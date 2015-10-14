@@ -1,0 +1,13 @@
+.ipynb_checkpoints/
+
+## Core latex/pdflatex auxiliary files:
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+
+*.dvi
+*-converted-to.*
