@@ -30,3 +30,7 @@ RUN apt-get update && \
     make
 
 ENV PATH $PATH:/montage/bin
+
+RUN pip install --upgrade --no-deps git+git://github.com/Theano/Theano.git && \
+    pip install --upgrade --no-deps git+git://github.com/Lasagne/Lasagne.git && \
+    pip install --upgrade --no-deps git+git://github.com/dnouri/nolearn.git
