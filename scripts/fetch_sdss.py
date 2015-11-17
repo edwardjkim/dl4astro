@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 # This script
 # 
@@ -10,6 +10,11 @@
 # 
 # This [Docker image](https://github.com/EdwardJKim/deeplearning4astro/tree/master/docker) has all packages necessary to run this notebook.
 
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+
 import os
 import shutil
 import requests
@@ -17,10 +22,12 @@ import json
 import bz2
 import re
 import subprocess
+from time import sleep
 
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from mpi4py import MPI
 
 import montage_wrapper as mw
 from astropy.io import fits
@@ -30,29 +37,40 @@ from astropy import wcs
 def fetch_fits(df, dirname="temp"):
 
     bands = [c for c in 'ugriz']
-    
+
     if not os.path.exists(dirname):
         os.makedirs(dirname)
 
     for i, r in df.iterrows():
 
         url = "http://data.sdss3.org/sas/dr12/boss/photoObj/frames/{0}/{1}/{2}/".format(
-            r.rerun, r.run, r.camcol, r.field)
-        print("Downloading from {}".format(url))
+            r["rerun"], r["run"], r["camcol"], r["field"])
 
         for band in bands:
 
-            filename = "frame-{4}-{1:06d}-{2}-{3:04d}.fits.bz2".format(
-                r.rerun, r.run, r.camcol, r.field, band)
+            filename = "frame-{4}-{1:06d}-{2}-{3:04d}.fits".format(
+                r["rerun"], r["run"], r["camcol"], r["field"], band)
             filepath = os.path.join(dirname, filename)
-            
-            resp = requests.get(url + filename, stream=True)
-            
-            with open(filepath.replace(".bz2", ""), "wb") as f:
-                img = bz2.decompress(resp.content)
-                f.write(img)
 
-    return None
+            for _ in range(10):
+                try:
+                    resp = requests.get(url + filename + ".bz2")
+                except:
+                    sleep(1)
+                    continue
+                
+                if resp.status_code == 200:
+                    with open(filepath, "wb") as f:
+                        img = bz2.decompress(resp.content)
+                        f.write(img)
+                    #print("Downloaded {}".format(filename))
+                    break
+                else:
+                    sleep(1)
+                    continue
+
+            if not os.path.exists(filepath):
+                raise Exception
 
 def get_ref_list(df):
 
@@ -60,7 +78,7 @@ def get_ref_list(df):
     
     for row in df.iterrows():
         r = row[1]
-        filename = "frame-r-{1:06d}-{2}-{3:04d}.fits".format(r.rerun, r.run, r.camcol, r.field)
+        filename = "frame-r-{1:06d}-{2}-{3:04d}.fits".format(r["rerun"], r["run"], r["camcol"], r["field"])
         ref_images.append(filename)
 
     return ref_images
@@ -74,15 +92,27 @@ def align_images(images, frame_dir="temp", registered_dir="temp"):
     
     for image in images:
         
-        print("Processing {}...".format(image))
+        #print("Processing {}...".format(image))
     
-        for b in "ugriz":
-            frame_path = os.path.join(frame_dir, image.replace("frame-r-", "frame-{}-").format(b))
-            registered_path = os.path.join(registered_dir, image.replace("frame-r-", "registered-{}-").format(b))
+        frame_path = [
+            os.path.join(frame_dir, image.replace("frame-r-", "frame-{}-").format(b))
+            for b in "ugriz"
+            ]
+        registered_path = [
+            os.path.join(registered_dir, image.replace("frame-r-", "registered-{}-").format(b))
+            for b in "ugriz"
+            ]
 
-            header = os.path.join(registered_dir, image.replace("frame", "header").replace(".fits", ".hdr"))
-            mw.commands.mGetHdr(os.path.join(frame_dir, image), header)
-            mw.reproject(frame_path, registered_path, header=header, exact_size=True, silent_cleanup=True)
+        header = os.path.join(
+            registered_dir,
+            image.replace("frame", "header").replace(".fits", ".hdr")
+            )
+
+        mw.commands.mGetHdr(os.path.join(frame_dir, image), header)
+        mw.reproject(
+            frame_path, registered_path,
+            header=header, exact_size=True, silent_cleanup=True, common=True
+            )
 
     return None
 
@@ -92,33 +122,30 @@ def convert_catalog_to_pixels(df, dirname="temp"):
     if not os.path.exists(dirname):
         os.makedirs(dirname)
 
-    pixels = pd.DataFrame()
+    pixels = []
+    fits_list = []
 
     for i, r in df.iterrows():
 
         fits_file = "registered-r-{1:06d}-{2}-{3:04d}.fits".format(
-            r.rerun, r.run, r.camcol, r.field)
+            r["rerun"], r["run"], r["camcol"], r["field"])
         fits_path = os.path.join(dirname, fits_file)
             
         hdulist = fits.open(fits_path)
 
         w = wcs.WCS(hdulist[0].header, relax=False)
         
-        px, py = w.all_world2pix(r.ra, r.dec, 1)
+        px, py = w.all_world2pix(r["ra"], r["dec"], 1)
 
-        pixels.loc[i, "file"] = fits_file
-        pixels.loc[i, "px"] = px
-        pixels.loc[i, "py"] = py
-        pixels.loc[i, "class"] = r["class"]
-        
+        fits_list.append(fits_file)
+        pixels.append((i, px, py, r["class"]))
+
+    for i, fits_file in enumerate(fits_list):
+        ix, px, py, c = pixels[i]
         pixel_list = fits_file.replace(".fits", ".list")
         pixel_path = os.path.join(dirname, pixel_list)
-        
-    for fits_file in pixels.file.unique():
-        pixel_list = fits_file.replace(".fits", ".list")
-        pixel_path = os.path.join(dirname, pixel_list)
-        p = pixels[pixels.file == fits_file]
-        p[["px", "py", "class"]].to_csv(pixel_path, sep= " ", header=False)
+        with open(pixel_path, "a") as fout:
+            fout.write("{} {} {} {}\n".format(ix, px, py, c))
 
     return None
 
@@ -225,7 +252,7 @@ def write_default_sex():
         " \n"
         "#----------------------------- Miscellaneous ---------------------------------\n"
         " \n"
-        "VERBOSE_TYPE     NORMAL         # can be QUIET, NORMAL or FULL\n"
+        "VERBOSE_TYPE     QUIET          # can be QUIET, NORMAL or FULL\n"
         "HEADER_SUFFIX    .head          # Filename extension for additional headers\n"
         "WRITE_XML        N              # Write XML file (Y/N)?\n"
         "XML_NAME         sex.xml        # Filename for XML output\n"
@@ -262,28 +289,30 @@ def run_sex(df, dirname="temp"):
         
         list_file = f.replace(".fits", ".list")
         list_path = os.path.join(dirname, list_file)
-    
-        with open("default.sex", "r") as default, open("default.sex.temp", "w") as temp:
-            for line in default:
-                line = re.sub(
-                    r"^ASSOC_NAME\s+sky.list",
-                    "ASSOC_NAME       {}".format(list_file),
-                    line
-                )
-                temp.write(line)
+
+        config_file = f.replace(".fits", ".sex")
+
+        with open("default.sex", "r") as default:
+            with open(config_file, "w") as temp:
+                for line in default:
+                    line = re.sub(
+                        r"^ASSOC_NAME\s+sky.list",
+                        "ASSOC_NAME       {}".format(list_file),
+                        line
+                    )
+                    temp.write(line)
     
         shutil.copy(list_path, os.getcwd())
     
-        subprocess.call(["sex", "-c", "default.sex.temp", fpath])
+        subprocess.call(["sex", "-c", config_file, fpath])
 
-        os.remove("default.sex.temp")
+        os.remove(config_file)
     
         try:
             assoc = pd.read_csv(
                 "test.cat",
-                comment="#",
-                header=None,
-                delim_whitespace=True,
+                skiprows=5,
+                sep="\s+",
                 names=["xmin", "ymin", "xmax", "ymax", "match"]
             )
             assoc["file"] = f
@@ -292,11 +321,12 @@ def run_sex(df, dirname="temp"):
             pass
         
         os.remove(os.path.join(os.getcwd(), list_file))
-            
-    cat.loc[:, "class"] = df["class"].values
-    cat.loc[:, "objID"] = df["objID"].values
-    #cat = cat.reset_index(drop=True)
     
+    if len(cat) > 0:
+         cat["class"] = df.ix[cat["match"], "class"].values
+         cat["objID"] = df.ix[cat["match"], "objID"].values
+    #cat = cat.reset_index(drop=True)
+
     return cat
 
 def nanomaggie_to_luptitude(array, band):
@@ -319,51 +349,53 @@ def nanomaggie_to_luptitude(array, band):
     
     return luptitude
 
-def save_cutout(df, size=32, image_dir="temp", dirname="result"):
+def save_cutout(df, size=48, image_dir="temp", save_dir="result"):
 
-    if not os.path.exists(dirname):
-        os.makedirs(dirname)
+    if not os.path.exists(save_dir):
+        os.makedirs(save_dir)
 
     saved = pd.DataFrame()
 
+    def find_position(xmin, xmax, cut_size, frame_size):
+        diff = 0.5 * ((xmax - xmin) - cut_size)
+        if xmin + diff < 0:
+            r = 0
+            l = r + cut_size
+        elif xmax + diff >= frame_size:
+            l = frame_size
+            r = l - cut_size
+        else:
+            r = int(xmin + diff)
+            l = r + cut_size
+        return r, l
+
     for i, row in df.iterrows():
-     
+
         array = np.zeros((5, size, size))
 
         for j, b in enumerate("ugriz"):
 
             fpath = os.path.join(image_dir, row["file"])
             image_data = fits.getdata(fpath.replace("-r-", "-{}-".format(b)))
-    
-            y0, x0, y1, x1 = row[0:4].values
+            
+            y0, x0, y1, x1 = row[["xmin", "ymin", "xmax", "ymax"]].values
 
-            right = max(0.5 * (size - (x1 - x0)), 1)
-            left = max(0.5 * (size - (x1 - x0)), 0)
-            up = max(0.5 * (size - (y1 - y0)), 0)
-            down = max(0.5 * (size - (y1 - y0)), 1)
-    
-            cut_out = image_data[x0 - right: x1 + left, y0 - down: y1 + up]
+            right, left = find_position(x0, x1, size, image_data.shape[0])
+            down, up = find_position(y0, y1, size, image_data.shape[1])
+
+            cut_out = image_data[right: left, down: up]
         
             if cut_out.shape[0] == size and cut_out.shape[1] == size:
-            
                 cut_out = nanomaggie_to_luptitude(cut_out, b)
-        
                 array[j, :, :] = cut_out
                 
-        if np.isnan(array).sum() == 0:
-            save_path = os.path.join(dirname, "{0}.{1}x{1}.{2}.npy".format(row["class"], size, row["objID"]))
+        if np.isnan(array).sum() == 0 and array.sum() > 0:
+            save_path = os.path.join(save_dir, "{0}.{1}x{1}.{2}.npy".format(row["class"], size, row["objID"]))
             np.save(save_path, array)
-            saved.loc[i, "class"] = row["class"]
-            saved.loc[i, "objID"] = row["objID"]
-                
-    print("{} files saved to {}.".format(len(saved), save_path))
 
-    return saved
+def run_online_mode():
 
-
-def main():
-
-    df = pd.read_csv("../data/DR12_spec_phot_sample.csv", dtype={"objID": object})
+    df = pd.read_csv("../data/DR12_spec_phot_sample.csv", dtype={"objID": "object"})
 
     if os.path.exists("result"):
         done = os.listdir("result")
@@ -371,13 +403,11 @@ def main():
         # check existing results and skip
         df = df[~df.objID.isin(done)]
 
-    chunk_size = 1
-
     write_default_conv()
     write_default_param()
     write_default_sex()
 
-    for i in range(0, len(df), chunk_size):
+    for i in range(0, len(df)):
         chunk = df[i: i + chunk_size]
         # download image fits files
         fetch_fits(chunk)
@@ -391,6 +421,54 @@ def main():
             pass
         shutil.rmtree("temp")
         print("{} objects remaining...".format(len(df) - 1 - i))
-    
+
+def run_parallel(filename, dest=None):
+
+    comm = MPI.COMM_WORLD
+    rank = comm.Get_rank()
+    size = comm.Get_size()
+
+    if rank == 0:
+        print("Running on {} cores...\n".format(size))
+
+        write_default_conv()
+        write_default_param()
+        write_default_sex()
+
+    df = pd.read_csv(filename, dtype={"objID": "object"})
+
+    if os.path.exists("result"):
+        done = os.listdir("result")
+        done = [d.split(".")[2] for d in done]
+        # check existing results and skip
+        df = df[~df.objID.isin(done)].dropna()
+
+    start = int(rank / size * len(df))
+    end = int((rank + 1) / size * len(df))
+    df = df[start:end]
+
+    if dest is None:
+        dest = os.getcwd()
+    temp_dir = os.path.join(dest, "temp{}".format(rank))
+    target_dir = os.path.join(dest, "result".format(rank))
+
+    for i in range(0, len(df)):
+        chunk = df[i: i + 1]
+        try:
+            # download image fits files
+            fetch_fits(chunk, dirname=temp_dir)
+            ref_images = get_ref_list(chunk)
+            align_images(ref_images, frame_dir=temp_dir, registered_dir=temp_dir)
+            convert_catalog_to_pixels(chunk, dirname=temp_dir)
+            cat = run_sex(chunk, dirname=temp_dir)
+            saved = save_cutout(cat, image_dir=temp_dir, save_dir=target_dir)
+            shutil.rmtree(temp_dir)
+            print("Core {}: processing successful...".format(rank))
+        except:
+            print("Core {} failed to process an object...".format(rank))
+
+        print("Core {}: {} objects remaining...".format(rank, len(df) - 1 - i))
+
 if __name__ == "__main__":
-    main()
+
+    run_parallel("chunk.csv")
