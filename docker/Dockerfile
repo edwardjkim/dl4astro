@@ -2,15 +2,17 @@ FROM ipython/scipyserver
 
 MAINTAINER Edward Kim <edward.junhyung.kim@gmail.com>
 
+USER root
+
 RUN apt-get update && \
-    apt-get -y -q install libfftw3-dev libatlas-base-dev wget vim && \
+    apt-get -y -q install libfftw3-dev libatlas-base-dev libatlas-base-dev gfortran wget vim && \
 
     # SExtractor uses the LAPACK functions available in ATLAS, and
     # it won't be able to find LAPACK without the following line.
     update-alternatives --set liblapack.so /usr/lib/atlas-base/atlas/liblapack.so && \
-    
+
+    cd /tmp && \
     # install sextractor
-    cd / && \
     wget http://www.astromatic.net/download/sextractor/sextractor-2.19.5.tar.gz && \
     tar xvzf sextractor-2.19.5.tar.gz && \
     cd sextractor-2.19.5 && \
@@ -23,14 +25,14 @@ RUN apt-get update && \
     pip install montage-wrapper && \
 
     # Install Montage
-    cd / && \
+    cd /tmp && \
     wget http://montage.ipac.caltech.edu/download/Montage_v4.0.tar.gz && \
     tar xvzf Montage_v4.0.tar.gz && \
-    cd /montage && \
+    cd montage && \
     make
 
 ENV PATH $PATH:/montage/bin
 
-RUN pip install --upgrade --no-deps git+git://github.com/Theano/Theano.git && \
-    pip install --upgrade --no-deps git+git://github.com/Lasagne/Lasagne.git && \
-    pip install --upgrade --no-deps git+git://github.com/dnouri/nolearn.git
+RUN pip2 install --upgrade terminado && \
+    pip2 install Theano Lasagne && \
+    pip2 install git+https://github.com/dnouri/nolearn.git@master#egg=nolearn==0.7.git
