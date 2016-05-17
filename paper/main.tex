@@ -374,12 +374,12 @@ Given $N$ samples, the loss function becomes
   L(y, \hat{y}) = - \frac{1}{N} \sum_{i=1}^{N} \hat{y}_i  \log_2 y_i
     + (1 - \hat{y}_i)  \log_2 (1 - \hat y_i).
 \end{equation}
-where $\hat{y}_i$ is the truth value and probability estimate of the $i$-th data,
-respectively.
+where $\hat{y}_i$ and $y_i$ are the truth value and probability estimate of
+the $i$-th data, respectively.
 
 To find the weights $\mathbf{w}$ and biases $\mathbf{b}$ which minimize the loss,
 we use a technique called \textit{gradient descent},
-where we the following rules to update the parameters in each layer $j$:
+where we use the following rules to update the parameters in each layer $j$:
 \begin{align}
   \mathbf{w}_j &\rightarrow
   \mathbf{w}^{\prime}
@@ -400,7 +400,7 @@ of the overall gradient.
 We define an \textit{epoch} as a single, complete pass through the training data,
 and full training usually requires many epochs.
 At the end of each epoch, we evaluate the loss function on the validation set,
-and the model that minimizes the loss is chosen as the best model.
+and the model that minimizes the validation loss is chosen as the best model.
 
 \subsection{Convolutional Neural Networks}
 
@@ -850,7 +850,7 @@ for the science cases of the CFHTLenS data,
 we adopt these values to compare the classification performance
 at a reasonable operating condition.
 Thus, we compute $p_{g}$ at $c_g=0.960$
-and $c_{s}$ at $p_s=0.250$.
+and $c_{s}$ at $p_s=0.970$.
 
 \subsubsection{Mean Squared Error}
 
@@ -875,7 +875,7 @@ Probability \textit{calibration curves}~\citep[or reliability curves;][]{degroot
 are often used to display this relationship,
 where we bin the probability estimates and plot the
 fraction of positive examples versus the predicted probability in each bin
-(see Figures~\ref{fig:clens_calibration_conv} and fig:\textcolor{red}{xxx}).
+(see Figures~\ref{fig:clens_calibration_conv} and \ref{fig:clens_calibration_tpc}).
 
 The problem with binning approach is either too few or too many bins
 can distort the evaluation of calibration performance.
@@ -934,7 +934,7 @@ Thus, we measure the reliability of the classifier output by the absolute error
 in the estimation of number of galaxies,
 \begin{equation}
   \frac{\mid \Delta N_g \mid}{N_g} =
-  \frac{\big| N_g - \sum_{i=1}^{N} P_{\rmn{class}} \big|}{N_g}
+  \frac{\big| N_g - \sum_{i=1}^{N} P_{\rmn{class}} \big|}{N_g}.
 \end{equation}
 
 \subsection{CFHTLenS}
@@ -1025,7 +1025,8 @@ in the estimation of number of galaxies,
   \hfill
   \begin{minipage}[c]{0.49\textwidth}
     \includegraphics[width=\textwidth]{figures/clens_calibration_tpc.pdf}
-    \caption{Calibration curve for TPC as applied to the CFHTLenS data set.}
+    \caption{Calibration curve for $\rmn{TPC}_{\rmn{morph}}$
+      as applied to the CFHTLenS data set.}
     \label{fig:clens_calibration_tpc}
   \end{minipage}
 \end{figure*}
@@ -1128,8 +1129,7 @@ the shape information automatically from the images.
 We note that, at these operating conditions ($c_g=0.96$, $p_s=0.97$),
 both ConvNet and $\rmn{TPC}_{\rmn{morph}}$ outperform the
 star-galaxy classification provided by
-the CFHTLenS pipeline~\cite{hildebrandt2012cfhtlens} across all magnitudes.
-We do not show the CFHTLenS classifications to avoid cluttering the plots.
+the CFHTLenS pipeline~\citep{hildebrandt2012cfhtlens} over all magnitudes.
 
 In Figure~\ref{fig:clens_integrated}, we show the overall galaxy purity
 and star completeness values as functions of magnitude for the integrated
@@ -1144,22 +1144,21 @@ We also show the galaxy purity and star completeness values as functions of
 $g-r$ color in Figure~\ref{fig:clens_g_r}.
 $\rmn{TPC}_{\rmn{morph}}$ provides slightly better
 completeness and purity than ConvNet between $0.8 \la g-r \la 1.6$ while
-ConvNet outperforms $\rmn{TPC}_{\rmn{morph}}$ or is similar to
-$\rmn{TPC}_{\rmn{morph}}$ in the remaining regions.
+ConvNet outperforms $\rmn{TPC}_{\rmn{morph}}$ in the remaining regions.
 
 Figure~\ref{fig:clens_calibration_conv} shows the calibration curve
 that compares $P_{\rmn{gal}}$,
-the fraction of objects that are galaxies (as determined from their spectra)
-to $P_{\rmn{conv}}$ the probabilistic output that our ConvNet model produces.
+the fraction of objects that are galaxies (as determined from their spectra),
+to $P_{\rmn{conv}}$, the probabilistic output that our ConvNet model produces.
 The calibration curve is nearly diagonal, which implies that ConvNet
 is well-calibrated and we can treat $P_{\rmn{conv}}$ as the probability
 that an object is a galaxy.
 Figure~\ref{fig:clens_calibration_tpc} shows the calibration curve
-for the probabilistic output of TPC,
+for the probabilistic output of $\rmn{TPC}_{\rmn{morph}}$,
 which is apparently not as well-calibrated as ConvNet.
 These calibration curves visually confirm the results in
 Table~\ref{table:clens_metrics} that the calibration error
-of ConvNet is about 20\% lower than that of TPC.
+of ConvNet is about 20\% lower than that of $\rmn{TPC}_{\rmn{morph}}$.
 While probabilistic predictions can be further calibrated by using,
 \eg isotonic calibration~\citep{zadrozny2001obtaining},
 we do not consider additional probability calibration in this work.
@@ -1172,10 +1171,6 @@ are fed into the network.
 The size of feature maps decreases with depth, and layers near the
 input layer have fewer filters while the later layers have more.
 The low-level features
-
-When highly optimized features (\eg the $\rmn{concentration}$ of SDSS)
-are not readily available from the catalog, a ConvNet model becomes more
-attractive.
 
 \subsection{SDSS}
   \label{sec:results_sdss}
@@ -1238,7 +1233,8 @@ attractive.
   \begin{minipage}[c]{0.49\textwidth}
     \centering
     \includegraphics[width=\textwidth]{figures/sdss_calibration_tpc.pdf}
-    \caption{Calibration curve for TPC as applied to the CFHTLenS data set.}
+    \caption{Calibration curve for $\rmn{TPC}_{\rmn{morph}}$
+      as applied to the SDSS data set.}
     \label{fig:sdss_calibration_tpc}
   \end{minipage}
 \end{figure*}
@@ -1258,7 +1254,7 @@ and star purity values for ConvNet and TPC as functions of $i$-band magnitude
 for the differential counts.
 We note that $\rmn{TPC}_{\rmn{morph}}$ outperforms the star-galaxy
 classifier used by the SDSS pipeline (\ie an object is classifed as a galaxy
-if the concentration parameter is greater than 0.145) across all magnitudes.
+if the concentration parameter is greater than 0.145) over all magnitudes.
 We do not show the SDSS classifications to avoid cluttering the plots.
 While ConvNet shows a similar but slighly worse performance than
 $\rmn{TPC}_{\rmn{morph}}$,
@@ -1283,24 +1279,18 @@ $i\sim22.5$, while the star completeness of ConvNet drops to 0.9500.
 
 We also show the galaxy purity and star completeness values as functions of
 $g-r$ color in Figure~\ref{fig:sdss_g_r}.
-$\rmn{TPC}_{\rmn{morph}}$ provides slightly better
-completeness and purity than ConvNet between $0.8 \la g-r \la 1.6$ while
-ConvNet outperforms $\rmn{TPC}_{\rmn{morph}}$ or is similar to
-$\rmn{TPC}_{\rmn{morph}}$ in the remaining regions.
+ConvNet performs slightly better than $\rmn{TPC}_{\rmn{morph}}$ in both
+galaxy completeness and star purity between $0.7 \la g-r \la 2.0$
+where the stellar fraction is relatively low.
+Both $\rmn{TPC}_{\rmn{morph}}$ and $\rmn{TPC}_{\rmn{phot}}$ outperform
+ConvNet in the region $g-r \la 0.8$ where the stellar fraction is higher.
 
-Figure~\ref{fig:sdss_calibration_conv} shows the calibration curve
-that compares $P_{\rmn{gal}}$,
-the fraction of objects that are galaxies (as determined from their spectra)
-to $P_{\rmn{conv}}$ the probabilistic output that our ConvNet model produces.
-The calibration curve is nearly diagonal, which implies that ConvNet
-is well-calibrated and we can treat $P_{\rmn{conv}}$ as the probability
-that an object is a galaxy.
-Figure~\ref{fig:sdss_calibration_tpc} shows the calibration curve
-for the probabilistic output of TPC,
-which is apparently not as well-calibrated as ConvNet.
-These calibration curves visually confirm the results in
-Table~\ref{table:sdss_metrics} that the calibration error
-of ConvNet is about 20\% lower than that of TPC.
+Figure~\ref{fig:sdss_calibration_conv} and \ref{fig:sdss_calibratoin_tpc}
+show the calibration curves of ConvNet and $\rmn{TPC}_{\rmn{morph}}$,
+respectively.
+Compared to Figure~\ref{fig:clens_calibration_conv}, our ConvNet as applied to
+the SDSS data set is not as well-calibrated as when it is applied to the
+CFHTLenS data set. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
