@@ -1,0 +1,303 @@
+\begin{thebibliography}{}
+\makeatletter
+\relax
+\def\mn@urlcharsother{\let\do\@makeother \do\$\do\&\do\#\do\^\do\_\do\%\do\~}
+\def\mn@doi{\begingroup\mn@urlcharsother \@ifnextchar [ {\mn@doi@}
+  {\mn@doi@[]}}
+\def\mn@doi@[#1]#2{\def\@tempa{#1}\ifx\@tempa\@empty \href
+  {http://dx.doi.org/#2} {doi:#2}\else \href {http://dx.doi.org/#2} {#1}\fi
+  \endgroup}
+\def\mn@eprint#1#2{\mn@eprint@#1:#2::\@nil}
+\def\mn@eprint@arXiv#1{\href {http://arxiv.org/abs/#1} {{\tt arXiv:#1}}}
+\def\mn@eprint@dblp#1{\href {http://dblp.uni-trier.de/rec/bibtex/#1.xml}
+  {dblp:#1}}
+\def\mn@eprint@#1:#2:#3:#4\@nil{\def\@tempa {#1}\def\@tempb {#2}\def\@tempc
+  {#3}\ifx \@tempc \@empty \let \@tempc \@tempb \let \@tempb \@tempa \fi \ifx
+  \@tempb \@empty \def\@tempb {arXiv}\fi \@ifundefined
+  {mn@eprint@\@tempb}{\@tempb:\@tempc}{\expandafter \expandafter \csname
+  mn@eprint@\@tempb\endcsname \expandafter{\@tempc}}}
+
+\bibitem[\protect\citeauthoryear{{Alam} et~al.,}{{Alam}
+  et~al.}{2015}]{alam2015eleventh}
+{Alam} S.,  et~al., 2015, \mn@doi [\apjs] {10.1088/0067-0049/219/1/12}, \href
+  {http://adsabs.harvard.edu/abs/2015ApJS..219...12A} {219, 12}
+
+\bibitem[\protect\citeauthoryear{{Ball}, {Brunner}, {Myers}  \&
+  {Tcheng}}{{Ball} et~al.}{2006}]{ball2006robust}
+{Ball} N.~M.,  {Brunner} R.~J.,  {Myers} A.~D.,   {Tcheng} D.,  2006, \apj,
+  650, 497
+
+\bibitem[\protect\citeauthoryear{{Ball}, {Brunner}, {Myers}, {Strand},
+  {Alberts}, {Tcheng}  \& {Llor{\`a}}}{{Ball} et~al.}{2007}]{ball2007robust}
+{Ball} N.~M.,  {Brunner} R.~J.,  {Myers} A.~D.,  {Strand} N.~E.,  {Alberts}
+  S.~L.,  {Tcheng} D.,   {Llor{\`a}} X.,  2007, \mn@doi [\apj]
+  {10.1086/518362}, \href {http://adsabs.harvard.edu/abs/2007ApJ...663..774B}
+  {663, 774}
+
+\bibitem[\protect\citeauthoryear{Ball, Brunner, Myers, Strand, Alberts  \&
+  Tcheng}{Ball et~al.}{2008}]{ball2008robust}
+Ball N.~M.,  Brunner R.~J.,  Myers A.~D.,  Strand N.~E.,  Alberts S.~L.,
+  Tcheng D.,  2008, \apj, 683, 12
+
+\bibitem[\protect\citeauthoryear{Banerji et~al.,}{Banerji
+  et~al.}{2010}]{banerji2010galaxy}
+Banerji M.,  et~al., 2010, Monthly Notices of the Royal Astronomical Society,
+  406, 342
+
+\bibitem[\protect\citeauthoryear{Bengio, Boulanger-Lewandowski  \&
+  Pascanu}{Bengio et~al.}{2013}]{bengio2013advances}
+Bengio Y.,  Boulanger-Lewandowski N.,   Pascanu R.,  2013, in Acoustics, Speech
+  and Signal Processing (ICASSP), 2013 IEEE International Conference on. pp
+  8624--8628
+
+\bibitem[\protect\citeauthoryear{Bertin \& Arnouts}{Bertin \&
+  Arnouts}{1996}]{bertin1996sextractor}
+Bertin E.,  Arnouts S.,  1996, \aaps, 117, 393
+
+\bibitem[\protect\citeauthoryear{Breiman}{Breiman}{2001}]{breiman2001random}
+Breiman L.,  2001, Machine learning, 45, 5
+
+\bibitem[\protect\citeauthoryear{Breiman, Friedman, Stone  \& Olshen}{Breiman
+  et~al.}{1984}]{breiman1984classification}
+Breiman L.,  Friedman J.,  Stone C.~J.,   Olshen R.~A.,  1984, Classification
+  and regression trees.
+CRC press
+
+\bibitem[\protect\citeauthoryear{Brier}{Brier}{1950}]{brier1950verification}
+Brier G.~W.,  1950, Monthly weather review, 78, 1
+
+\bibitem[\protect\citeauthoryear{{Carrasco Kind} \& {Brunner}}{{Carrasco Kind}
+  \& {Brunner}}{2013}]{carrascokind2013tpz}
+{Carrasco Kind} M.,  {Brunner} R.~J.,  2013, \mnras, 432, 1483
+
+\bibitem[\protect\citeauthoryear{{Carrasco Kind} \& {Brunner}}{{Carrasco Kind}
+  \& {Brunner}}{2014a}]{carrascokind2014somz}
+{Carrasco Kind} M.,  {Brunner} R.~J.,  2014a, \mnras, 438, 3409
+
+\bibitem[\protect\citeauthoryear{{Carrasco Kind} \& {Brunner}}{{Carrasco Kind}
+  \& {Brunner}}{2014b}]{carrascokind2014exhausting}
+{Carrasco Kind} M.,  {Brunner} R.~J.,  2014b, \mnras, 442, 3380
+
+\bibitem[\protect\citeauthoryear{Caruana \& Niculescu-Mizil}{Caruana \&
+  Niculescu-Mizil}{2004}]{caruana2004data}
+Caruana R.,  Niculescu-Mizil A.,  2004, in Proceedings of the tenth ACM SIGKDD
+  international conference on Knowledge discovery and data mining. pp 69--78
+
+\bibitem[\protect\citeauthoryear{Davis et~al.}{Davis
+  et~al.}{2003}]{davis2003science}
+Davis M.,  et~al., 2003, Astronomical Telescopes and Instrumentation, pp
+  161--172
+
+\bibitem[\protect\citeauthoryear{DeGroot \& Fienberg}{DeGroot \&
+  Fienberg}{1983}]{degroot1983comparison}
+DeGroot M.~H.,  Fienberg S.~E.,  1983, The statistician, pp 12--22
+
+\bibitem[\protect\citeauthoryear{Dieleman, Willett  \& Dambre}{Dieleman
+  et~al.}{2015}]{dieleman2015rotation}
+Dieleman S.,  Willett K.~W.,   Dambre J.,  2015, MNRAS, 450, 1441
+
+\bibitem[\protect\citeauthoryear{Eisenstein et~al.,}{Eisenstein
+  et~al.}{2011}]{eisenstein2011sdss}
+Eisenstein D.~J.,  et~al., 2011, The Astronomical Journal, 142, 72
+
+\bibitem[\protect\citeauthoryear{Erben et~al.}{Erben
+  et~al.}{2013}]{erben2013cfhtlens}
+Erben T.,  et~al., 2013, \mnras, p. stt928
+
+\bibitem[\protect\citeauthoryear{Fadely, Hogg  \& Willman}{Fadely
+  et~al.}{2012}]{Fadely2012}
+Fadely R.,  Hogg D.~W.,   Willman B.,  2012, \apj, 760, 15
+
+\bibitem[\protect\citeauthoryear{Fukushima}{Fukushima}{1980}]{fukushima1980neocognitron}
+Fukushima K.,  1980, Biological cybernetics, 36, 193
+
+\bibitem[\protect\citeauthoryear{Garilli et~al.}{Garilli
+  et~al.}{2008}]{garilli2008vimos}
+Garilli B.,  et~al., 2008, \aap, 486, 683
+
+\bibitem[\protect\citeauthoryear{Garilli et~al.}{Garilli
+  et~al.}{2014}]{garilli2014vimos}
+Garilli B.,  et~al., 2014, \aap, 562, A23
+
+\bibitem[\protect\citeauthoryear{Gwyn}{Gwyn}{2012}]{gwyn2012canada}
+Gwyn S.~D.,  2012, \aj, 143, 38
+
+\bibitem[\protect\citeauthoryear{He, Zhang, Ren  \& Sun}{He
+  et~al.}{2015}]{he2015deep}
+He K.,  Zhang X.,  Ren S.,   Sun J.,  2015, arXiv preprint arXiv:1512.03385
+
+\bibitem[\protect\citeauthoryear{{Henrion}, {Mortlock}, {Hand}  \&
+  {Gandy}}{{Henrion} et~al.}{2011}]{henrion2011bayesian}
+{Henrion} M.,  {Mortlock} D.~J.,  {Hand} D.~J.,   {Gandy} A.,  2011, \mnras,
+  412, 2286
+
+\bibitem[\protect\citeauthoryear{Heymans et~al.}{Heymans
+  et~al.}{2012}]{heymans2012cfhtlens}
+Heymans C.,  et~al., 2012, \mnras, 427, 146
+
+\bibitem[\protect\citeauthoryear{Hildebrandt et~al.}{Hildebrandt
+  et~al.}{2012}]{hildebrandt2012cfhtlens}
+Hildebrandt H.,  et~al., 2012, \mnras, 421, 2355
+
+\bibitem[\protect\citeauthoryear{Hinton, Srivastava, Krizhevsky, Sutskever  \&
+  Salakhutdinov}{Hinton et~al.}{2012}]{hinton2012improving}
+Hinton G.~E.,  Srivastava N.,  Krizhevsky A.,  Sutskever I.,   Salakhutdinov
+  R.~R.,  2012, arXiv preprint arXiv:1207.0580
+
+\bibitem[\protect\citeauthoryear{Hoyle}{Hoyle}{2015}]{hoyle2015measuring}
+Hoyle B.,  2015, arXiv preprint arXiv:1504.07255
+
+\bibitem[\protect\citeauthoryear{Huertas-Company et~al.,}{Huertas-Company
+  et~al.}{2015}]{huertas2015catalog}
+Huertas-Company M.,  et~al., 2015, ApJS, 221, 8
+
+\bibitem[\protect\citeauthoryear{Ivezi{\'c}, Connolly, VanderPlas  \&
+  Gray}{Ivezi{\'c} et~al.}{2014}]{ivezic2014statistics}
+Ivezi{\'c} {\v{Z}}.,  Connolly A.~J.,  VanderPlas J.~T.,   Gray A.,  2014,
+  Statistics, Data Mining, and Machine Learning in Astronomy: A Practical
+  Python Guide for the Analysis of Survey Data.
+Princeton University Press
+
+\bibitem[\protect\citeauthoryear{Kamdar, Turk  \& Brunner}{Kamdar
+  et~al.}{2016a}]{kamdar2016machine1}
+Kamdar H.~M.,  Turk M.~J.,   Brunner R.~J.,  2016a, MNRAS, 455, 642
+
+\bibitem[\protect\citeauthoryear{Kamdar, Turk  \& Brunner}{Kamdar
+  et~al.}{2016b}]{kamdar2016machine2}
+Kamdar H.~M.,  Turk M.~J.,   Brunner R.~J.,  2016b, \mn@doi [MNRAS]
+  {10.1093/mnras/stv2981}, 457, 1162
+
+\bibitem[\protect\citeauthoryear{Kim, Brunner  \& Kind}{Kim
+  et~al.}{2015}]{kim2015hybrid}
+Kim E.~J.,  Brunner R.~J.,   Kind M.~C.,  2015, MNRAS, 453, 507
+
+\bibitem[\protect\citeauthoryear{Krizhevsky, Sutskever  \& Hinton}{Krizhevsky
+  et~al.}{2012}]{krizhevsky2012imagenet}
+Krizhevsky A.,  Sutskever I.,   Hinton G.~E.,  2012, in Advances in neural
+  information processing systems. pp 1097--1105
+
+\bibitem[\protect\citeauthoryear{Le~F{\`e}vre et~al.}{Le~F{\`e}vre
+  et~al.}{2005}]{le2005vimos}
+Le~F{\`e}vre O.,  et~al., 2005, \aap, 439, 845
+
+\bibitem[\protect\citeauthoryear{LeCun, Bottou, Bengio  \& Haffner}{LeCun
+  et~al.}{1998}]{lecun1998gradient}
+LeCun Y.,  Bottou L.,  Bengio Y.,   Haffner P.,  1998, Proceedings of the IEEE,
+  86, 2278
+
+\bibitem[\protect\citeauthoryear{LeCun, Bengio  \& Hinton}{LeCun
+  et~al.}{2015}]{lecun2015deep}
+LeCun Y.,  Bengio Y.,   Hinton G.,  2015, Nature, 521, 436
+
+\bibitem[\protect\citeauthoryear{Li \& Thakar}{Li \&
+  Thakar}{2008}]{li2008casjobs}
+Li N.,  Thakar A.~R.,  2008, Computing in Science \& Engineering, 10, 18
+
+\bibitem[\protect\citeauthoryear{{Lupton}, {Gunn}  \& {Szalay}}{{Lupton}
+  et~al.}{1999}]{lupton1999modified}
+{Lupton} R.~H.,  {Gunn} J.~E.,   {Szalay} A.~S.,  1999, \mn@doi [\aj]
+  {10.1086/301004}, \href {http://adsabs.harvard.edu/abs/1999AJ....118.1406L}
+  {118, 1406}
+
+\bibitem[\protect\citeauthoryear{Monteith, Carroll, Seppi  \&
+  Martinez}{Monteith et~al.}{2011}]{Monteith2011}
+Monteith K.,  Carroll J.~L.,  Seppi K.,   Martinez T.,  2011, in Neural
+  Networks (IJCNN), The 2011 International Joint Conference on. pp 2657--2663
+
+\bibitem[\protect\citeauthoryear{Nair \& Hinton}{Nair \&
+  Hinton}{2010}]{nair2010rectified}
+Nair V.,  Hinton G.~E.,  2010, in Proceedings of the 27th International
+  Conference on Machine Learning (ICML-10). pp 807--814
+
+\bibitem[\protect\citeauthoryear{Newman et~al.}{Newman
+  et~al.}{2013}]{newman2013deep2}
+Newman J.~A.,  et~al., 2013, \ApJSupp, 208, 5
+
+\bibitem[\protect\citeauthoryear{{Odewahn}, {Stockwell}, {Pennington},
+  {Humphreys}  \& {Zumach}}{{Odewahn} et~al.}{1992}]{odewahn1992automated}
+{Odewahn} S.~C.,  {Stockwell} E.~B.,  {Pennington} R.~L.,  {Humphreys} R.~M.,
+  {Zumach} W.~A.,  1992, \aj, 103, 318
+
+\bibitem[\protect\citeauthoryear{Paterno}{Paterno}{2003}]{paterno2004calculating}
+Paterno M.,  2003, Calculating Efficiencies and Their Uncertainties,
+  \url{http://home.fnal.gov/~paterno/images/effic.pdf}
+
+\bibitem[\protect\citeauthoryear{Ross et~al.}{Ross
+  et~al.}{2011}]{ross2011ameliorating}
+Ross A.~J.,  et~al., 2011, \mnras, 417, 1350
+
+\bibitem[\protect\citeauthoryear{Russakovsky et~al.,}{Russakovsky
+  et~al.}{2015}]{russakovsky2015imagenet}
+Russakovsky O.,  et~al., 2015, International Journal of Computer Vision, 115,
+  211
+
+\bibitem[\protect\citeauthoryear{Saxe, McClelland  \& Ganguli}{Saxe
+  et~al.}{2013}]{saxe2013exact}
+Saxe A.~M.,  McClelland J.~L.,   Ganguli S.,  2013, arXiv preprint
+  arXiv:1312.6120
+
+\bibitem[\protect\citeauthoryear{{Schlegel}, {Finkbeiner}  \&
+  {Davis}}{{Schlegel} et~al.}{1998}]{schlegel1998maps}
+{Schlegel} D.~J.,  {Finkbeiner} D.~P.,   {Davis} M.,  1998, \mn@doi [\apj]
+  {10.1086/305772}, \href {http://adsabs.harvard.edu/abs/1998ApJ...500..525S}
+  {500, 525}
+
+\bibitem[\protect\citeauthoryear{Seo et~al.,}{Seo
+  et~al.}{2012}]{seo2012acoustic}
+Seo H.-J.,  et~al., 2012, \apj, 761, 13
+
+\bibitem[\protect\citeauthoryear{Sevilla-Noarbe \& Etayo-Sotos}{Sevilla-Noarbe
+  \& Etayo-Sotos}{2015}]{sevilla2015effect}
+Sevilla-Noarbe I.,  Etayo-Sotos P.,  2015, Astronomy and Computing, 11, 64
+
+\bibitem[\protect\citeauthoryear{Silverman}{Silverman}{1986}]{silverman1986density}
+Silverman B.~W.,  1986, CRC press, 26
+
+\bibitem[\protect\citeauthoryear{Simonyan \& Zisserman}{Simonyan \&
+  Zisserman}{2014}]{simonyan2014very}
+Simonyan K.,  Zisserman A.,  2014, arXiv preprint arXiv:1409.1556
+
+\bibitem[\protect\citeauthoryear{Soumagnac et~al.}{Soumagnac
+  et~al.}{2015}]{soumagnac2013star}
+Soumagnac M.~T.,  et~al., 2015, \mnras, 450, 666
+
+\bibitem[\protect\citeauthoryear{{Suchkov}, {Hanisch}  \& {Margon}}{{Suchkov}
+  et~al.}{2005}]{suchkov2005census}
+{Suchkov} A.~A.,  {Hanisch} R.~J.,   {Margon} B.,  2005, \aj, 130, 2439
+
+\bibitem[\protect\citeauthoryear{Sutskever, Martens, Dahl  \& Hinton}{Sutskever
+  et~al.}{2013}]{sutskever2013importance}
+Sutskever I.,  Martens J.,  Dahl G.,   Hinton G.,  2013, in Proceedings of the
+  30th international conference on machine learning (ICML-13). pp 1139--1147
+
+\bibitem[\protect\citeauthoryear{Swets, Dawes  \& Monahan}{Swets
+  et~al.}{2000}]{swets2000better}
+Swets J.~A.,  Dawes R.~M.,   Monahan J.,  2000, Scientific American, p.~83
+
+\bibitem[\protect\citeauthoryear{Szegedy et~al.,}{Szegedy
+  et~al.}{2015}]{szegedy2015going}
+Szegedy C.,  et~al., 2015, in Proceedings of the IEEE Conference on Computer
+  Vision and Pattern Recognition. pp~1--9
+
+\bibitem[\protect\citeauthoryear{{Weir}, {Fayyad}  \& {Djorgovski}}{{Weir}
+  et~al.}{1995}]{weir1995automated}
+{Weir} N.,  {Fayyad} U.~M.,   {Djorgovski} S.,  1995, \aj, 109, 2401
+
+\bibitem[\protect\citeauthoryear{Wolpert}{Wolpert}{1996}]{wolpert1996lack}
+Wolpert D.~H.,  1996, Neural computation, 8, 1341
+
+\bibitem[\protect\citeauthoryear{York et~al.,}{York
+  et~al.}{2000}]{york2000sloan}
+York D.~G.,  et~al., 2000, The Astronomical Journal, 120, 1579
+
+\bibitem[\protect\citeauthoryear{Zadrozny \& Elkan}{Zadrozny \&
+  Elkan}{2001}]{zadrozny2001obtaining}
+Zadrozny B.,  Elkan C.,  2001, in ICML. pp 609--616
+
+\bibitem[\protect\citeauthoryear{Zeiler \& Fergus}{Zeiler \&
+  Fergus}{2014}]{zeiler2014visualizing}
+Zeiler M.~D.,  Fergus R.,  2014, in , Computer vision--ECCV 2014.
+Springer, pp 818--833
+
+\makeatother
+\end{thebibliography}
