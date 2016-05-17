@@ -41,8 +41,7 @@ Ball N.~M.,  Brunner R.~J.,  Myers A.~D.,  Strand N.~E.,  Alberts S.~L.,
 
 \bibitem[\protect\citeauthoryear{Banerji et~al.,}{Banerji
   et~al.}{2010}]{banerji2010galaxy}
-Banerji M.,  et~al., 2010, Monthly Notices of the Royal Astronomical Society,
-  406, 342
+Banerji M.,  et~al., 2010, \mnras, 406, 342
 
 \bibitem[\protect\citeauthoryear{Bengio, Boulanger-Lewandowski  \&
   Pascanu}{Bengio et~al.}{2013}]{bengio2013advances}
@@ -85,8 +84,7 @@ Caruana R.,  Niculescu-Mizil A.,  2004, in Proceedings of the tenth ACM SIGKDD
 
 \bibitem[\protect\citeauthoryear{Crocce et~al.,}{Crocce
   et~al.}{2016}]{crocce2016galaxy}
-Crocce M.,  et~al., 2016, Monthly Notices of the Royal Astronomical Society,
-  455, 4301
+Crocce M.,  et~al., 2016, \mnras, 455, 4301
 
 \bibitem[\protect\citeauthoryear{Davis et~al.}{Davis
   et~al.}{2003}]{davis2003science}
@@ -99,7 +97,7 @@ DeGroot M.~H.,  Fienberg S.~E.,  1983, The statistician, pp 12--22
 
 \bibitem[\protect\citeauthoryear{Desai et~al.,}{Desai
   et~al.}{2012}]{desai2012blanco}
-Desai S.,  et~al., 2012, The Astrophysical Journal, 757, 83
+Desai S.,  et~al., 2012, \apj, 757, 83
 
 \bibitem[\protect\citeauthoryear{Dieleman, Willett  \& Dambre}{Dieleman
   et~al.}{2015}]{dieleman2015rotation}
@@ -107,7 +105,7 @@ Dieleman S.,  Willett K.~W.,   Dambre J.,  2015, MNRAS, 450, 1441
 
 \bibitem[\protect\citeauthoryear{Eisenstein et~al.,}{Eisenstein
   et~al.}{2011}]{eisenstein2011sdss}
-Eisenstein D.~J.,  et~al., 2011, The Astronomical Journal, 142, 72
+Eisenstein D.~J.,  et~al., 2011, \aj, 142, 72
 
 \bibitem[\protect\citeauthoryear{Erben et~al.}{Erben
   et~al.}{2013}]{erben2013cfhtlens}
@@ -169,16 +167,16 @@ Princeton University Press
 
 \bibitem[\protect\citeauthoryear{Kamdar, Turk  \& Brunner}{Kamdar
   et~al.}{2016a}]{kamdar2016machine1}
-Kamdar H.~M.,  Turk M.~J.,   Brunner R.~J.,  2016a, MNRAS, 455, 642
+Kamdar H.~M.,  Turk M.~J.,   Brunner R.~J.,  2016a, \mnras, 455, 642
 
 \bibitem[\protect\citeauthoryear{Kamdar, Turk  \& Brunner}{Kamdar
   et~al.}{2016b}]{kamdar2016machine2}
-Kamdar H.~M.,  Turk M.~J.,   Brunner R.~J.,  2016b, \mn@doi [MNRAS]
+Kamdar H.~M.,  Turk M.~J.,   Brunner R.~J.,  2016b, \mn@doi [\mnras]
   {10.1093/mnras/stv2981}, 457, 1162
 
 \bibitem[\protect\citeauthoryear{Kim, Brunner  \& Kind}{Kim
   et~al.}{2015}]{kim2015hybrid}
-Kim E.~J.,  Brunner R.~J.,   Kind M.~C.,  2015, MNRAS, 453, 507
+Kim E.~J.,  Brunner R.~J.,   Kind M.~C.,  2015, \mnras, 453, 507
 
 \bibitem[\protect\citeauthoryear{Krizhevsky, Sutskever  \& Hinton}{Krizhevsky
   et~al.}{2012}]{krizhevsky2012imagenet}
@@ -297,7 +295,7 @@ Wolpert D.~H.,  1996, Neural computation, 8, 1341
 
 \bibitem[\protect\citeauthoryear{York et~al.,}{York
   et~al.}{2000}]{york2000sloan}
-York D.~G.,  et~al., 2000, The Astronomical Journal, 120, 1579
+York D.~G.,  et~al., 2000, \aj, 120, 1579
 
 \bibitem[\protect\citeauthoryear{Zadrozny \& Elkan}{Zadrozny \&
   Elkan}{2001}]{zadrozny2001obtaining}
