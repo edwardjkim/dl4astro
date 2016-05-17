@@ -83,6 +83,11 @@ Brier G.~W.,  1950, Monthly weather review, 78, 1
 Caruana R.,  Niculescu-Mizil A.,  2004, in Proceedings of the tenth ACM SIGKDD
   international conference on Knowledge discovery and data mining. pp 69--78
 
+\bibitem[\protect\citeauthoryear{Crocce et~al.,}{Crocce
+  et~al.}{2016}]{crocce2016galaxy}
+Crocce M.,  et~al., 2016, Monthly Notices of the Royal Astronomical Society,
+  455, 4301
+
 \bibitem[\protect\citeauthoryear{Davis et~al.}{Davis
   et~al.}{2003}]{davis2003science}
 Davis M.,  et~al., 2003, Astronomical Telescopes and Instrumentation, pp
@@ -91,6 +96,10 @@ Davis M.,  et~al., 2003, Astronomical Telescopes and Instrumentation, pp
 \bibitem[\protect\citeauthoryear{DeGroot \& Fienberg}{DeGroot \&
   Fienberg}{1983}]{degroot1983comparison}
 DeGroot M.~H.,  Fienberg S.~E.,  1983, The statistician, pp 12--22
+
+\bibitem[\protect\citeauthoryear{Desai et~al.,}{Desai
+  et~al.}{2012}]{desai2012blanco}
+Desai S.,  et~al., 2012, The Astrophysical Journal, 757, 83
 
 \bibitem[\protect\citeauthoryear{Dieleman, Willett  \& Dambre}{Dieleman
   et~al.}{2015}]{dieleman2015rotation}
