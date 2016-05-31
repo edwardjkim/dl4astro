@@ -19,8 +19,7 @@
 
 \bibitem[\protect\citeauthoryear{{Alam} et~al.,}{{Alam}
   et~al.}{2015}]{alam2015eleventh}
-{Alam} S.,  et~al., 2015, \mn@doi [\apjs] {10.1088/0067-0049/219/1/12}, \href
-  {http://adsabs.harvard.edu/abs/2015ApJS..219...12A} {219, 12}
+{Alam} S.,  et~al., 2015, \mn@doi [\apjs] {10.1088/0067-0049/219/1/12}, 219, 12
 
 \bibitem[\protect\citeauthoryear{{Ball}, {Brunner}, {Myers}  \&
   {Tcheng}}{{Ball} et~al.}{2006}]{ball2006robust}
@@ -31,8 +30,7 @@
   {Alberts}, {Tcheng}  \& {Llor{\`a}}}{{Ball} et~al.}{2007}]{ball2007robust}
 {Ball} N.~M.,  {Brunner} R.~J.,  {Myers} A.~D.,  {Strand} N.~E.,  {Alberts}
   S.~L.,  {Tcheng} D.,   {Llor{\`a}} X.,  2007, \mn@doi [\apj]
-  {10.1086/518362}, \href {http://adsabs.harvard.edu/abs/2007ApJ...663..774B}
-  {663, 774}
+  {10.1086/518362}, 663, 774
 
 \bibitem[\protect\citeauthoryear{Ball, Brunner, Myers, Strand, Alberts  \&
   Tcheng}{Ball et~al.}{2008}]{ball2008robust}
@@ -102,6 +100,11 @@ Desai S.,  et~al., 2012, \apj, 757, 83
 \bibitem[\protect\citeauthoryear{Dieleman, Willett  \& Dambre}{Dieleman
   et~al.}{2015}]{dieleman2015rotation}
 Dieleman S.,  Willett K.~W.,   Dambre J.,  2015, MNRAS, 450, 1441
+
+\bibitem[\protect\citeauthoryear{Dieleman, De~Fauw  \& Kavukcuoglu}{Dieleman
+  et~al.}{2016}]{dieleman2016exploiting}
+Dieleman S.,  De~Fauw J.,   Kavukcuoglu K.,  2016, arXiv preprint
+  arXiv:1602.02660
 
 \bibitem[\protect\citeauthoryear{Eisenstein et~al.,}{Eisenstein
   et~al.}{2011}]{eisenstein2011sdss}
@@ -203,8 +206,7 @@ Li N.,  Thakar A.~R.,  2008, Computing in Science \& Engineering, 10, 18
 \bibitem[\protect\citeauthoryear{{Lupton}, {Gunn}  \& {Szalay}}{{Lupton}
   et~al.}{1999}]{lupton1999modified}
 {Lupton} R.~H.,  {Gunn} J.~E.,   {Szalay} A.~S.,  1999, \mn@doi [\aj]
-  {10.1086/301004}, \href {http://adsabs.harvard.edu/abs/1999AJ....118.1406L}
-  {118, 1406}
+  {10.1086/301004}, 118, 1406
 
 \bibitem[\protect\citeauthoryear{Monteith, Carroll, Seppi  \&
   Martinez}{Monteith et~al.}{2011}]{Monteith2011}
@@ -246,8 +248,7 @@ Saxe A.~M.,  McClelland J.~L.,   Ganguli S.,  2013, arXiv preprint
 \bibitem[\protect\citeauthoryear{{Schlegel}, {Finkbeiner}  \&
   {Davis}}{{Schlegel} et~al.}{1998}]{schlegel1998maps}
 {Schlegel} D.~J.,  {Finkbeiner} D.~P.,   {Davis} M.,  1998, \mn@doi [\apj]
-  {10.1086/305772}, \href {http://adsabs.harvard.edu/abs/1998ApJ...500..525S}
-  {500, 525}
+  {10.1086/305772}, 500, 525
 
 \bibitem[\protect\citeauthoryear{Seo et~al.,}{Seo
   et~al.}{2012}]{seo2012acoustic}
