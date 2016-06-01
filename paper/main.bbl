@@ -235,6 +235,11 @@ Paterno M.,  2003, Calculating Efficiencies and Their Uncertainties,
   et~al.}{2011}]{ross2011ameliorating}
 Ross A.~J.,  et~al., 2011, \mnras, 417, 1350
 
+\bibitem[\protect\citeauthoryear{Rumelhart, Hinton  \& Williams}{Rumelhart
+  et~al.}{1988}]{rumelhart1988learning}
+Rumelhart D.~E.,  Hinton G.~E.,   Williams R.~J.,  1988, Cognitive modeling, 5,
+  1
+
 \bibitem[\protect\citeauthoryear{Russakovsky et~al.,}{Russakovsky
   et~al.}{2015}]{russakovsky2015imagenet}
 Russakovsky O.,  et~al., 2015, International Journal of Computer Vision, 115,

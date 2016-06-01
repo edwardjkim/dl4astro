@@ -5,44 +5,44 @@ The style file: mnras.bst
 Database file #1: sg_paper.bib
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
-You've used 67 entries,
+You've used 68 entries,
             2881 wiz_defined-function locations,
-            1106 strings with 19212 characters,
-and the built_in function-call counts, 32506 in all, are:
-= -- 2679
-> -- 2280
-< -- 187
-+ -- 1051
-- -- 304
-* -- 3513
-:= -- 5056
+            1111 strings with 19370 characters,
+and the built_in function-call counts, 32961 in all, are:
+= -- 2709
+> -- 2321
+< -- 189
++ -- 1070
+- -- 310
+* -- 3567
+:= -- 5134
 add.period$ -- 0
-call.type$ -- 67
-change.case$ -- 134
-chr.to.int$ -- 65
-cite$ -- 67
-duplicate$ -- 1668
-empty$ -- 1739
-format.name$ -- 526
-if$ -- 5817
+call.type$ -- 68
+change.case$ -- 136
+chr.to.int$ -- 66
+cite$ -- 68
+duplicate$ -- 1691
+empty$ -- 1761
+format.name$ -- 534
+if$ -- 5891
 int.to.chr$ -- 3
 int.to.str$ -- 0
-missing$ -- 68
-newline$ -- 217
-num.names$ -- 480
-pop$ -- 407
+missing$ -- 69
+newline$ -- 220
+num.names$ -- 488
+pop$ -- 411
 preamble$ -- 1
-purify$ -- 268
+purify$ -- 272
 quote$ -- 0
-skip$ -- 1072
+skip$ -- 1086
 stack$ -- 0
-substring$ -- 1893
-swap$ -- 871
-text.length$ -- 281
+substring$ -- 1907
+swap$ -- 885
+text.length$ -- 285
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 597
+type$ -- 606
 warning$ -- 0
-while$ -- 518
+while$ -- 526
 width$ -- 0
-write$ -- 677
+write$ -- 687

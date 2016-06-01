@@ -437,8 +437,8 @@ At the end of each epoch, we evaluate the loss function on the validation set,
 and the model that minimizes the validation loss is chosen as the best model.
 
 The gradients in \ref{eq:gradient_descent} can be computed using the
-\textit{backpropagation} procedure, which is nothing more than an application of
-the chain rule for derivatives.
+\textit{backpropagation} procedure~\citep{rumelhart1988learning},
+which is nothing more than an application of the chain rule for derivatives.
 The derivative of the loss function with respect to the input of a unit can be
 computed by working backwards from the gradient with respect to the output of
 the unit.
