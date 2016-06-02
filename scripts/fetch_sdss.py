@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 
 # This script
 # 
@@ -27,7 +27,7 @@ from time import sleep
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from mpi4py import MPI
+#from mpi4py import MPI
 
 import montage_wrapper as mw
 from astropy.io import fits
@@ -393,9 +393,9 @@ def save_cutout(df, size=48, image_dir="temp", save_dir="result"):
             save_path = os.path.join(save_dir, "{0}.{1}x{1}.{2}.npy".format(row["class"], size, row["objID"]))
             np.save(save_path, array)
 
-def run_online_mode():
+def run_online_mode(filename="DR12_spec_phot_sample.csv", chunk_size=100):
 
-    df = pd.read_csv("../data/DR12_spec_phot_sample.csv", dtype={"objID": "object"})
+    df = pd.read_csv(filename, dtype={"objID": "object"})
 
     if os.path.exists("result"):
         done = os.listdir("result")
@@ -471,4 +471,4 @@ def run_parallel(filename, dest=None):
 
 if __name__ == "__main__":
 
-    run_parallel("chunk.csv")
+    run_online_mode("DR12_spec_phot_sample.csv")
