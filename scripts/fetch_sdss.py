@@ -1,14 +1,31 @@
 #!/usr/bin/env python2
 
-# This script
-# 
-# - makes an SQL query to the SDSS DR12 database (using its [API](http://skyserver.sdss.org/dr12/en/help/docs/api.aspx)) to create a catalog, 
-# - downloads the FITS files,
-# - uses [Montage](http://montage.ipac.caltech.edu/) (and [montage wrapper](http://www.astropy.org/montage-wrapper/) to align each image to the image in the $r$-band, and
-# - uses [Sextractor](http://www.astromatic.net/software/sextractor) to find the pixel position of objects, and
-# - converts the fluxes in FITS files to [luptitudes](http://www.sdss.org/dr12/algorithms/magnitudes/#asinh).
-# 
-# This [Docker image](https://github.com/EdwardJKim/deeplearning4astro/tree/master/docker) has all packages necessary to run this notebook.
+'''
+Author: Edward J Kim <edward.junhyung.kim@gmail.com>
+
+This script
+ 
+- Makes an SQL query to the SDSS DR12 database (using its API at
+  http://skyserver.sdss.org/dr12/en/help/docs/api.aspx) to create a catalog, 
+
+- Downloads the FITS files,
+
+- Uses Montage (http://montage.ipac.caltech.edu/) and
+  montage wrapper (http://www.astropy.org/montage-wrapper/) to align each image
+  to the image in the r-band, and
+
+- Uses Sextractor (http://www.astromatic.net/software/sextractor) to find the
+  pixel position of objects, and
+
+- Converts the fluxes in FITS files to luptitudes
+  (http://www.sdss.org/dr12/algorithms/magnitudes/#asinh).
+ 
+See Dockerfile at https://github.com/EdwardJKim/deeplearning4astro/tree/master/docker.
+It has all packages necessary to run this notebook.
+
+To use this script with CasJobs, see
+https://github.com/EdwardJKim/dl4astro/blob/master/scripts/README.md.
+'''
 
 from __future__ import absolute_import
 from __future__ import division
