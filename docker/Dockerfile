@@ -21,8 +21,8 @@ RUN apt-get update && \
     make install && \
 
     # Python montage-wrapper
-    pip install --upgrade pip && \
-    pip install montage-wrapper && \
+    pip2 install --upgrade pip && \
+    pip2 install montage-wrapper && \
 
     # Install Montage
     cd /tmp && \
@@ -31,7 +31,7 @@ RUN apt-get update && \
     cd montage && \
     make
 
-ENV PATH $PATH:/montage/bin
+ENV PATH $PATH:/tmp/montage/bin
 
 RUN pip2 install --upgrade terminado && \
     pip2 install Theano Lasagne && \
