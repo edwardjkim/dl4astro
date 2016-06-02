@@ -10,6 +10,7 @@
       phot.dered_u, phot.dered_g, phot.dered_r, phot.dered_i, phot.dered_z,
       phot.psfMag_u, phot.psfMag_g, phot.psfMag_r, phot.psfMag_i, phot.psfMag_z,
       cModelMag_u, cModelMag_g, cModelMag_r, cModelMag_i, cModelMag_z
+      phot.extinction_u, phot.extinction_g, phot.extinction_r, phot.extinction_i, phot.extinction_z
   INTO mydb.DR12_spec_phot_all
   FROM SpecObjAll AS spec
   JOIN PhotoObjAll AS phot
