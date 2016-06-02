@@ -366,7 +366,7 @@ def nanomaggie_to_luptitude(array, band):
     
     return luptitude
 
-def save_cutout(df, size=48, image_dir="temp", save_dir="result"):
+def save_cutout(df, cat, size=48, image_dir="temp", save_dir="result"):
 
     if not os.path.exists(save_dir):
         os.makedirs(save_dir)
@@ -386,16 +386,20 @@ def save_cutout(df, size=48, image_dir="temp", save_dir="result"):
             l = r + cut_size
         return r, l
 
-    for i, row in df.iterrows():
+    for i, row in cat.iterrows():
 
         array = np.zeros((5, size, size))
+        
+        y0, x0, y1, x1 = row[["xmin", "ymin", "xmax", "ymax"]].values
+        matched = df[df["objID"] == row.astype("object")["objID"]]
+        assert len(matched) == 1
 
         for j, b in enumerate("ugriz"):
 
             fpath = os.path.join(image_dir, row["file"])
             image_data = fits.getdata(fpath.replace("-r-", "-{}-".format(b)))
             
-            y0, x0, y1, x1 = row[["xmin", "ymin", "xmax", "ymax"]].values
+            extinction = matched["extinction_{}".format(b)].values[0]
 
             right, left = find_position(x0, x1, size, image_data.shape[0])
             down, up = find_position(y0, y1, size, image_data.shape[1])
@@ -403,7 +407,7 @@ def save_cutout(df, size=48, image_dir="temp", save_dir="result"):
             cut_out = image_data[right: left, down: up]
         
             if cut_out.shape[0] == size and cut_out.shape[1] == size:
-                cut_out = nanomaggie_to_luptitude(cut_out, b)
+                cut_out = nanomaggie_to_luptitude(cut_out, b) - extinction
                 array[j, :, :] = cut_out
                 
         if np.isnan(array).sum() == 0 and array.sum() > 0:
@@ -433,7 +437,7 @@ def run_online_mode(filename="DR12_spec_phot_sample.csv", chunk_size=100):
         convert_catalog_to_pixels(chunk)
         cat = run_sex(chunk)
         try:
-            saved = save_cutout(cat, size=48)
+            saved = save_cutout(chunk, cat, size=48)
         except:
             pass
         shutil.rmtree("temp")
