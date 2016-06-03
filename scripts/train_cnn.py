@@ -172,8 +172,8 @@ class TrainSplit(object):
 
     def __call__(self, X, y, net):
         if self.eval_size:
-            X_train, y_train = X[:-eval_size], y[:-eval_size]
-            X_valid, y_valid = X[-eval_size:], y[-eval_size:]
+            X_train, y_train = X[:-self.eval_size], y[:-self.eval_size]
+            X_valid, y_valid = X[-self.eval_size:], y[-self.eval_size:]
         else:
             X_train, y_train = X, y
             X_valid, y_valid = _sldict(X, slice(len(y), None)), y[len(y):]
