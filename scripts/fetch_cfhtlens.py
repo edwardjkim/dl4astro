@@ -334,7 +334,9 @@ def save_cutout(df, size=96, image_dir="temp", save_dir="result"):
             right, left = find_position(x0, x1, size, image_data.shape[0])
             down, up = find_position(y0, y1, size, image_data.shape[1])
 
-            cut_out = image_data[right: left, down: up]
+            extinction = df[df["id"] == row["id"]]["EXTINCTION_{}".format(b)].values[0]
+
+            cut_out = image_data[right: left, down: up] - extinction
             
             cut_out[cut_out <= 0] = 1.0e-20
 
