@@ -39,17 +39,14 @@ from lasagne.init import Orthogonal, Constant
 from nolearn.lasagne import NeuralNet
 from nolearn.lasagne import BatchIterator
 from lasagne.nonlinearities import softmax
-from sklearn.utils import shuffle
 
 import bmc
 
-X = np.load("sdss_training_images.npy")
+X = np.load("../data/sdss_training_images.npy")
 print("X.shape = {}, X.min = {}, X.max = {}".format(X.shape, X.min(), X.max()))
 
-y = np.load("sdss_training_labels.npy")
+y = np.load("../data/sdss_training_labels.npy")
 print("y.shape = {}, y.min = {}, y.max = {}".format(y.shape, y.min(), y.max()))
-
-X, y = shuffle(X, y)
 
 def renormalize(array):
     return (array - array.min()) / (array.max() - array.min())
@@ -274,17 +271,17 @@ net = NeuralNet(
     ],
 
     verbose=2,
-    train_split=TrainSplit(eval_size=10000)
+    train_split=TrainSplit(eval_size=15000)
     )
 
 
 net.fit(X, y)
             
-best_valid_loss = min([row['valid_loss'] for row in net50k.train_history_])
+best_valid_loss = min([row['valid_loss'] for row in net.train_history_])
 print("Best valid loss: {}".format(best_valid_loss))
 
-X_valid = np.load("sdss_valid_images.npy")
-y_valid = np.load("sdss_valid_labels.npy")
+X_valid = X[-15000:]
+y_valid = y[-15000:]
 
 for i in range(5):
     X_valid[:, i, :, :] = renormalize(X_valid[:, i, :, :])
@@ -292,6 +289,68 @@ for i in range(5):
 y_valid = renormalize(y_valid).astype(np.int32)
 
 y_pred_valid = np.zeros((len(y_valid), 64))
+
+class AugmentedBatchIterator(BatchIterator):
+
+    def __init__(self, batch_size, crop_size=8, validation=False, testing=False, startx=None, starty=None, rotate=None):
+        super(AugmentedBatchIterator, self).__init__(batch_size)
+        self.crop_size = crop_size
+        self.validation = validation
+        self.testing = testing
+        self.startx, self.starty = startx, starty
+        self.rotate = rotate
+
+    def transform(self, Xb, yb):
+
+        Xb, yb = super(AugmentedBatchIterator, self).transform(Xb, yb)
+        batch_size, nchannels, width, height = Xb.shape
+
+        if self.validation:
+            if self.crop_size % 2 == 0:
+                right = left = self.crop_size // 2
+            else:
+                right = self.crop_size // 2
+                left = self.crop_size // 2 + 1
+            X_new = Xb[:, :, right: -left, right: -left]
+            return X_new, yb
+
+        if not self.testing:
+            eigenvalues, eigenvectors = compute_PCA(Xb)
+
+        # Flip half of the images horizontally at random
+        indices = np.random.choice(batch_size, batch_size // 2, replace=False)
+        Xb[indices] = Xb[indices, :, :, ::-1]
+
+        # Crop images
+        X_new = np.zeros(
+            (batch_size, nchannels, width - self.crop_size, height - self.crop_size),
+            dtype=np.float32
+        )
+
+        for i in range(batch_size):
+            if self.testing:
+                px, py = self.startx, self.starty
+            else:
+                # Choose x, y pixel posiitions at random
+                px, py = np.random.choice(self.crop_size, size=2)
+
+            sx = slice(px, px + width - self.crop_size)
+            sy = slice(py, py + height - self.crop_size)
+
+            # Rotate 0, 90, 180, or 270 degrees at random
+            if self.testing:
+                nrotate = self.rotate
+                noise = np.zeros(nchannels)
+            else:
+                nrotate = np.random.choice(4)
+                # add random color perturbation
+                alpha = np.random.normal(loc=0.0, scale=0.5, size=5)
+                noise = np.dot(eigenvectors, np.transpose(alpha * eigenvalues))
+
+            for j in range(nchannels):
+                X_new[i, j] = np.rot90(Xb[i, j, sx, sy] + noise[j], k=nrotate)
+
+        return X_new, yb
 
 count = 0
 
@@ -320,6 +379,14 @@ combine.fit(y_pred_valid, y_valid)
 
 print("Validation set done.")
 
+X_test = np.load("../data/sdss_test_images.npy")
+y_test = np.load("../data/sdss_test_labels.npy")
+
+for i in range(5):
+    X_test[:, i, :, :] = renormalize(X_test[:, i, :, :])
+
+y_test = renormalize(y_test).astype(np.int32)
+
 y_pred_test = np.zeros((len(y_test), 64))
 
 count = 0
@@ -342,7 +409,7 @@ for startx in range(4):
 
             print("Iteration: {} / 64".format(count))
 
-y_pred = bmc.predict_proba(y_pred_test)
+y_pred = combine.predict_proba(y_pred_test)
 
 np.save("sdss_convnet_pred.npy", y_pred)
 
