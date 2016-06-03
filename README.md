@@ -15,13 +15,6 @@ Note: For demonstration and testing purposes only.
 For creating a training set, use
 [scripts/fetch_sdss.py](scripts/fetch_sdss.py).
 
-[fetch_sdss.ipynb](notebooks/fetch_sdss.ipynb):
-This notebook demonstrates how to generate cutout images from the CFHTLenS
-database.
-Note: For demonstration and testing purposes only.
-For creating a training set, use
-[scripts/fetch_cfhtlens.py](scripts/fetch_cfhtlens.py).
-
 ### Dockerfile
 
 The Dockerfile for the Jupyter notebook server that has been used to run
