@@ -414,7 +414,7 @@ def save_cutout(df, cat, size=48, image_dir="temp", save_dir="result"):
             save_path = os.path.join(save_dir, "{0}.{1}x{1}.{2}.npy".format(row["class"], size, row["objID"]))
             np.save(save_path, array)
 
-def run_online_mode(filename="DR12_spec_phot_sample.csv", chunk_size=100):
+def run_online_mode(filename="DR12_spec_phot_sample.csv"):
 
     df = pd.read_csv(filename, dtype={"objID": "object"})
 
@@ -429,7 +429,7 @@ def run_online_mode(filename="DR12_spec_phot_sample.csv", chunk_size=100):
     write_default_sex()
 
     for i in range(0, len(df)):
-        chunk = df[i: i + chunk_size]
+        chunk = df[i: i + 1]
         # download image fits files
         fetch_fits(chunk)
         ref_images = get_ref_list(chunk)
