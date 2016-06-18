@@ -72,6 +72,8 @@
 \newcommand{\eg}{{e.g., }}
 \newcommand{\ie}{{i.e., }}
 
+\newcommand{\RC}[1]{{\color{red}\textbf{Robert Comment: #1\ }}}
+
 \pdfminorversion=5
 
 \title[Star-galaxy Classification Using ConvNets]{Star-galaxy Classification Using Deep Convolutional Neural Networks}
@@ -96,20 +98,20 @@ $^2$Department of Astronomy, University of Illinois, Urbana, IL 61801 USA}
 \begin{abstract}
 Most existing star-galaxy classifiers use the reduced summary information from catalogs,
 requiring careful feature extraction and selection.
-The latest advances in machine learning using deep convolutional neural networks
+The latest advances in machine learning that use deep convolutional neural networks
 allow a machine to automatically learn the features directly from data,
-minimizing need for input from human experts.
+minimizing the need for input from human experts.
 We present a star-galaxy classification framework that uses
-deep convolutional neural networks (ConvNets) directly on the raw pixel values.
+deep convolutional neural networks (ConvNets) directly on the reduced, calibrated pixel values.
 Using data from the Sloan Digital Sky Survey (SDSS) and
 the Canada-France-Hawaii Telescope Lensing Survey (CFHTLenS),
 we demonstrate that ConvNets are able to produce accurate and well-calibrated
 probabilistic classifications that are competitive with
 conventional machine learning techniques.
-Future advances in deep learning may bring more success in currently ongoing and
+Future advances in deep learning may bring more success with current and
 forthcoming photometric surveys, such as the Dark Energy Survey (DES) and
 the Large Synoptic Survey Telescope (LSST), because deep neural networks require
-very little feature engineering by hand.
+very little, manual feature engineering.
 \end{abstract}
 
 \begin{keywords}
@@ -131,7 +133,7 @@ Furthermore, any classification approach must be probabilistic in nature.
 A fully probabilistic classifier enables a user to adopt probability cuts
 to obtain a pure sample for population studies,
 or to optimize the allocation of observing time by selecting objects for follow-up.
-However, ideally, the probability estimates themselves would be retained for all sources
+Ideally, however, the probability estimates themselves would be retained for all sources
 and used in subsequent analyses to improve or enhance a particular
 measurement~\citep{ross2011ameliorating,seo2012acoustic}.
 
@@ -142,21 +144,21 @@ in many areas of astronomy~\citep{ball2007robust,ball2008robust,
 banerji2010galaxy,
 carrascokind2013tpz,carrascokind2014somz,carrascokind2014exhausting,
 ivezic2014statistics,
-kamdar2016machine1,kamdar2016machine2}, and
-artificial neural networks were first applied to the problem of star-galaxy
+kamdar2016machine1,kamdar2016machine2}. 
+Artificial neural networks were first applied to the problem of star-galaxy
 classification in the work of \citet{odewahn1992automated},
-which has become a core part of the astronomical image processing software
+and they have become a core part of the astronomical image processing software
 \texttt{SExtractor}~\citep{bertin1996sextractor}.
 Other successfully implemented examples of applying machine learning to
 the star-galaxy classification problem include decision 
-trees~\citep{weir1995automated,suchkov2005census,ball2006robust,sevilla2015effect}
-, Support Vector Machines~\citep{Fadely2012}, and
+trees~\citep{weir1995automated,suchkov2005census,ball2006robust,sevilla2015effect}, 
+Support Vector Machines~\citep{Fadely2012}, and
 classifier combination strategies~\citep{kim2015hybrid}.
 
 Almost all star-galaxy classifiers published in the literature use
 the reduced summary information available from astronomical catalogs.
 Constructing catalogs requires careful engineering and considerable domain expertise
-to transform the raw pixel values of an image to suitable features,
+to transform the reduced, calibrated pixel values that comprise an image into suitable features,
 such as magnitudes or shape information of an object.
 In a branch of machine learning called \textit{deep learning},
 features are not designed by human experts;
@@ -166,14 +168,16 @@ classification in Sloan Digital Sky Survey~\citep[SDSS;][]{dieleman2015rotation}
 and Cosmic Assembly Near-infrared Deep Extragalactic Legacy
 Survey~\citep[CANDELS;][]{huertas2015catalog} and to photometric redshift
 estimation~\citep{hoyle2015measuring},
-but it has never been applied to the problem of source classification.
+but it has not yet been applied to the problem of source classification.
+
+\RC{FYI, a raw pixel value is observed directly from the telescope and is generally worthless. It must be reduced (correcting for the optics of the telescope and observational imprints) and calibrated (so that photon counts mean a physical value) before being useful in any sense.}
 
 In this paper, we present a star-galaxy classification framework
 that uses a convolutional neural network (ConvNet) model directly on the images
-from SDSS and Canada-France-Hawaii Telescope Lensing Survey (CFHTLenS).
+from the SDSS and the Canada-France-Hawaii Telescope Lensing Survey (CFHTLenS).
 We compare its performance with a standard machine learning technique
 that uses the reduced summary information from catalogs,
-and demonstrate that our ConvNet model is able to produce accurate and
+and we demonstrate that our ConvNet model is able to produce accurate and
 well-calibrated probabilistic classifications with very little feature
 engineering by hand.
 In Section~\ref{sec:data}, we describe the data sets used in this paper
@@ -198,20 +202,21 @@ we outline our conclusions in Section~\ref{sec:conclusions}.
   \centering
   \includegraphics[width=\columnwidth]{figures/sdss_color_color.pdf}
   \caption{
-    Hexbin plots showing the color-color space distribution of stars and
-    galaxies in the SDSS data set.
+    Hexbin plots showing the color-color space distribution of galaxies (blue, top row) and stars (green, bottom row)
+    in the SDSS data set used in this analysis.
     It is easy to see that there is significant overlap between stars
-    and galaxies in the color-color space. 
+    and galaxies in these color-color spaces. 
   }
   \label{fig:sdss_color_color}
 \end{figure}
 
+\RC{It might be helpful to have a colorbar with these plots to show relative densities. I also wonder if the extra whitespace might be reduced somehow. Finally, I actually think a ratio plot might be best her, where the hexbin shows the ratio of the normalized counts.}
 
 The Sloan Digital Sky Survey~\citep[SDSS;][]{york2000sloan}
 phases I--III obtained photometric data in five bands,
 $u$, $g$, $r$, $i$, and $z$,
 covering 14,555 square degrees, more than one-third of the entire sky.
-The resulting catalog contains photometry of over 300 million stars galaxies
+The resulting catalog contains photometry of over 300 million stars and galaxies
 with a limiting magnitude of $r \approx 22$,
 making the SDSS one of the largest sky surveys ever undertaken.
 The SDSS also conducted an expansive spectroscopic follow-up of
@@ -221,7 +226,7 @@ contained within the Data Release 12~\citep[DR12;][]{alam2015eleventh},
 which is publicly available through the online CasJobs
 server\footnote{http://skyserver.sdss.org/casjobs/}~\citep{li2008casjobs}.
 
-Using the CasJobs server, we randomly select $65\,000$ stars and galaxies.
+Using the CasJobs server, we randomly select a total of 65,000 sources, which are either stars or galaxies.
 We exclude some bad photometric observations as follows.
 We consider only objects whose $r$-band magnitude is less than 40;
 there are no warning flags in the spectroscopic measurement (\texttt{zWarning = 0});
@@ -241,8 +246,8 @@ the $65\,000$ objects we have selected,
 and to center each object in the cutout image.
 We also convert the flux values to inverse hyperbolic sine magnitudes
 \citep[also known as luptitudes;][]{lupton1999modified}.
-Finally, in order to account for the effect of galactic dust,
-galactic extinction corrections in magnitudes are applied
+Finally, in order to account for the effect of Galactic dust,
+extinction corrections in magnitudes are applied
 following \cite{schlegel1998maps}.
 In the end, we have cutout images of size $48\times48$ pixels
 with luptitude values in each pixel.
@@ -250,19 +255,21 @@ We note that we have experimented with increasing the pixel dimensions to
 $60\times60$ and $72\times72$ pixels, but do not find noticeable
 improvement in the performance of our model.
 
-In the end, we have $17\,344$ stars and $47\,656$ galaxies available
+In the end, we have 17,344 stars and 47,656 galaxies available
 for the training and testing processes.
 The apparent magnitudes range from $10.7 < r < 23.1$,
 and the galaxies in this sample have a mean redshift of $z \sim 0.36$.
 The $ugriz$ color-color space of the sample is plotted in
 Figure~\ref{fig:sdss_color_color}.
 We randomly split the objects into training, held-out validation,
-and blind test sets of size $40\,000$, $10\,000$, and $15\,000$, respectively.
+and blind test sets of size 40,000, 10,000, and 15,000, respectively.
 We note that cross-validation is often avoided in deep learning
 in favor of hold-out validation,
 since cross-validation is computationally expensive.
 We also note that we perform a blind test, and the test set is not used in any
 way to train or calibrate the algorithms.
+
+\RC{Be useful to state what the ratio of Stars to galaxies are in these three data sets (train, validate, test). Also, a referee will likely ask how they are distributed in magnitude and color.}
 
 \subsection{Canada-France-Hawaii Telescope Lensing Survey}
 
@@ -271,7 +278,7 @@ way to train or calibrate the algorithms.
   \includegraphics[width=\columnwidth]{figures/clens_color_color.pdf}
   \caption{
     Hexbin plots showing the color-color space distribution of stars and
-    galaxies in the CFHTLenS data set.
+    galaxies in the CFHTLenS data set used in this analysis.
   }
   \label{fig:clens_color_color}
 \end{figure}
@@ -284,7 +291,7 @@ This catalog consists of more than twenty five million objects
 with a limiting magnitude of $i_{\text{AB}} \approx 25.5$. 
 It covers a total of 154 square degrees
 in the four fields (named W1, W2, W3, and W4)
-of CFHT Legacy Survey~\citep[CFHTLS;][]{gwyn2012canada}
+of the CFHT Legacy Survey~\citep[CFHTLS;][]{gwyn2012canada}
 observed in the five photometric bands:
 $u$, $g$, $r$, $i$, and $z$.
 
@@ -307,9 +314,9 @@ that contains objects with spectroscopic labels.
 We create cutout images of size $96\times96$ pixels by using a similar method
 to that described in Section~\ref{sec:sdss}.
 Finally, images are downscaled to $48\times48$ pixels
-to reduce computational cost.
+to reduce the computational cost.
 
-In the end, we have $8\,545$ stars and $57\,843$ galaxies available
+In the end, we have 8,545 stars and 57,843 galaxies available
 for the training and testing processes.
 The apparent magnitudes range from $13.9 < r < 25.6$,
 and the galaxies in this sample have a mean redshift of $z \sim 0.59$.
@@ -318,6 +325,7 @@ Figure~\ref{fig:clens_color_color}.
 We randomly split the objects into training, held-out validation, and
 blind test sets of size $40\,000$, $10\,000$, and $13\,278$, respectively.
 
+\RC{ Again the S:G ratio in the data sets and mag and color distributions. Referee will likely ask, so you can put something in here to simplify review process.}
 \section{Deep Learning}
   \label{sec:deep_learning}
 
@@ -363,8 +371,8 @@ Then, the output of the neuron is
 where $\sigma$ is the activation function (or \textit{non-linearity}).
 
 The sigmoid function, $\sigma(x)=1/\left(1+e^{-x}\right)$,
-has frequently been used as activation function, but it has recently fallen out of favor,
-and the hyperbolic tangent function, $\sigma(x)=\tanh(x)$, is almost always used instead.
+has frequently been used as an activation function, but it has recently fallen out of favor,
+and the hyperbolic tangent function, $\sigma(x)=\tanh(x)$, is generally used instead.
 The most popular non-linearity at present, however, is the rectified linear unit
 \citep[ReLU;][]{nair2010rectified}, $\sigma(x)=\max(0, x)$.
 ReLUs generally allow much faster
@@ -386,7 +394,7 @@ A schematic representation is shown in Figure~\ref{fig:neuron_b}.
 All layers except the input and output layers are conveniently called hidden layers.
 With multiple hidden layers, deep neural networks can model complex nonlinear
 relationships, and they have had great success in multimedia tasks where humans traditionally
-outperformed computers: speech recognition, language processing, and image classification.
+outperformed computers, such as speech recognition, language processing, and image classification.
 
 The goal of learning is to find a set of weights and biases such that,
 given $N$ samples, the output from the network
@@ -499,12 +507,13 @@ makes the model invariant to small shifts and distortions.
 Two or more layers of convolution and pooling are stacked,
 followed by more convolutional and fully-connected layers.
 
+\RC{You do not talk anywhere on the software you actually use to do this work. You should introduce Python, Lasagna, Theano, and any other relevant software. You also should cite them. Finally, what hardware was used for these tests?}
 
 \subsection{Neural Network Architecture}
 
 \begin{table*}
   \centering
-  \caption{Summary of ConvNet architecture and hyperparameters. Note that pooling layers have no learnable parameters.}
+  \caption{Summary of ConvNet architecture and hyperparameters. Note that pooling layers have no learnable parameters. \RC{ This might be much easier to understand if it is a flowchart, like we did in INFO490 with Keras. Is that possible? I say this as it would better  match your toy ANN in  a previous figure.}}
   \label{table:hyperparamters}
   \begin{tabular}{ccccccc}
     \hline
@@ -565,13 +574,14 @@ by normalizing the output values that the network produces for each class.
 However, we find that solving a regression problem instead of using
 the softmax function results in significantly worse performance.
 
+\RC{ I wonder why? Is this somehow relevant?}
 
 We have performed a manual search to explore more than 200 combinations of different architectures
 and hyperparameters to find an architecture that minimizes the loss function
 (Equation~\ref{eq:cross_entropy_all}) on the validation set of the SDSS data.
 The architecture described in this section provides the best performance on
 the SDSS validation set.
-To test how this model performs across different, related problems,
+To test how this model performs across different, related data,
 we use the same architecture on the CFHTLenS data set.
 
 The architecture of \cite{krizhevsky2012imagenet}
@@ -607,7 +617,7 @@ We use slightly positive values ($b=0.01$ or $0.1$) for all biases.
 We find initializing biases to a small constant value helps eliminate dead neurons
 by ensuring that all ReLU neurons fire in the beginning.
 
-We note that training our network takes about 40 hours on a NVIDIA Tesla K40 GPU.
+We note that training our network takes about forty hours on an NVIDIA Tesla K40 GPU.
 
 \section{Reducing Overfitting}
   \label{sec:overfitting}
@@ -615,7 +625,7 @@ We note that training our network takes about 40 hours on a NVIDIA Tesla K40 GPU
 Our convolution neural network has $11\times10^6$ learnable parameters,
 while there are only $4\times10^4$ images in the training set.
 As a result, the model is very likely to \emph{overfit} without regularization.
-In this section, we describe the techniques used to combat overfitting.
+In this section, we describe the techniques we used to minimize overfitting.
 
 \subsection{Data Augmentation}
   \label{sec:data_augmentation}
@@ -728,10 +738,10 @@ using the updated alpha values.
 
 We continue the sampling process until
 we reach a predefined number of combinations,
-and finally use Equation~\ref{eq:posterior_bmc} to compute
+and we finally use Equation~\ref{eq:posterior_bmc} to compute
 the posterior probability that a source is a star (or a galaxy).
 In this paper, we use a $q$ value of three,
-and $1\,000$ model combinations are considered.
+and we consider a total of $1\,000$ model combinations.
 
 \section{Trees for Probabilistic Classifications}
   \label{sec:tpc}
@@ -754,7 +764,7 @@ TPC is a part of a publicly available software package called
 (Machine Learning for Photo-$z$).
 
 TPC uses classification trees,
-a type of prediction trees that are designed to
+a type of prediction tree that is designed to
 provide a classification or predict a discrete category.
 Prediction trees are built by asking a sequence of questions
 that recursively split the data into branches
@@ -799,7 +809,7 @@ where $f_g$ is the fraction of galaxies in the training data.
 At each node in our tree,
 we scan all dimensions to identify the split point that
 maximizes the information gain as defined by Equation~\ref{eq:information_gain},
-and select the attribute that maximizes the impurity index overall.
+and select the attribute that maximizes the overall impurity index.
 
 In a technique called random forest,
 we create bootstrap samples
@@ -812,7 +822,7 @@ multiple, uncorrelated prediction trees
 whose individual predictions are aggregated to produce
 a star-galaxy classification for each source.
 
-We train two TPC models on the SDSS data set using different sets of
+We train two TPC models on the SDSS data set by using different sets of
 attributes.
 The first model, which we denote $\rmn{TPC}_{\rmn{phot}}$, is trained with
 only nine photometric attributes:
@@ -824,15 +834,14 @@ The second model, which we denote $\rmn{TPC}_{\rmn{morph}}$, is trained with
 the concentration parameter in each band in addition to the magnitudes and
 colors, for a total of fifteen dimensions.
 The concentration is defined as the difference between the cmodel
-and PSF magnitude,
-\ie $\rmn{concentration}\equiv\rmn{psfMag}-\rmn{cModelMag}$.
+and PSF magnitude: $\rmn{concentration}\equiv\rmn{psfMag}-\rmn{cModelMag}$.
 The SDSS pipeline uses a parametric method based on the concentration,
-\ie an object is classified as a galaxy if $\rmn{concentration}>0.145$.
+an object is classified as a galaxy if $\rmn{concentration}>0.145$.
 We find that the concentration is an excellent morphological feature
 for star-galaxy separation, and including more morphological features
 does not show noticeable improvement in performance.
-The concentration is a good example of carefully handcrafted feature extraction,
-and we show in Section~\ref{sec:results_and_discussion}
+The concentration is a good example of carefully handcrafted feature extraction;
+we show in Section~\ref{sec:results_and_discussion}
 that ConvNets do not require such feature engineering.
 
 We also train two models on the CFHTLenS data set.
@@ -886,10 +895,10 @@ on the CFHTLenS and SDSS data sets, and compare it with the performance of TPC.
 Probabilistic classification models can be considered as
 functions that output a probability estimate of each source
 to be in one of the classes (\eg a star or a galaxy).
-The simplest way to way to use the probability output is to
+The simplest way to use the probability output is to
 convert it into a class label by using a threshold (a probability cut).
 Although many studies often choose the threshold by setting it to a fixed value,
-\eg $P_{\rmn{cut}} = 0.5$ \citep[\eg][]{henrion2011bayesian, Fadely2012},
+such as $P_{\rmn{cut}} = 0.5$ \citep[\eg][]{henrion2011bayesian, Fadely2012},
 choosing $0.5$ as a threshold is not the best choice
 for an unbalanced data set, where galaxies outnumber stars.
 Furthermore, setting a fixed threshold ignores the operating condition 
@@ -963,7 +972,7 @@ and $c_{s}$ at $p_s=0.970$.
 \subsubsection{Mean Squared Error}
 
 We also use the mean squared error
-(MSE; also known as Brier score~\citep{brier1950verification})
+(MSE; also known as the Brier score~\citep{brier1950verification})
 as a performance metric. We define MSE as
 \begin{equation} \label{eq:mse}
   \rmn{MSE} = \frac{1}{N} \sum^{N}_{j=1}
@@ -985,17 +994,19 @@ where we bin the probability estimates and plot the
 fraction of positive examples versus the predicted probability in each bin
 (see Figures~\ref{fig:clens_calibration_conv} and \ref{fig:clens_calibration_tpc}).
 
-The problem with binning approach is either too few or too many bins
+\RC{Why 1000 here?}
+
+The problem with a binning approach is either too few or too many bins
 can distort the evaluation of calibration performance.
 Thus, we adopt a calibration measure based on
 overlapping binning~\citep{caruana2004data}.
 We order the predicted values $P_\rmn{class}$ and
-put the first $1\,000$ elements in the first bin.
+put the first 1,000 elements in the first bin.
 We calculate the true probability $P_\rmn{gal}$ by counting the true galaxies
 in this bin.
 The calibration error for this bin is $\mid P_\rmn{gal} - P_\rmn{class} \mid$.
-We then repeat this for the second bin (2 to $1\,001$),
-the third bin (3 to $1\,002$), and so on, and average the binned calibration errors.
+We then repeat this for the second bin (2 to 1,001),
+the third bin (3 to 1,002), and so on, and average the binned calibration errors.
 Thus, the overall calibration error is given by
 \begin{equation}
   \rmn{CAL} = \frac{1}{N-s} \sum_{b=1}^{N-s} \sum_{j=b}^{b+s-1}
@@ -1012,7 +1023,7 @@ when measuring auto-correlation functions of luminous
 galaxies~\citep{ross2011ameliorating}.
 In other words, given a well-calibrated classifier,
 instead of counting each galaxy equally, a galaxy could be
-counted as $P_{\rmn{class}}$ the probability estimate.
+counted as $P_{\rmn{class}}$, the probability estimate.
 This should in principle remove the contamination effect of stars.
 For a perfect classifier, we can count the total number of galaxies in the sample
 by summing the values of $P_{\rmn{class}}$.
@@ -1050,9 +1061,9 @@ in the estimation of number of galaxies,
   \centering
   \includegraphics[width=\columnwidth]{figures/clens_mag.pdf}
   \caption{Galaxy purity and star completeness values as functions
-           of the $i$-band magnitude
-           as estimated by the kernel density estimation (KDE) method
-           for the differential counts in the CFHTLenS data set.
+           of the $i$-band magnitude (differential counts)
+           as estimated by kernel density estimation (KDE)
+           in the CFHTLenS data set.
            The top panel shows the histogram with a bin size of 0.1 mag
            and the KDE for objects in the test set.
            The second panel shows the fraction of stars estimated by KDE
@@ -1072,7 +1083,7 @@ in the estimation of number of galaxies,
   \includegraphics[width=\columnwidth]{figures/clens_integrated.pdf}
   \caption{
     Galaxy purity and star completeness as functions of the $i$-band
-    magnitude for the integrated counts in the CFHTLenS data set.
+    magnitude (integrated counts) in the CFHTLenS data set.
     The upper panel compares the galaxy
     purity values for ConvNet (red solid line), $\rmn{TPC}_{\rmn{morph}}$
     (blue dashed line), and $\rmn{TPC}_{\rmn{phot}}$ (yellow dashed line).
@@ -1099,8 +1110,8 @@ in the estimation of number of galaxies,
     \centering
     \includegraphics[width=\textwidth]{figures/clens_calibration_conv.pdf}
     \caption{
-      Calibration curve for ConvNet as applied to the CFHTLenS data set.
-      $P_{\rmn{gal}}$ is the fraction of objects that are galaxies.
+      The calibration curve for ConvNet as applied to the CFHTLenS data set.
+      $P_{\rmn{gal}}$ is the fraction of objects that are galaxies, and
       $P_{\rmn{conv}}$ is the probabilistic output generated by ConvNet.
       The dashed line displays the relationship
       $P_{\rmn{gal}} = P_{\rmn{conv}}$.
@@ -1154,9 +1165,11 @@ in the estimation of number of galaxies,
     (d) Activations on the sixth convolutional layer.
     Each image in (a), (b), and (c) is a feature map corresponding to the
     output for one of the learned features.
+    \RC{Note that usually R = Red (i-band), G = Green (r-band), and B = Blue (g-band)}
     }
   \label{fig:galaxy_activations}
 \end{figure*}
+
 
 \begin{figure*}
   \centering
@@ -1221,10 +1234,10 @@ which is trained on both morphological and photometric attributes.
 
 In Figure~\ref{fig:clens_mag}, we compare the galaxy purity
 and star completeness values for ConvNet, $\rmn{TPC}_{\rmn{morph}}$, and
-$\rmn{TPC}_{\rmn{phot}}$, as functions of $i$-band magnitude
+$\rmn{TPC}_{\rmn{phot}}$, as a function of  $i$-band magnitude
 for the differential counts.
-We use the kernel density estimation~\citep[KDE;][]{silverman1986density}
-with the Gaussian kernel.
+We use  kernel density estimation~\citep[KDE;][]{silverman1986density}
+with a Gaussian kernel.
 As the first panel shows, KDE is able to smooth the fluctuations in the distribution
 without binning.
 While ConvNet shows a slightly better performance than $\rmn{TPC}_{\rmn{morph}}$
@@ -1239,7 +1252,7 @@ star-galaxy classification provided by
 the CFHTLenS pipeline~\citep{hildebrandt2012cfhtlens} over all magnitudes.
 
 In Figure~\ref{fig:clens_integrated}, we show the overall galaxy purity
-and star completeness values as functions of $i$-band magnitude for the
+and star completeness values as a function of $i$-band magnitude for the
 integrated counts.
 ConvNet is able to maintain a galaxy purity of 0.9972 up to $i\sim24.5$,
 while the galaxy purity of $\rmn{TPC}_{\rmn{morph}}$ drops to 0.9963.
@@ -1366,8 +1379,8 @@ is able to learn the shape information automatically from the raw images.
 
 In Figure~\ref{fig:sdss_mag}, we compare the galaxy purity
 and star completeness values for ConvNet, $\rmn{TPC}_{\rmn{morph}}$, and
-$\rmn{TPC}_{\rmn{phot}}$ as
-functions of $r$-band magnitude for the differential counts in the SDSS data.
+$\rmn{TPC}_{\rmn{phot}}$ as a
+function of $r$-band magnitude for the differential counts in the SDSS data.
 We note that $\rmn{TPC}_{\rmn{morph}}$ outperforms the star-galaxy
 classifier used by the SDSS pipeline (\ie an object is classified as a galaxy
 if $\rmn{concentration} > 0.145$) over all magnitudes.
@@ -1384,8 +1397,10 @@ might be its over-reliance on morphological features.
 Near a survey's limit, the measurement uncertainties generally increase,
 and morphology is not a reliable metric for star-galaxy classification.
 
+\RC{I wonder if augmentation hurts us here, since we are populating our training data with more faint, and confusing objects? Mag distribution of stars and galaxies might help clarify this point.}
+
 In Figure~\ref{fig:sdss_integrated}, we show the overall galaxy purity
-and star completeness values as functions of magnitude for the integrated
+and star completeness values as a function of magnitude for the integrated
 counts.
 ConvNet is able to maintain a galaxy purity of 0.9915 up to $i\sim22.5$,
 while $\rmn{TPC}_{\rmn{morph}}$ provides a galaxy purity of 0.9977.
@@ -1393,12 +1408,12 @@ $\rmn{TPC}_{\rmn{morph}}$ also outperforms ConvNet
 in terms of star completeness, maintaining a purity of 0.9810 up to
 $i\sim22.5$, while the star completeness of ConvNet drops to 0.9500.
 
-We also show the galaxy purity and star completeness values as functions of
+We also show the galaxy purity and star completeness values as a function of
 $g-r$ color in Figure~\ref{fig:sdss_g_r}.
 ConvNet performs slightly better than $\rmn{TPC}_{\rmn{morph}}$ in both
 galaxy completeness and star purity between $0.7 \la g-r \la 2.0$,
 where the stellar fraction is relatively low.
-Both $\rmn{TPC}_{\rmn{morph}}$ and $\rmn{TPC}_{\rmn{phot}}$ outperform
+On the other hand, both $\rmn{TPC}_{\rmn{morph}}$ and $\rmn{TPC}_{\rmn{phot}}$ outperform
 ConvNet in the region $g-r \la 0.8$ where the stellar fraction is higher.
 
 Figures~\ref{fig:sdss_calibration_conv} and \ref{fig:sdss_calibration_tpc}
@@ -1433,7 +1448,7 @@ but the probabilities are still slightly better calibrated.
 The major advantage of ConvNets is that useful features are learned
 automatically from raw pixel values, while traditional machine learning
 algorithms require feature engineering as a separate process
-to provide produce accurate classifications.
+to produce accurate classifications.
 
 ConvNets have recently achieved record-breaking results in many image
 classification tasks~\citep{lecun2015deep} and have been quickly and widely
@@ -1442,9 +1457,9 @@ One of the main reasons for the success is that ConvNets are general-purpose
 algorithms that are applicable to a variety of problems without the need for
 designing a feature extractor.
 The lack of requirement for feature extraction is a huge advantage, \eg
-when the task is to classify $1\,000$ classes in the ImageNet data
+when the task is to classify 1,000 classes in the ImageNet data
 set~\citep{russakovsky2015imagenet},
-as a good feature extractor for identifying images of cats would of little use
+as a good feature extractor for identifying images of cats would be of little use
 for classifying sailboats, and it is impractical to design a separate
 feature extractor for each class.
 However, when there already exists a good feature extractor for the problem
@@ -1472,13 +1487,13 @@ However, spectroscopic observations are expensive and time-consuming,
 and it is unclear if sufficient training data will be available
 in future photometric surveys.
 If enough training data become available in DES or LSST, ConvNets
-become an attractive option because it can be applied immediately on raw images
+become an attractive option because it can be applied immediately on reduced, calibrated images
 to produce well-calibrated posterior probabilities.
-We also note that using more training images will require the use of multi-GPU,
+We also note that using more training images will require the use of multi-GPU systems,
 which was beyond the scope of the present work.
 
 
-Deep learning is a rapidly developing field and recent developments include
+Deep learning is a rapidly developing field, and recent developments include
 improved network architectures.
 For future work, we plan to train more ConvNet variants, such as the
 Inception Module~\citep{szegedy2015going} and Residual Network~\citep{he2015deep}.
@@ -1492,9 +1507,9 @@ for the Galaxy Zoo challenge was based on a ConvNet model,
 and it required averaging many sets of predictions from models with different
 neural network architectures.
 
-It is also likely that the performance will be improved by,
-not only training multiple network architectures,
-but also combining with different star-galaxy classifiers.
+It is also likely that the performance will be improved
+not only by training multiple network architectures,
+but also by combining them with different star-galaxy classifiers.
 In \citet{kim2015hybrid}, we combined a purely morphological classifier,
 a supervised machine learning method (TPC),
 an unsupervised machine learning method based on self-organizing maps,
