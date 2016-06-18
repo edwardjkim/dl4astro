@@ -170,8 +170,6 @@ Survey~\citep[CANDELS;][]{huertas2015catalog} and to photometric redshift
 estimation~\citep{hoyle2015measuring},
 but it has not yet been applied to the problem of source classification.
 
-\RC{FYI, a raw pixel value is observed directly from the telescope and is generally worthless. It must be reduced (correcting for the optics of the telescope and observational imprints) and calibrated (so that photon counts mean a physical value) before being useful in any sense.}
-
 In this paper, we present a star-galaxy classification framework
 that uses a convolutional neural network (ConvNet) model directly on the images
 from the SDSS and the Canada-France-Hawaii Telescope Lensing Survey (CFHTLenS).
@@ -268,8 +266,20 @@ in favor of hold-out validation,
 since cross-validation is computationally expensive.
 We also note that we perform a blind test, and the test set is not used in any
 way to train or calibrate the algorithms.
-
 \RC{Be useful to state what the ratio of Stars to galaxies are in these three data sets (train, validate, test). Also, a referee will likely ask how they are distributed in magnitude and color.}
+\textcolor{cyan}{
+The first two panels of Figure~\ref{fig:sdss_mag} show the number of objects
+and the fraction of stars in the test set as functions of $r$-band magnitude.
+Similarly, Figure~\ref{fig:sdss_g_r} shows the number of objects and the
+fraction of stars in the test set as functions of $g-r$ color.
+The normalized kernel density estimate distributions for the training set
+and validation sets are almost identical to those of the test set,
+and they are nearly indistinguishable when overlapped.
+We do not show the distributions for the training and validation sets in
+Figures~\ref{fig:sdss_mag} and \ref{fig:sdss_g_r} to avoid cluttering the
+plots.
+}
+
 
 \subsection{Canada-France-Hawaii Telescope Lensing Survey}
 
@@ -324,8 +334,15 @@ The $ugriz$ color-color space of the sample is plotted in
 Figure~\ref{fig:clens_color_color}.
 We randomly split the objects into training, held-out validation, and
 blind test sets of size $40\,000$, $10\,000$, and $13\,278$, respectively.
-
 \RC{ Again the S:G ratio in the data sets and mag and color distributions. Referee will likely ask, so you can put something in here to simplify review process.}
+\textcolor{cyan}{
+Figures~\ref{fig:clens_mag} and \ref{fig:clens_g_r} show the distribution
+of objects in the test set as functions of $r$-band magnitude and $g-r$ color.
+We do not show the distributions for the training and validation sets,
+since the normalized kernel density estimate distributions for the training set
+and validation sets are almost identical to those of the test set.
+}
+
 \section{Deep Learning}
   \label{sec:deep_learning}
 
@@ -618,6 +635,13 @@ We find initializing biases to a small constant value helps eliminate dead neuro
 by ensuring that all ReLU neurons fire in the beginning.
 
 We note that training our network takes about forty hours on an NVIDIA Tesla K40 GPU.
+\textcolor{cyan}{
+To implement our model, we use Python and the Lasagne
+library~\citep{dieleman2015lasagne}, which is built on top of
+Theano~\citep{theano2016theano}.
+In the interest of scientific reproducibility, we make all our code available at
+\href{https://github.com/EdwardJKim/dl4astro}{https://github.com/EdwardJKim/dl4astro}.  
+}
 
 \section{Reducing Overfitting}
   \label{sec:overfitting}
@@ -1001,12 +1025,12 @@ can distort the evaluation of calibration performance.
 Thus, we adopt a calibration measure based on
 overlapping binning~\citep{caruana2004data}.
 We order the predicted values $P_\rmn{class}$ and
-put the first 1,000 elements in the first bin.
+put the first $1\,000$ elements in the first bin.
 We calculate the true probability $P_\rmn{gal}$ by counting the true galaxies
 in this bin.
 The calibration error for this bin is $\mid P_\rmn{gal} - P_\rmn{class} \mid$.
-We then repeat this for the second bin (2 to 1,001),
-the third bin (3 to 1,002), and so on, and average the binned calibration errors.
+We then repeat this for the second bin (2 to $1\,001$),
+the third bin (3 to $1\,002$), and so on, and average the binned calibration errors.
 Thus, the overall calibration error is given by
 \begin{equation}
   \rmn{CAL} = \frac{1}{N-s} \sum_{b=1}^{N-s} \sum_{j=b}^{b+s-1}
@@ -1157,8 +1181,10 @@ in the estimation of number of galaxies,
   \end{subfigure}
   \caption{
     (a) A sample $44\times44$ RGB image of a galaxy in the CFHTLenS data set.
-    The RGB image is created by mapping R $\rightarrow g$ band magnitude,
-    G $\rightarrow r$ band magnitude, and B $\rightarrow i$ band magnitude.
+    \textcolor{cyan}{
+    The RGB image is created by mapping R $\rightarrow i$ band magnitude,
+    G $\rightarrow r$ band magnitude, and B $\rightarrow g$ band magnitude.
+    }
     (b) Activations on the first convolutional layer when a $5\times44\times44$
     image is fed into the network.
     (c) Activations on the third convolutional layer.
@@ -1437,8 +1463,6 @@ ConvNet is lower than that of $\rmn{TPC}_{\rmn{morph}}$.
 
 We have presented a convolutional neural network for classifying stars and
 galaxies in the SDSS and CFHTLenS photometric images.
-In the interest of scientific reproducibility, we make all our code available at
-\href{https://github.com/EdwardJKim/dl4astro}{https://github.com/EdwardJKim/dl4astro}.  
 For the CFHTLenS data set, the network is able to provide a classification that
 is as accurate as a random forest algorithm (TPC), while the probability estimates of
 our ConvNet model appear to be better calibrated.

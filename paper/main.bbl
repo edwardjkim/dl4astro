@@ -97,6 +97,11 @@ DeGroot M.~H.,  Fienberg S.~E.,  1983, The statistician, pp 12--22
   et~al.}{2012}]{desai2012blanco}
 Desai S.,  et~al., 2012, \apj, 757, 83
 
+\bibitem[\protect\citeauthoryear{Dieleman \& et al.}{Dieleman \&
+  et~al.}{2015}]{dieleman2015lasagne}
+Dieleman S.,  et al. 2015, Lasagne: First release., \url
+  {http://dx.doi.org/10.5281/zenodo.27878}
+
 \bibitem[\protect\citeauthoryear{Dieleman, Willett  \& Dambre}{Dieleman
   et~al.}{2015}]{dieleman2015rotation}
 Dieleman S.,  Willett K.~W.,   Dambre J.,  2015, MNRAS, 450, 1441
@@ -291,6 +296,10 @@ Swets J.~A.,  Dawes R.~M.,   Monahan J.,  2000, Scientific American, p.~83
   et~al.}{2015}]{szegedy2015going}
 Szegedy C.,  et~al., 2015, in Proceedings of the IEEE Conference on Computer
   Vision and Pattern Recognition. pp~1--9
+
+\bibitem[\protect\citeauthoryear{{Theano Development Team}}{{Theano Development
+  Team}}{2016}]{theano2016theano}
+{Theano Development Team} 2016, arXiv e-prints, abs/1605.02688
 
 \bibitem[\protect\citeauthoryear{{Weir}, {Fayyad}  \& {Djorgovski}}{{Weir}
   et~al.}{1995}]{weir1995automated}
