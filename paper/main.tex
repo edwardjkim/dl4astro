@@ -533,7 +533,11 @@ followed by more convolutional and fully-connected layers.
 
 \begin{table*}
   \centering
-  \caption{Summary of ConvNet architecture and hyperparameters. Note that pooling layers have no learnable parameters. \RC{ This might be much easier to understand if it is a flowchart, like we did in INFO490 with Keras. Is that possible? I say this as it would better  match your toy ANN in  a previous figure.}}
+  \caption{Summary of ConvNet architecture and hyperparameters. Note that pooling layers have no learnable parameters. \RC{ This might be much easier to understand if it is a flowchart, like we did in INFO490 with Keras. Is that possible? I say this as it would better  match your toy ANN in  a previous figure.}
+\textcolor{magenta}{
+Please see \url{https://github.com/EdwardJKim/dl4astro/blob/master/paper/figures/layers.png}. I can make this one look better and include it, but I would rather not include it if you are OK with it, because I don't think it adds any further information. It seems to me the flowchart is basically each row in the below table connected with arrows.
+}
+  }
   \label{table:hyperparamters}
   \begin{tabular}{ccccccc}
     \hline
@@ -644,10 +648,14 @@ by ensuring that all ReLU neurons fire in the beginning.
 To implement our model, we use Python and the Lasagne
 library~\citep{dieleman2015lasagne}, which is built on top of
 Theano~\citep{theano2016theano}.
-In the interest of scientific reproducibility, we make all our code available at
-\href{https://github.com/EdwardJKim/dl4astro}{https://github.com/EdwardJKim/dl4astro}.  
+The Theano library simplifies the use of GPU for computation, and using the GPU
+allows about an order of magnitude faster training than using just the CPU.
 }
-We note that training our network takes about forty hours on an NVIDIA Tesla K40 GPU.
+We note that training our network takes about forty hours on an NVIDIA Tesla
+K40 GPU.
+In the interest of scientific reproducibility, we make all our code available
+at \href{https://github.com/EdwardJKim/dl4astro}{https://github.com/EdwardJKim/dl4astro}.
+
 
 \section{Reducing Overfitting}
   \label{sec:overfitting}
