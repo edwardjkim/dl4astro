@@ -209,6 +209,10 @@ we outline our conclusions in Section~\ref{sec:conclusions}.
 \end{figure}
 
 \RC{It might be helpful to have a colorbar with these plots to show relative densities. I also wonder if the extra whitespace might be reduced somehow. Finally, I actually think a ratio plot might be best her, where the hexbin shows the ratio of the normalized counts.}
+\textcolor{magenta}
+{
+I added colorbars. I don't see how I can reduce the whitespace further. I tried creating a ratio plot (see \url{https://github.com/EdwardJKim/dl4astro/blob/master/paper/figures/sdss_color_color.test.pdf}) but I think I prefer separate color-color diagrams for stars and galaxies. If you think the ratio plot is better, I can polish the linked ratio plot and replace the color-color diagrams with ratio plots.
+}
 
 The Sloan Digital Sky Survey~\citep[SDSS;][]{york2000sloan}
 phases I--III obtained photometric data in five bands,
@@ -240,7 +244,7 @@ We use the astrometry information in the FITS headers
 in the \texttt{Montage}\footnote{http://montage.ipac.caltech.edu/} software
 to align each image to the reference ($r$-band) image.
 We then use \texttt{SExtractor} to find the pixel positions of
-the $65\,000$ objects we have selected,
+the 65,000 objects we have selected,
 and to center each object in the cutout image.
 We also convert the flux values to inverse hyperbolic sine magnitudes
 \citep[also known as luptitudes;][]{lupton1999modified}.
@@ -287,8 +291,9 @@ plots.
   \centering
   \includegraphics[width=\columnwidth]{figures/clens_color_color.pdf}
   \caption{
-    Hexbin plots showing the color-color space distribution of stars and
-    galaxies in the CFHTLenS data set used in this analysis.
+    Hexbin plots showing the color-color space distribution of
+    galaxies (blue, top row) and stars (green, bottom row)
+    in the CFHTLenS data set used in this analysis.
   }
   \label{fig:clens_color_color}
 \end{figure}
@@ -333,7 +338,7 @@ and the galaxies in this sample have a mean redshift of $z \sim 0.59$.
 The $ugriz$ color-color space of the sample is plotted in
 Figure~\ref{fig:clens_color_color}.
 We randomly split the objects into training, held-out validation, and
-blind test sets of size $40\,000$, $10\,000$, and $13\,278$, respectively.
+blind test sets of size 40,000, 10,000, and 13,278, respectively.
 \RC{ Again the S:G ratio in the data sets and mag and color distributions. Referee will likely ask, so you can put something in here to simplify review process.}
 \textcolor{cyan}{
 Figures~\ref{fig:clens_mag} and \ref{fig:clens_g_r} show the distribution
@@ -524,8 +529,6 @@ makes the model invariant to small shifts and distortions.
 Two or more layers of convolution and pooling are stacked,
 followed by more convolutional and fully-connected layers.
 
-\RC{You do not talk anywhere on the software you actually use to do this work. You should introduce Python, Lasagna, Theano, and any other relevant software. You also should cite them. Finally, what hardware was used for these tests?}
-
 \subsection{Neural Network Architecture}
 
 \begin{table*}
@@ -592,6 +595,8 @@ However, we find that solving a regression problem instead of using
 the softmax function results in significantly worse performance.
 
 \RC{ I wonder why? Is this somehow relevant?}
+\textcolor{magenta}{ I don't know. I treated regression vs classification problem as just another hyperparamter I have to choose. Using classification mode + softmax was simply a better hyperparamter for the problem.
+}
 
 We have performed a manual search to explore more than 200 combinations of different architectures
 and hyperparameters to find an architecture that minimizes the loss function
@@ -634,7 +639,7 @@ We use slightly positive values ($b=0.01$ or $0.1$) for all biases.
 We find initializing biases to a small constant value helps eliminate dead neurons
 by ensuring that all ReLU neurons fire in the beginning.
 
-We note that training our network takes about forty hours on an NVIDIA Tesla K40 GPU.
+\RC{You do not talk anywhere on the software you actually use to do this work. You should introduce Python, Lasagna, Theano, and any other relevant software. You also should cite them. Finally, what hardware was used for these tests?}
 \textcolor{cyan}{
 To implement our model, we use Python and the Lasagne
 library~\citep{dieleman2015lasagne}, which is built on top of
@@ -642,6 +647,7 @@ Theano~\citep{theano2016theano}.
 In the interest of scientific reproducibility, we make all our code available at
 \href{https://github.com/EdwardJKim/dl4astro}{https://github.com/EdwardJKim/dl4astro}.  
 }
+We note that training our network takes about forty hours on an NVIDIA Tesla K40 GPU.
 
 \section{Reducing Overfitting}
   \label{sec:overfitting}
@@ -765,7 +771,7 @@ we reach a predefined number of combinations,
 and we finally use Equation~\ref{eq:posterior_bmc} to compute
 the posterior probability that a source is a star (or a galaxy).
 In this paper, we use a $q$ value of three,
-and we consider a total of $1\,000$ model combinations.
+and we consider a total of 1,000 model combinations.
 
 \section{Trees for Probabilistic Classifications}
   \label{sec:tpc}
@@ -1019,24 +1025,25 @@ fraction of positive examples versus the predicted probability in each bin
 (see Figures~\ref{fig:clens_calibration_conv} and \ref{fig:clens_calibration_tpc}).
 
 \RC{Why 1000 here?}
+\textcolor{magenta}{It's somewhat arbitrary.  Number of ojbects in the test set / Number of bins in the calibration curve = 15000 / 10 = 1500.  So about 1000, rounded down.  But I could have chosen 100 or 10000 or any other number. Do you think I need a reason here?}
 
 The problem with a binning approach is either too few or too many bins
 can distort the evaluation of calibration performance.
 Thus, we adopt a calibration measure based on
 overlapping binning~\citep{caruana2004data}.
 We order the predicted values $P_\rmn{class}$ and
-put the first $1\,000$ elements in the first bin.
+put the first 1,000 elements in the first bin.
 We calculate the true probability $P_\rmn{gal}$ by counting the true galaxies
 in this bin.
 The calibration error for this bin is $\mid P_\rmn{gal} - P_\rmn{class} \mid$.
-We then repeat this for the second bin (2 to $1\,001$),
-the third bin (3 to $1\,002$), and so on, and average the binned calibration errors.
+We then repeat this for the second bin (2 to 1,001),
+the third bin (3 to 1,002), and so on, and average the binned calibration errors.
 Thus, the overall calibration error is given by
 \begin{equation}
   \rmn{CAL} = \frac{1}{N-s} \sum_{b=1}^{N-s} \sum_{j=b}^{b+s-1}
   \bigg| P_{\rmn{class},j} - \frac{\sum_{j=b}^{b+s-1} P_{\rmn{gal},j}}{s} \bigg|,
 \end{equation}
-where $s=1\,000$ is the bin length.
+where $s=1000$ is the bin length.
 
 \subsubsection{Number of galaxies}
 
@@ -1192,6 +1199,7 @@ in the estimation of number of galaxies,
     Each image in (a), (b), and (c) is a feature map corresponding to the
     output for one of the learned features.
     \RC{Note that usually R = Red (i-band), G = Green (r-band), and B = Blue (g-band)}
+    \textcolor{magenta}{Fixed}
     }
   \label{fig:galaxy_activations}
 \end{figure*}
@@ -1254,7 +1262,7 @@ Thus, magnitudes and colors alone are not sufficient to separate stars from
 galaxies,
 and morphology is critical in separating stars from galaxies.
 ConvNet is able to learn the morphological features automatically from
-the raw images, and the performance of ConvNet is therefore comparable to
+the images, and the performance of ConvNet is therefore comparable to
 that of $\rmn{TPC}_{\rmn{morph}}$,
 which is trained on both morphological and photometric attributes.
 
@@ -1401,7 +1409,7 @@ $\rmn{TPC}_{\rmn{phot}}$ in all six metrics by a significant amount, as
 magnitudes and colors alone are not sufficient to separate stars from galaxies.
 Although ConvNet performs worse than $\rmn{TPC}_{\rmn{morph}}$ on the SDSS
 data, its performance is much closer to $\rmn{TPC}_{\rmn{morph}}$, as ConvNet
-is able to learn the shape information automatically from the raw images.
+is able to learn the shape information automatically from the images.
 
 In Figure~\ref{fig:sdss_mag}, we compare the galaxy purity
 and star completeness values for ConvNet, $\rmn{TPC}_{\rmn{morph}}$, and
@@ -1470,7 +1478,7 @@ When the same network architecture is applied to the SDSS data set,
 the network fails to outperform TPC,
 but the probabilities are still slightly better calibrated.
 The major advantage of ConvNets is that useful features are learned
-automatically from raw pixel values, while traditional machine learning
+automatically from images, while traditional machine learning
 algorithms require feature engineering as a separate process
 to produce accurate classifications.
 
