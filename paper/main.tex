@@ -211,7 +211,7 @@ we outline our conclusions in Section~\ref{sec:conclusions}.
 \RC{It might be helpful to have a colorbar with these plots to show relative densities. I also wonder if the extra whitespace might be reduced somehow. Finally, I actually think a ratio plot might be best her, where the hexbin shows the ratio of the normalized counts.}
 \textcolor{magenta}
 {
-I added colorbars. I don't see how I can reduce the whitespace further. I tried creating a ratio plot (see \url{https://github.com/EdwardJKim/dl4astro/blob/master/paper/figures/sdss_color_color.test.pdf}) but I think I prefer separate color-color diagrams for stars and galaxies. If you think the ratio plot is better, I can polish the linked ratio plot and replace the color-color diagrams with ratio plots.
+I added colorbars. I don't see how I can reduce the whitespace further. I tried creating a ratio plot (see \url{https://github.com/EdwardJKim/dl4astro/blob/master/paper/figures/sdss_color_color.test.pdf}) but I think I prefer separate color-color diagrams for stars and galaxies, because the only reason I included these color-color diagrams is the referee will be an astronomer, and I think a ratio plot will be less familiar to the referee than the conventional plots with number counts. If you think a ratio plot is better, I can polish the linked ratio plot and replace the color-color diagrams with ratio plots.
 }
 
 The Sloan Digital Sky Survey~\citep[SDSS;][]{york2000sloan}
@@ -276,7 +276,7 @@ The first two panels of Figure~\ref{fig:sdss_mag} show the number of objects
 and the fraction of stars in the test set as functions of $r$-band magnitude.
 Similarly, Figure~\ref{fig:sdss_g_r} shows the number of objects and the
 fraction of stars in the test set as functions of $g-r$ color.
-The normalized kernel density estimate distributions for the training set
+The normalized kernel density estimate distributions for the training
 and validation sets are almost identical to those of the test set,
 and they are nearly indistinguishable when overlapped.
 We do not show the distributions for the training and validation sets in
@@ -342,9 +342,9 @@ blind test sets of size 40,000, 10,000, and 13,278, respectively.
 \RC{ Again the S:G ratio in the data sets and mag and color distributions. Referee will likely ask, so you can put something in here to simplify review process.}
 \textcolor{cyan}{
 Figures~\ref{fig:clens_mag} and \ref{fig:clens_g_r} show the distribution
-of objects in the test set as functions of $r$-band magnitude and $g-r$ color.
+of objects in the test set as functions of $i$-band magnitude and $g-r$ color.
 We do not show the distributions for the training and validation sets,
-since the normalized kernel density estimate distributions for the training set
+since the normalized kernel density estimate distributions for the training
 and validation sets are almost identical to those of the test set.
 }
 
@@ -535,7 +535,7 @@ followed by more convolutional and fully-connected layers.
   \centering
   \caption{Summary of ConvNet architecture and hyperparameters. Note that pooling layers have no learnable parameters. \RC{ This might be much easier to understand if it is a flowchart, like we did in INFO490 with Keras. Is that possible? I say this as it would better  match your toy ANN in  a previous figure.}
 \textcolor{magenta}{
-Please see \url{https://github.com/EdwardJKim/dl4astro/blob/master/paper/figures/layers.png}. I can make this one look better and include it, but I would rather not include it if you are OK with it, because I don't think it adds any further information. It seems to me the flowchart is basically each row in the below table connected with arrows.
+Please see \url{https://github.com/EdwardJKim/dl4astro/blob/master/paper/figures/layers.png}. I can make this one look better and include it, but I would rather not include it if you are OK with it, because I don't think it adds any useful information. It seems to me the flowchart is basically each row in the below table connected with arrows.
 }
   }
   \label{table:hyperparamters}
@@ -1033,7 +1033,7 @@ fraction of positive examples versus the predicted probability in each bin
 (see Figures~\ref{fig:clens_calibration_conv} and \ref{fig:clens_calibration_tpc}).
 
 \RC{Why 1000 here?}
-\textcolor{magenta}{It's somewhat arbitrary.  Number of ojbects in the test set / Number of bins in the calibration curve = 15000 / 10 = 1500.  So about 1000, rounded down.  But I could have chosen 100 or 10000 or any other number. Do you think I need a reason here?}
+\textcolor{magenta}{It's somewhat arbitrary.  Number of ojbects in the test set / Number of bins in the calibration curve = 15000 / 10 = 1500.  So about 1000, rounded down.  But I could have chosen 100 or 10000 or any other number. Do you think I need a justification here?}
 
 The problem with a binning approach is either too few or too many bins
 can distort the evaluation of calibration performance.
@@ -1440,6 +1440,9 @@ Near a survey's limit, the measurement uncertainties generally increase,
 and morphology is not a reliable metric for star-galaxy classification.
 
 \RC{I wonder if augmentation hurts us here, since we are populating our training data with more faint, and confusing objects? Mag distribution of stars and galaxies might help clarify this point.}
+\textcolor{magenta}{
+Even if we are populating our training data with fainter objects, augmentation still improves the overall performance on the validation set, so I don't think augmentation hurts us.
+}
 
 In Figure~\ref{fig:sdss_integrated}, we show the overall galaxy purity
 and star completeness values as a function of magnitude for the integrated
