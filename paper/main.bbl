@@ -99,8 +99,8 @@ Desai S.,  et~al., 2012, \apj, 757, 83
 
 \bibitem[\protect\citeauthoryear{Dieleman \& et al.}{Dieleman \&
   et~al.}{2015}]{dieleman2015lasagne}
-Dieleman S.,  et al. 2015, Lasagne: First release., \url
-  {http://dx.doi.org/10.5281/zenodo.27878}
+Dieleman S.,  et al. 2015, Lasagne: First release.,
+  \mn@doi{10.5281/zenodo.27878}
 
 \bibitem[\protect\citeauthoryear{Dieleman, Willett  \& Dambre}{Dieleman
   et~al.}{2015}]{dieleman2015rotation}
