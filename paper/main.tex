@@ -72,8 +72,6 @@
 \newcommand{\eg}{{e.g., }}
 \newcommand{\ie}{{i.e., }}
 
-\newcommand{\RC}[1]{{\color{red}\textbf{Robert Comment: #1\ }}}
-
 \pdfminorversion=5
 
 \title[Star-galaxy Classification Using ConvNets]{Star-galaxy Classification Using Deep Convolutional Neural Networks}
@@ -208,11 +206,6 @@ we outline our conclusions in Section~\ref{sec:conclusions}.
   \label{fig:sdss_color_color}
 \end{figure}
 
-\RC{It might be helpful to have a colorbar with these plots to show relative densities. I also wonder if the extra whitespace might be reduced somehow. Finally, I actually think a ratio plot might be best her, where the hexbin shows the ratio of the normalized counts.}
-\textcolor{magenta}
-{
-I added colorbars. I don't see how I can reduce the whitespace further. I tried creating a ratio plot (see \url{https://github.com/EdwardJKim/dl4astro/blob/master/paper/figures/sdss_color_color.test.pdf}) but I think I prefer separate color-color diagrams for stars and galaxies, because the only reason I included these color-color diagrams is the referee will be an astronomer, and I think a ratio plot will be less familiar to the referee than the conventional plots with number counts. If you think a ratio plot is better, I can polish the linked ratio plot and replace the color-color diagrams with ratio plots.
-}
 
 The Sloan Digital Sky Survey~\citep[SDSS;][]{york2000sloan}
 phases I--III obtained photometric data in five bands,
@@ -270,8 +263,6 @@ in favor of hold-out validation,
 since cross-validation is computationally expensive.
 We also note that we perform a blind test, and the test set is not used in any
 way to train or calibrate the algorithms.
-\RC{Be useful to state what the ratio of Stars to galaxies are in these three data sets (train, validate, test). Also, a referee will likely ask how they are distributed in magnitude and color.}
-\textcolor{cyan}{
 The first two panels of Figure~\ref{fig:sdss_mag} show the number of objects
 and the fraction of stars in the test set as functions of $r$-band magnitude.
 Similarly, Figure~\ref{fig:sdss_g_r} shows the number of objects and the
@@ -282,7 +273,6 @@ and they are nearly indistinguishable when overlapped.
 We do not show the distributions for the training and validation sets in
 Figures~\ref{fig:sdss_mag} and \ref{fig:sdss_g_r} to avoid cluttering the
 plots.
-}
 
 
 \subsection{Canada-France-Hawaii Telescope Lensing Survey}
@@ -339,14 +329,11 @@ The $ugriz$ color-color space of the sample is plotted in
 Figure~\ref{fig:clens_color_color}.
 We randomly split the objects into training, held-out validation, and
 blind test sets of size 40,000, 10,000, and 13,278, respectively.
-\RC{ Again the S:G ratio in the data sets and mag and color distributions. Referee will likely ask, so you can put something in here to simplify review process.}
-\textcolor{cyan}{
 Figures~\ref{fig:clens_mag} and \ref{fig:clens_g_r} show the distribution
 of objects in the test set as functions of $i$-band magnitude and $g-r$ color.
 We do not show the distributions for the training and validation sets,
 since the normalized kernel density estimate distributions for the training
 and validation sets are almost identical to those of the test set.
-}
 
 \section{Deep Learning}
   \label{sec:deep_learning}
@@ -533,11 +520,7 @@ followed by more convolutional and fully-connected layers.
 
 \begin{table*}
   \centering
-  \caption{Summary of ConvNet architecture and hyperparameters. Note that pooling layers have no learnable parameters. \RC{ This might be much easier to understand if it is a flowchart, like we did in INFO490 with Keras. Is that possible? I say this as it would better  match your toy ANN in  a previous figure.}
-\textcolor{magenta}{
-Please see \url{https://github.com/EdwardJKim/dl4astro/blob/master/paper/figures/layers.png}. I can make this one look better and include it, but I would rather not include it if you are OK with it, because I don't think it adds any useful information. It seems to me the flowchart is basically each row in the below table connected with arrows.
-}
-  }
+  \caption{Summary of ConvNet architecture and hyperparameters. Note that pooling layers have no learnable parameters.}
   \label{table:hyperparamters}
   \begin{tabular}{ccccccc}
     \hline
@@ -598,10 +581,6 @@ by normalizing the output values that the network produces for each class.
 However, we find that solving a regression problem instead of using
 the softmax function results in significantly worse performance.
 
-\RC{ I wonder why? Is this somehow relevant?}
-\textcolor{magenta}{ I don't know. I treated regression vs classification problem as just another hyperparamter I have to choose. Using classification mode + softmax was simply a better hyperparamter for the problem.
-}
-
 We have performed a manual search to explore more than 200 combinations of different architectures
 and hyperparameters to find an architecture that minimizes the loss function
 (Equation~\ref{eq:cross_entropy_all}) on the validation set of the SDSS data.
@@ -643,14 +622,11 @@ We use slightly positive values ($b=0.01$ or $0.1$) for all biases.
 We find initializing biases to a small constant value helps eliminate dead neurons
 by ensuring that all ReLU neurons fire in the beginning.
 
-\RC{You do not talk anywhere on the software you actually use to do this work. You should introduce Python, Lasagna, Theano, and any other relevant software. You also should cite them. Finally, what hardware was used for these tests?}
-\textcolor{cyan}{
 To implement our model, we use Python and the Lasagne
 library~\citep{dieleman2015lasagne}, which is built on top of
 Theano~\citep{theano2016theano}.
 The Theano library simplifies the use of GPU for computation, and using the GPU
 allows about an order of magnitude faster training than using just the CPU.
-}
 We note that training our network takes about forty hours on an NVIDIA Tesla
 K40 GPU.
 In the interest of scientific reproducibility, we make all our code available
@@ -1032,9 +1008,6 @@ where we bin the probability estimates and plot the
 fraction of positive examples versus the predicted probability in each bin
 (see Figures~\ref{fig:clens_calibration_conv} and \ref{fig:clens_calibration_tpc}).
 
-\RC{Why 1000 here?}
-\textcolor{magenta}{It's somewhat arbitrary.  Number of ojbects in the test set / Number of bins in the calibration curve = 15000 / 10 = 1500.  So about 1000, rounded down.  But I could have chosen 100 or 10000 or any other number. Do you think I need a justification here?}
-
 The problem with a binning approach is either too few or too many bins
 can distort the evaluation of calibration performance.
 Thus, we adopt a calibration measure based on
@@ -1051,7 +1024,9 @@ Thus, the overall calibration error is given by
   \rmn{CAL} = \frac{1}{N-s} \sum_{b=1}^{N-s} \sum_{j=b}^{b+s-1}
   \bigg| P_{\rmn{class},j} - \frac{\sum_{j=b}^{b+s-1} P_{\rmn{gal},j}}{s} \bigg|,
 \end{equation}
-where $s=1000$ is the bin length.
+where $s=1000$ is the bin length, which is chosen approximately equal to
+the number of objects in the testing set divided by the number of bins used in
+the calibration curve, \ie $s \approx N / 10$.
 
 \subsubsection{Number of galaxies}
 
@@ -1196,18 +1171,14 @@ in the estimation of number of galaxies,
   \end{subfigure}
   \caption{
     (a) A sample $44\times44$ RGB image of a galaxy in the CFHTLenS data set.
-    \textcolor{cyan}{
     The RGB image is created by mapping R $\rightarrow i$ band magnitude,
     G $\rightarrow r$ band magnitude, and B $\rightarrow g$ band magnitude.
-    }
     (b) Activations on the first convolutional layer when a $5\times44\times44$
     image is fed into the network.
     (c) Activations on the third convolutional layer.
     (d) Activations on the sixth convolutional layer.
     Each image in (a), (b), and (c) is a feature map corresponding to the
     output for one of the learned features.
-    \RC{Note that usually R = Red (i-band), G = Green (r-band), and B = Blue (g-band)}
-    \textcolor{magenta}{Fixed}
     }
   \label{fig:galaxy_activations}
 \end{figure*}
@@ -1439,10 +1410,6 @@ might be its over-reliance on morphological features.
 Near a survey's limit, the measurement uncertainties generally increase,
 and morphology is not a reliable metric for star-galaxy classification.
 
-\RC{I wonder if augmentation hurts us here, since we are populating our training data with more faint, and confusing objects? Mag distribution of stars and galaxies might help clarify this point.}
-\textcolor{magenta}{
-Even if we are populating our training data with fainter objects, augmentation still improves the overall performance on the validation set, so I don't think augmentation hurts us.
-}
 
 In Figure~\ref{fig:sdss_integrated}, we show the overall galaxy purity
 and star completeness values as a function of magnitude for the integrated
