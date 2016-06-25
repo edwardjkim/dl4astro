@@ -1409,7 +1409,11 @@ especially at faint magnitudes,
 might be its over-reliance on morphological features.
 Near a survey's limit, the measurement uncertainties generally increase,
 and morphology is not a reliable metric for star-galaxy classification.
-
+Another possibility is that data augmentation has a negative effect at faint
+magnitudes, as the network may get confused by additional examples of faint
+galaxies that look like point sources.
+Data augmentation however is indispensable, since it improves the overall
+performance greatly.
 
 In Figure~\ref{fig:sdss_integrated}, we show the overall galaxy purity
 and star completeness values as a function of magnitude for the integrated
