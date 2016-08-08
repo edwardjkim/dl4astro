@@ -75,7 +75,7 @@
 % Use strikethrough and colors for revisions
 \usepackage[normalem]{ulem}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
-\newcommand{\added}[1]{\textcolor{red}{#1}}
+\newcommand{\changed}[1]{\textcolor{red}{#1}}
 
 \pdfminorversion=5
 
@@ -199,7 +199,7 @@ we outline our conclusions in Section~\ref{sec:conclusions}.
 \section{Data}
   \label{sec:data}
 
-\added{
+\changed{
 To demonstrate the performance of our ConvNet model, we use photometric and
 spectroscopic data sets with different characteristics and compositions.
 In this section, we briefly describe these data sets and the image pre-processing
@@ -447,7 +447,7 @@ $y_j$ is the probability prediction made by the model.
 We compute the loss function by taking the average of all cross-entropies in the sample.
 Thus, the loss function becomes
 \begin{equation}
-\added{
+\changed{
   L(\bmath{y}, \hat{\bmath{y}})
 }
 = - \frac{1}{N} \sum_{j=1}^{N} \hat{y}_j  \log_2 y_j
@@ -516,14 +516,14 @@ computed, it is straightforward to compute the gradients for the weight,
 The convolutional neural network~\citep[ConvNet;][]{fukushima1980neocognitron,lecun1998gradient}
 is a type of deep, feedforward neural network
 that has recently become
-\added{
+\changed{
 a popular
 }
 approach in the computer vision community.
 In a typical ConvNet, the first few stages are composed of two types of layers: 
 convolutional layers and pooling layers.
 
-\added{
+\changed{
 The input to a convolutional layer is an image, and the output channels of
 each layer are called \textit{feature maps}.
 }
@@ -540,7 +540,7 @@ with a sum of convolutions. Thus, the $k$-th feature map is given by
 where we sum over the set of input feature maps,
 $\ast$ is the convolution operator, and $\bmath{w}_m^k$ represent the filters.
 
-\added{
+\changed{
 Typically, a
 }
 pooling layer computes the maximum of a local $2\times2$ patch in a feature map.
@@ -798,77 +798,78 @@ To compare the performance of ConvNets with
 machine learning algorithms that use standard photometric features,
 we use a machine learning framework called
 Trees for Probabilistic Classifications (TPC).
-Although a complete description of TPC is beyond the scope of this paper,
-we provide a brief description in this section.
-For more details, we refer the reader to
-\cite{carrascokind2013tpz} and \cite{kim2015hybrid}.
-
 TPC is a parallel, supervised machine learning algorithm
 that uses prediction trees and random forest 
 techniques~\citep{breiman1984classification, breiman2001random}
 to produce a star-galaxy classification.
-TPC is a part of a publicly available software package called
-\textsc{MLZ}\footnote{http://pythonhosted.org/MLZ/}
-(Machine Learning for Photo-$z$).
+\changed{
+A complete description of TPC is beyond the scope of this paper, and
+we refer the reader to
+\cite{carrascokind2013tpz} and \cite{kim2015hybrid} for more details.
+}
 
-TPC uses classification trees,
-a type of prediction tree that is designed to
-provide a classification or predict a discrete category.
-Prediction trees are built by asking a sequence of questions
-that recursively split the data into branches
-until a terminal leaf is created
-that meets a stopping criterion
-(\eg a minimum leaf size).
-The optimal split dimension is decided by
-choosing the attribute that maximizes
-the \textit{Information Gain} ($I_G$), which is defined as
-
-\begin{equation} \label{eq:information_gain}
-  I_G \left(D_{\rmn{node}}, X\right)
-  = I_d \left( D_{\rmn{node}} \right)
-  - \sum_{x \in \rmn{values}(X)}
-  \frac{|D_{\rmn{node}, x}|}{|D_{\rmn{node}}|}
-  I_d \left( D_{\rmn{node}, x} \right),
-\end{equation}
-
-\noindent
-where $D_{\rmn{node}}$ is the training data in a given node,
-$X$ is one of the possible dimensions (\eg magnitudes or colors)
-along which the node is split, and
-$x$ are the possible values of a specific dimension $X$.
-$|D_{\rmn{node}}|$ and $|D_{\rmn{node}, x}|$ are the size of the total training data
-and the number of objects in a given subset $x$ within the current node,
-respectively.
-$I_d$ is the impurity degree index,
-and TPC can calculate $I_d$
-from any of the three standard different impurity indices:
-\textit{information entropy}, \textit{Gini impurity},
-and \textit{classification error}.
-In this work, we use the information entropy,
-which is defined similarly to the thermodynamic entropy:
-
-\begin{equation}
-  I_d \left( D \right)
-  = - f_g \log_{2} f_g - \left(1 - f_g\right) \log_{2} \left(1 - f_g\right),
-\end{equation}
-
-\noindent
-where $f_g$ is the fraction of galaxies in the training data.
-At each node in our tree,
-we scan all dimensions to identify the split point that
-maximizes the information gain as defined by Equation~\ref{eq:information_gain},
-and select the attribute that maximizes the overall impurity index.
-
-In a technique called random forest,
-we create bootstrap samples
-(\ie $N$ randomly selected objects with replacement)
-from the input training data
-by sampling repeatedly from the magnitudes and colors
-using their measurement errors.
-We use these bootstrap samples to construct
-multiple, uncorrelated prediction trees
-whose individual predictions are aggregated to produce
-a star-galaxy classification for each source.
+%TPC is a part of a publicly available software package called
+%\textsc{MLZ}\footnote{http://pythonhosted.org/MLZ/}
+%(Machine Learning for Photo-$z$).
+%
+%TPC uses classification trees,
+%a type of prediction tree that is designed to
+%provide a classification or predict a discrete category.
+%Prediction trees are built by asking a sequence of questions
+%that recursively split the data into branches
+%until a terminal leaf is created
+%that meets a stopping criterion
+%(\eg a minimum leaf size).
+%The optimal split dimension is decided by
+%choosing the attribute that maximizes
+%the \textit{Information Gain} ($I_G$), which is defined as
+%
+%\begin{equation} \label{eq:information_gain}
+%  I_G \left(D_{\rmn{node}}, X\right)
+%  = I_d \left( D_{\rmn{node}} \right)
+%  - \sum_{x \in \rmn{values}(X)}
+%  \frac{|D_{\rmn{node}, x}|}{|D_{\rmn{node}}|}
+%  I_d \left( D_{\rmn{node}, x} \right),
+%\end{equation}
+%
+%\noindent
+%where $D_{\rmn{node}}$ is the training data in a given node,
+%$X$ is one of the possible dimensions (\eg magnitudes or colors)
+%along which the node is split, and
+%$x$ are the possible values of a specific dimension $X$.
+%$|D_{\rmn{node}}|$ and $|D_{\rmn{node}, x}|$ are the size of the total training data
+%and the number of objects in a given subset $x$ within the current node,
+%respectively.
+%$I_d$ is the impurity degree index,
+%and TPC can calculate $I_d$
+%from any of the three standard different impurity indices:
+%\textit{information entropy}, \textit{Gini impurity},
+%and \textit{classification error}.
+%In this work, we use the information entropy,
+%which is defined similarly to the thermodynamic entropy:
+%
+%\begin{equation}
+%  I_d \left( D \right)
+%  = - f_g \log_{2} f_g - \left(1 - f_g\right) \log_{2} \left(1 - f_g\right),
+%\end{equation}
+%
+%\noindent
+%where $f_g$ is the fraction of galaxies in the training data.
+%At each node in our tree,
+%we scan all dimensions to identify the split point that
+%maximizes the information gain as defined by Equation~\ref{eq:information_gain},
+%and select the attribute that maximizes the overall impurity index.
+%
+%In a technique called random forest,
+%we create bootstrap samples
+%(\ie $N$ randomly selected objects with replacement)
+%from the input training data
+%by sampling repeatedly from the magnitudes and colors
+%using their measurement errors.
+%We use these bootstrap samples to construct
+%multiple, uncorrelated prediction trees
+%whose individual predictions are aggregated to produce
+%a star-galaxy classification for each source.
 
 We train two TPC models on the SDSS data set by using different sets of
 attributes.
