@@ -519,8 +519,10 @@ that has recently become \added{a popular} approach in the computer vision commu
 In a typical ConvNet, the first few stages are composed of two types of layers: 
 convolutional layers and pooling layers.
 
-The input to a convolutional layer is an image with a certain number of color channels
-or \textit{feature maps}.
+\added{
+The input to a convolutional layer is an image, and the output channels of
+each layer are called \textit{feature maps}.
+}
 To produce output feature maps, we convolve each feature map with a set of weights
 called \textit{filters},
 and apply a non-linearity such as ReLU to the weighted sum of these convolutions.
