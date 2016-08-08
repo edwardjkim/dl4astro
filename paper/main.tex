@@ -72,11 +72,10 @@
 \newcommand{\eg}{{e.g., }}
 \newcommand{\ie}{{i.e., }}
 
-% Use colors for revisions
+% Use strikethrough and colors for revisions
+\usepackage[normalem]{ulem}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
-\newcommand{\added}[1]{\textcolor{blue}{#1}}
-\newcommand{\changed}[1]{\textcolor{red}{#1}}
-\newcommand{\removed}[1]{\textcolor{gray}{#1}}
+\newcommand{\added}[1]{\textcolor{red}{#1}}
 
 \pdfminorversion=5
 
@@ -200,6 +199,13 @@ we outline our conclusions in Section~\ref{sec:conclusions}.
 \section{Data}
   \label{sec:data}
 
+\added{
+To demonstrate the performance of our ConvNet model, we use photometric and
+spectroscopic data sets with different characteristics and compositions.
+In this section, we briefly describe these data sets and the image pre-processing
+steps for retrieving cutout images.
+}
+
 \subsection{Sloan Digital Sky Survey}
   \label{sec:sdss}
 
@@ -263,7 +269,7 @@ In the end, we have 17,344 stars and 47,656 galaxies available
 for the training and testing processes.
 The apparent magnitudes range from $10.7 < r < 23.1$,
 and the galaxies in this sample have a mean redshift of $z \sim 0.36$.
-\removed{
+\sout{
 The $ugriz$ color-color space of the sample is plotted in
 Figure~\ref{fig:sdss_color_color}.
 }
@@ -336,7 +342,7 @@ In the end, we have 8,545 stars and 57,843 galaxies available
 for the training and testing processes.
 The apparent magnitudes range from $13.9 < r < 25.6$,
 and the galaxies in this sample have a mean redshift of $z \sim 0.59$.
-\removed{
+\sout{
 The $ugriz$ color-color space of the sample is plotted in
 Figure~\ref{fig:clens_color_color}.
 }
