@@ -238,8 +238,11 @@ server\footnote{http://skyserver.sdss.org/casjobs/}~\citep{li2008casjobs}.
 
 Using the CasJobs server, we randomly select a total of 65,000 sources, which are either stars or galaxies.
 We exclude some bad photometric observations as follows.
-We consider only objects whose $r$-band magnitude is less than 40;
-there are no warning flags in the spectroscopic measurement (\texttt{zWarning = 0});
+We consider only objects
+\sout{
+whose $r$-band magnitude is less than 40; there are
+}
+with no warning flags in the spectroscopic measurement (\texttt{zWarning = 0});
 the half-light radius in the $r$ band is less than 30 arc seconds
 as measured by the exponential and de Vaucouleurs light profiles;
 the error on the spectroscopic redshift measurement is less than 0.1; and
