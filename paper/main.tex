@@ -447,7 +447,10 @@ $y_j$ is the probability prediction made by the model.
 We compute the loss function by taking the average of all cross-entropies in the sample.
 Thus, the loss function becomes
 \begin{equation}
-  L(y_j, \hat{y}_j) = - \frac{1}{N} \sum_{j=1}^{N} \hat{y}_j  \log_2 y_j
+\added{
+  L(\bmath{y}, \hat{\bmath{y}})
+}
+= - \frac{1}{N} \sum_{j=1}^{N} \hat{y}_j  \log_2 y_j
     + (1 - \hat{y}_j)  \log_2 (1 - \hat y_j).
   \label{eq:cross_entropy_all}
 \end{equation}
