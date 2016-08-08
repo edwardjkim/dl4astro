@@ -1395,23 +1395,17 @@ process.
   \label{fig:sdss_g_r}
 \end{figure}
 
-\begin{figure*}
+\begin{figure}
   \centering
-  \begin{minipage}[c]{0.49\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{figures/sdss_calibration_conv.pdf}
-    \caption{Calibration curve for ConvNet as applied to the SDSS data set.}
-    \label{fig:sdss_calibration_conv}
-  \end{minipage}
-  \hfill
-  \begin{minipage}[c]{0.49\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{figures/sdss_calibration_tpc.pdf}
-    \caption{Calibration curve for $\rmn{TPC}_{\rmn{morph}}$
-      as applied to the SDSS data set.}
-    \label{fig:sdss_calibration_tpc}
-  \end{minipage}
-\end{figure*}
+  \includegraphics[width=\columnwidth]{figures/sdss_calibration.pdf}
+  \caption{
+    \changed{
+    Calibration curves for ConvNet (red) and $\rmn{TPC}_{\rmn{morph}}$
+    (blue) as applied to the SDSS data set.
+    }
+    }
+  \label{fig:sdss_calibration}
+\end{figure}
 
 We have also trained and tested our ConvNet model on the SDSS data set, and
 we present in Table~\ref{table:sdss_metrics} the same six metrics for ConvNet,
@@ -1469,10 +1463,11 @@ where the stellar fraction is relatively low.
 On the other hand, both $\rmn{TPC}_{\rmn{morph}}$ and $\rmn{TPC}_{\rmn{phot}}$ outperform
 ConvNet in the region $g-r \la 0.8$ where the stellar fraction is higher.
 
-Figures~\ref{fig:sdss_calibration_conv} and \ref{fig:sdss_calibration_tpc}
-show the calibration curves of ConvNet and $\rmn{TPC}_{\rmn{morph}}$,
-respectively.
-The calibration curve of ConvNet in Figure~\ref{fig:sdss_calibration_conv}
+\changed{
+Figure~\ref{fig:sdss_calibration} shows
+the calibration curves of ConvNet and $\rmn{TPC}_{\rmn{morph}}$.
+}
+The calibration curve of ConvNet in Figure~\ref{fig:sdss_calibration}
 is not as well-calibrated as the calibration curve in
 Figure~\ref{fig:clens_calibration_conv},
 where the same ConvNet model was applied to the CFHTLenS data set.
