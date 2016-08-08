@@ -72,6 +72,12 @@
 \newcommand{\eg}{{e.g., }}
 \newcommand{\ie}{{i.e., }}
 
+% Use colors for revisions
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\newcommand{\added}[1]{\textcolor{blue}{#1}}
+\newcommand{\changed}[1]{\textcolor{red}{#1}}
+\newcommand{\removed}[1]{\textcolor{gray}{#1}}
+
 \pdfminorversion=5
 
 \title[Star-galaxy Classification Using ConvNets]{Star-galaxy Classification Using Deep Convolutional Neural Networks}
@@ -197,17 +203,17 @@ we outline our conclusions in Section~\ref{sec:conclusions}.
 \subsection{Sloan Digital Sky Survey}
   \label{sec:sdss}
 
-\begin{figure}
-  \centering
-  \includegraphics[width=\columnwidth]{figures/sdss_color_color.pdf}
-  \caption{
-    Hexbin plots showing the color-color space distribution of galaxies (blue, top row) and stars (green, bottom row)
-    in the SDSS data set used in this analysis.
-    It is easy to see that there is significant overlap between stars
-    and galaxies in these color-color spaces. 
-  }
-  \label{fig:sdss_color_color}
-\end{figure}
+%\begin{figure}
+%  \centering
+%  \includegraphics[width=\columnwidth]{figures/sdss_color_color.pdf}
+%  \caption{
+%    Hexbin plots showing the color-color space distribution of galaxies (blue, top row) and stars (green, bottom row)
+%    in the SDSS data set used in this analysis.
+%    It is easy to see that there is significant overlap between stars
+%    and galaxies in these color-color spaces. 
+%  }
+%  \label{fig:sdss_color_color}
+%\end{figure}
 
 
 The Sloan Digital Sky Survey~\citep[SDSS;][]{york2000sloan}
@@ -257,8 +263,10 @@ In the end, we have 17,344 stars and 47,656 galaxies available
 for the training and testing processes.
 The apparent magnitudes range from $10.7 < r < 23.1$,
 and the galaxies in this sample have a mean redshift of $z \sim 0.36$.
+\removed{
 The $ugriz$ color-color space of the sample is plotted in
 Figure~\ref{fig:sdss_color_color}.
+}
 We randomly split the objects into training, held-out validation,
 and blind test sets of size 40,000, 10,000, and 15,000, respectively.
 We note that cross-validation is often avoided in deep learning
@@ -280,16 +288,16 @@ plots.
 
 \subsection{Canada-France-Hawaii Telescope Lensing Survey}
 
-\begin{figure}
-  \centering
-  \includegraphics[width=\columnwidth]{figures/clens_color_color.pdf}
-  \caption{
-    Hexbin plots showing the color-color space distribution of
-    galaxies (blue, top row) and stars (green, bottom row)
-    in the CFHTLenS data set used in this analysis.
-  }
-  \label{fig:clens_color_color}
-\end{figure}
+%\begin{figure}
+%  \centering
+%  \includegraphics[width=\columnwidth]{figures/clens_color_color.pdf}
+%  \caption{
+%    Hexbin plots showing the color-color space distribution of
+%    galaxies (blue, top row) and stars (green, bottom row)
+%    in the CFHTLenS data set used in this analysis.
+%  }
+%  \label{fig:clens_color_color}
+%\end{figure}
 
 We also use photometric data from
 the Canada-France-Hawaii Telescope Lensing Survey
@@ -328,8 +336,10 @@ In the end, we have 8,545 stars and 57,843 galaxies available
 for the training and testing processes.
 The apparent magnitudes range from $13.9 < r < 25.6$,
 and the galaxies in this sample have a mean redshift of $z \sim 0.59$.
+\removed{
 The $ugriz$ color-color space of the sample is plotted in
 Figure~\ref{fig:clens_color_color}.
+}
 We randomly split the objects into training, held-out validation, and
 blind test sets of size 40,000, 10,000, and 13,278, respectively.
 Figures~\ref{fig:clens_mag} and \ref{fig:clens_g_r} show the distribution
