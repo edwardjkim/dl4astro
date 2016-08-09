@@ -698,7 +698,7 @@ Each cropping is equivalent to randomly shifting a $44\times44$ image by up to 4
 vertically and/or horizontally. }
 \item{Gaussian noise:
 We introduce random Gaussian noise to each pixel values
-by using a similar method to \cite{krizhevsky2012imagenet}. }
+by using a similar method to \cite{krizhevsky2012imagenet}.}
 \end{itemize}
 These data augmentation schemes add almost no computational cost,
 as they are performed on the CPU while the GPU is training the ConvNets on images.
@@ -881,7 +881,11 @@ and their corresponding colors
 ($u-g$, $g-r$, $r-i$, $i-z$).
 The second model, which we denote $\rmn{TPC}_{\rmn{morph}}$, is trained with
 the concentration parameter in each band in addition to the magnitudes and
-colors, for a total of fifteen dimensions.
+colors, for a total of
+\changed{
+fourteen
+}
+dimensions.
 The concentration is defined as the difference between the
 \sout{cmodel and}
 \changed{
