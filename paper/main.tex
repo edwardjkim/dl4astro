@@ -1257,7 +1257,10 @@ As described in Section~\ref{sec:convnet},
 we train our ConvNet model by monitoring its performance on the validation set.
 Once we have finished training the model,
 we evaluate its performance on the blind test set.
-We also use the same training and validation sets to train 
+We also use the same training and validation sets to train
+\changed{
+and validate
+}
 $\rmn{TPC}_{\rmn{morph}}$ and $\rmn{TPC}_{\rmn{phot}}$, and
 perform classifications on the same test set to compare their performance
 with that of ConvNet.
