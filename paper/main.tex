@@ -882,8 +882,12 @@ and their corresponding colors
 The second model, which we denote $\rmn{TPC}_{\rmn{morph}}$, is trained with
 the concentration parameter in each band in addition to the magnitudes and
 colors, for a total of fifteen dimensions.
-The concentration is defined as the difference between the cmodel
-and PSF magnitude: $\rmn{concentration}\equiv\rmn{psfMag}-\rmn{cModelMag}$.
+The concentration is defined as the difference between the
+\sout{cmodel and}
+\changed{
+PSF magnitude (psfMag) and the composite model magnitude (cModelMag), \ie
+}
+$\rmn{concentration}\equiv\rmn{psfMag}-\rmn{cModelMag}$.
 The SDSS pipeline uses a parametric method based on the concentration,
 an object is classified as a galaxy if $\rmn{concentration}>0.145$.
 We find that the concentration is an excellent morphological feature
