@@ -454,12 +454,13 @@ $L(\bmath{y},\hat{\bmath{y}})$
 over the training data.
 In this work, we use \textit{cross-entropy}
 \changed{
-\citep{murphy2012machine},
-}
+\citep[also called log loss;][]{murphy2012machine} as the loss function.
+For binary classification, the cross-entropy per sample is given by
 \begin{equation}
   L(y_j, \hat{y}_j) = -\hat{y}_j \log_2 y_j - (1 - \hat{y}_j) \log_2(1 - y_j),
   \label{eq:cross_entropy}
 \end{equation}
+}
 where $\hat{y}_j$ is the actual truth value (\eg 0 or 1) of the $j$-th data, and
 $y_j$ is the probability prediction made by the model.
 We compute the loss function by taking the average of all cross-entropies in the sample.
