@@ -700,7 +700,13 @@ vertically and/or horizontally. }
 We introduce random Gaussian noise to each pixel values
 by using a similar method to \cite{krizhevsky2012imagenet}.}
 \end{itemize}
-These data augmentation schemes add almost no computational cost,
+\changed{
+In addition to artificially increasing the size of the dataset,
+these data augmentation schemes make the resulting model more invariant to
+rotation, reflection, translation, and small noise in the pixel values.
+We also note that the data augmentation steps
+}
+add almost no computational cost,
 as they are performed on the CPU while the GPU is training the ConvNets on images.
 
 \subsection{Dropout}
