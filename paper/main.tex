@@ -450,11 +450,7 @@ In this work, we use \textit{cross-entropy},
 where $\hat{y}_j$ is the actual truth value (\eg 0 or 1) of the $j$-th data, and
 $y_j$ is the probability prediction made by the model.
 We compute the loss function by taking the average of all cross-entropies in the sample.
-Thus,
-\changed{
-given $N$ samples,
-}
-the loss function becomes
+Thus, the loss function becomes
 \begin{equation}
 \changed{
   L(\bmath{y}, \hat{\bmath{y}})
@@ -743,9 +739,7 @@ Although the data augmentation step in Section~\ref{sec:data_augmentation} shoul
 make our ConvNet model invariant to these types of transformations,
 we find that applying BMC still results in a significant increase in performance.
 \changed{
-Although a complete description of BMC is beyond the scope of this paper,
-we provide a brief description.
-For more details, we refer the reader to \citet{Monteith2011}.
+For a thorough discussion of BMC, we refer the reader to \citet{Monteith2011}.
 }
 
 \sout{ The posterior probability that a source is a galaxy is given by }
