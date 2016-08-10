@@ -17,6 +17,10 @@
   {mn@eprint@\@tempb}{\@tempb:\@tempc}{\expandafter \expandafter \csname
   mn@eprint@\@tempb\endcsname \expandafter{\@tempc}}}
 
+\bibitem[\protect\citeauthoryear{Aggarwal}{Aggarwal}{2014}]{aggarwal2014data}
+Aggarwal C.~C.,  2014, Data classification: algorithms and applications.
+CRC Press
+
 \bibitem[\protect\citeauthoryear{{Alam} et~al.,}{{Alam}
   et~al.}{2015}]{alam2015eleventh}
 {Alam} S.,  et~al., 2015, \mn@doi [\apjs] {10.1088/0067-0049/219/1/12}, 219, 12
@@ -50,6 +54,14 @@ Bengio Y.,  Boulanger-Lewandowski N.,   Pascanu R.,  2013, in Acoustics, Speech
 \bibitem[\protect\citeauthoryear{Bertin \& Arnouts}{Bertin \&
   Arnouts}{1996}]{bertin1996sextractor}
 Bertin E.,  Arnouts S.,  1996, \aaps, 117, 393
+
+\bibitem[\protect\citeauthoryear{Bottou}{Bottou}{1998}]{bottou1998online}
+Bottou L.,  1998, On-line learning in neural networks, 17, 142
+
+\bibitem[\protect\citeauthoryear{Bousquet \& Bottou}{Bousquet \&
+  Bottou}{2008}]{bousquet2008tradeoffs}
+Bousquet O.,  Bottou L.,  2008, in Advances in neural information processing
+  systems. pp 161--168
 
 \bibitem[\protect\citeauthoryear{Breiman}{Breiman}{2001}]{breiman2001random}
 Breiman L.,  2001, Machine learning, 45, 5
@@ -195,10 +207,16 @@ Krizhevsky A.,  Sutskever I.,   Hinton G.~E.,  2012, in Advances in neural
   et~al.}{2005}]{le2005vimos}
 Le~F{\`e}vre O.,  et~al., 2005, \aap, 439, 845
 
+\bibitem[\protect\citeauthoryear{LeCun, Bottou, Orr  \& M{\"u}ller}{LeCun
+  et~al.}{1998a}]{lecun1998efficient}
+LeCun Y.~A.,  Bottou L.,  Orr G.~B.,   M{\"u}ller K.-R.,  1998a, in , Neural
+  networks: Tricks of the trade.
+Springer, pp 9--50
+
 \bibitem[\protect\citeauthoryear{LeCun, Bottou, Bengio  \& Haffner}{LeCun
-  et~al.}{1998}]{lecun1998gradient}
-LeCun Y.,  Bottou L.,  Bengio Y.,   Haffner P.,  1998, Proceedings of the IEEE,
-  86, 2278
+  et~al.}{1998b}]{lecun1998gradient}
+LeCun Y.,  Bottou L.,  Bengio Y.,   Haffner P.,  1998b, Proceedings of the
+  IEEE, 86, 2278
 
 \bibitem[\protect\citeauthoryear{LeCun, Bengio  \& Hinton}{LeCun
   et~al.}{2015}]{lecun2015deep}
@@ -212,6 +230,10 @@ Li N.,  Thakar A.~R.,  2008, Computing in Science \& Engineering, 10, 18
   et~al.}{1999}]{lupton1999modified}
 {Lupton} R.~H.,  {Gunn} J.~E.,   {Szalay} A.~S.,  1999, \mn@doi [\aj]
   {10.1086/301004}, 118, 1406
+
+\bibitem[\protect\citeauthoryear{Maas, Hannun  \& Ng}{Maas
+  et~al.}{2013}]{maas2013rectifier}
+Maas A.~L.,  Hannun A.~Y.,   Ng A.~Y.,  2013, in Proc. ICML.
 
 \bibitem[\protect\citeauthoryear{Monteith, Carroll, Seppi  \&
   Martinez}{Monteith et~al.}{2011}]{Monteith2011}
