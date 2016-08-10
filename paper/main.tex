@@ -434,8 +434,11 @@ is the rectified linear unit
 ReLUs generally allow much faster
 training of deep neural networks with many layers.
 However, ReLU units can sometimes result in dead neurons whose output is always zero.
-To mitigate this problem, we use leaky ReLUs that have a small, non-zero slope
-in the negative region,
+To mitigate this problem, we use leaky ReLUs
+\changed{
+~\citep{maas2013rectifier}
+}
+that have a small, non-zero slope in the negative region,
 \begin{equation}
   \sigma(x) =
     \begin{cases}
@@ -499,18 +502,18 @@ where $\eta$ is a small, positive number known as the \textit{learning rate}.
 The gradients can be computed using the backpropagation
 procedure~\citep{rumelhart1988learning}.
 A common approach to speed up training is to split the training data
-into mini-batches.
+into mini-batches~\citep{lecun1998efficient}.
 In mini-batch gradient descent, instead of computing the gradients in
 Equation~\ref{eq:gradient_descent} for the entire training data,
 we only compute the gradient of randomly chosen training examples at each step.
 As training examples are usually correlated,
 the gradient computed from each mini-batch is a good approximation
-of the overall gradient.
+of the overall gradient~\citep{bottou1998online}.
 As a result, mini-batch gradient descent results in much faster convergence.
 However, there is a trade-off: the lower the batch size is,
 the lower the convergence rate will be;
-the higher the batch size is,
-the longer it will take to compute the gradient at each step.
+the higher the batch size is, the longer it will take to compute the gradient
+at each step~\citep{bousquet2008tradeoffs}.
 Thus, a moderate batch size, combined with a decaying learning rate, is
 generally used in practice.
 }
