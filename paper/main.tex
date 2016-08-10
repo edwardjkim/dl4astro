@@ -398,15 +398,20 @@ and validation sets are almost identical to those of the test set.
     }
 \end{figure*}
 
+\sout{
 A neuron in the human brain receives signals from other neurons through
 synaptic connections.
 If the combination of these signals exceeds a certain threshold,
 the neuron will fire and send a signal to other neurons.
 Intelligence is believed to be the collective effect of
 approximately $10^{11}$ neurons firing.
+}
 An artificial neuron in most artificial neural networks is represented
 as a mathematical function that models a biological neural structure
-(Figure~\ref{fig:neuron_a}).
+\changed{
+\citep{aggarwal2014data}.
+A schematic representation is shown in Figure~\ref{fig:neuron_a}.
+}
 Let $\bmath{x}=\left(x_1,x_2,\dots,x_n\right)$ be a vector of inputs to a given neuron,
 $\bmath{w}=\left(w_1,w_2,\dots,w_n\right)$ be a vector of weights, and
 $b$ be the bias.
@@ -416,11 +421,15 @@ Then, the output of the neuron is
   \label{eq:neuron_output}
 \end{equation}
 where $\sigma$ is the activation function (or \textit{non-linearity}).
-
+\sout{
 The sigmoid function, $\sigma(x)=1/\left(1+e^{-x}\right)$,
 has frequently been used as an activation function, but it has recently fallen out of favor,
 and the hyperbolic tangent function, $\sigma(x)=\tanh(x)$, is generally used instead.
-The most popular non-linearity at present, however, is the rectified linear unit
+}
+The most popular non-linearity at present
+\sout{, however,
+}
+is the rectified linear unit
 \citep[ReLU;][]{nair2010rectified}, $\sigma(x)=\max(0, x)$.
 ReLUs generally allow much faster
 training of deep neural networks with many layers.
@@ -485,6 +494,8 @@ where we use the following rules to update the parameters in each layer $l$:
 \end{align}
 where $\eta$ is a small, positive number known as the \textit{learning rate}.
 \changed{
+The gradients can be computed using the backpropagation
+procedure~\citep{rumelhart1988learning}.
 A common approach to speed up training is to split the training data
 into mini-batches.
 In mini-batch gradient descent, instead of computing the gradients in
@@ -502,40 +513,41 @@ Thus, a moderate batch size, combined with a decaying learning rate, is
 generally used in practice.
 }
 
+
 We define an \textit{epoch} as a single, complete pass through the training data,
 and full training usually requires many epochs.
 At the end of each epoch, we evaluate the loss function on the validation set,
 and the model that minimizes the validation loss is chosen as the best model.
 
-The gradients in \ref{eq:gradient_descent} can be computed using the
-\textit{backpropagation} procedure~\citep{rumelhart1988learning},
-which is nothing more than an application of the chain rule for derivatives.
-The derivative of the loss function with respect to the input of a unit can be
-computed by working backwards from the gradient with respect to the output of
-the unit.
-At the output layer, the derivative of the loss function with respect to the
-output is given by
-\begin{align}
-  \frac{ \partial L }{ \partial y_i } &= y_i - \hat{y}_i \\
-  \frac{ \partial L }{ \partial x_i } &=
-    \frac{ \partial L }{ \partial y_i }
-    \frac{ \partial y_i }{ \partial x_i }.
-\end{align}
-At each hidden layer, the derivative of the loss function with respect to the
-output of each unit is a weighted sum of the derivatives with respect to the
-inputs of the subsequent layer,
-\begin{align}
-  \frac{ \partial L }{ \partial y_j } &=
-    \sum_{i} w_{ji} \frac{ \partial L }{ \partial x_i}   \\
-  \frac{ \partial L }{ \partial x_j } &=
-    \frac{ \partial L }{ \partial y_j }
-    \frac{ \partial y_j }{ \partial x_j }.
-\end{align}
-Finally, once the gradients $\partial L / \partial x_j$ have been
-computed, it is straightforward to compute the gradients for the weight,
-\begin{equation}
-\frac{\partial L}{\partial w_{jk}} = y_k \frac{\partial L}{\partial x_j}.
-\end{equation}
+%The gradients in \ref{eq:gradient_descent} can be computed using the
+%\textit{backpropagation} procedure~\citep{rumelhart1988learning},
+%which is nothing more than an application of the chain rule for derivatives.
+%The derivative of the loss function with respect to the input of a unit can be
+%computed by working backwards from the gradient with respect to the output of
+%the unit.
+%At the output layer, the derivative of the loss function with respect to the
+%output is given by
+%\begin{align}
+%  \frac{ \partial L }{ \partial y_i } &= y_i - \hat{y}_i \\
+%  \frac{ \partial L }{ \partial x_i } &=
+%    \frac{ \partial L }{ \partial y_i }
+%    \frac{ \partial y_i }{ \partial x_i }.
+%\end{align}
+%At each hidden layer, the derivative of the loss function with respect to the
+%output of each unit is a weighted sum of the derivatives with respect to the
+%inputs of the subsequent layer,
+%\begin{align}
+%  \frac{ \partial L }{ \partial y_j } &=
+%    \sum_{i} w_{ji} \frac{ \partial L }{ \partial x_i}   \\
+%  \frac{ \partial L }{ \partial x_j } &=
+%    \frac{ \partial L }{ \partial y_j }
+%    \frac{ \partial y_j }{ \partial x_j }.
+%\end{align}
+%Finally, once the gradients $\partial L / \partial x_j$ have been
+%computed, it is straightforward to compute the gradients for the weight,
+%\begin{equation}
+%\frac{\partial L}{\partial w_{jk}} = y_k \frac{\partial L}{\partial x_j}.
+%\end{equation}
 
 \subsection{Convolutional Neural Networks}
   \label{sec:convnet}
@@ -826,7 +838,7 @@ and we consider a total of 1,000 model combinations.
 
 \section{Trees for Probabilistic Classifications}
   \label{sec:tpc}
-  
+
 To compare the performance of ConvNets with
 machine learning algorithms that use standard photometric features,
 we use a machine learning framework called
@@ -841,68 +853,78 @@ we refer the reader to
 \cite{carrascokind2013tpz} and \cite{kim2015hybrid} for more details.
 }
 
-%TPC is a part of a publicly available software package called
-%\textsc{MLZ}\footnote{http://pythonhosted.org/MLZ/}
-%(Machine Learning for Photo-$z$).
-%
-%TPC uses classification trees,
-%a type of prediction tree that is designed to
-%provide a classification or predict a discrete category.
-%Prediction trees are built by asking a sequence of questions
-%that recursively split the data into branches
-%until a terminal leaf is created
-%that meets a stopping criterion
-%(\eg a minimum leaf size).
-%The optimal split dimension is decided by
-%choosing the attribute that maximizes
-%the \textit{Information Gain} ($I_G$), which is defined as
-%
-%\begin{equation} \label{eq:information_gain}
-%  I_G \left(D_{\rmn{node}}, X\right)
-%  = I_d \left( D_{\rmn{node}} \right)
-%  - \sum_{x \in \rmn{values}(X)}
-%  \frac{|D_{\rmn{node}, x}|}{|D_{\rmn{node}}|}
-%  I_d \left( D_{\rmn{node}, x} \right),
-%\end{equation}
-%
-%\noindent
-%where $D_{\rmn{node}}$ is the training data in a given node,
-%$X$ is one of the possible dimensions (\eg magnitudes or colors)
-%along which the node is split, and
-%$x$ are the possible values of a specific dimension $X$.
-%$|D_{\rmn{node}}|$ and $|D_{\rmn{node}, x}|$ are the size of the total training data
-%and the number of objects in a given subset $x$ within the current node,
-%respectively.
-%$I_d$ is the impurity degree index,
-%and TPC can calculate $I_d$
-%from any of the three standard different impurity indices:
-%\textit{information entropy}, \textit{Gini impurity},
-%and \textit{classification error}.
-%In this work, we use the information entropy,
-%which is defined similarly to the thermodynamic entropy:
-%
-%\begin{equation}
-%  I_d \left( D \right)
-%  = - f_g \log_{2} f_g - \left(1 - f_g\right) \log_{2} \left(1 - f_g\right),
-%\end{equation}
-%
-%\noindent
-%where $f_g$ is the fraction of galaxies in the training data.
-%At each node in our tree,
-%we scan all dimensions to identify the split point that
-%maximizes the information gain as defined by Equation~\ref{eq:information_gain},
-%and select the attribute that maximizes the overall impurity index.
-%
-%In a technique called random forest,
-%we create bootstrap samples
-%(\ie $N$ randomly selected objects with replacement)
-%from the input training data
-%by sampling repeatedly from the magnitudes and colors
-%using their measurement errors.
-%We use these bootstrap samples to construct
-%multiple, uncorrelated prediction trees
-%whose individual predictions are aggregated to produce
-%a star-galaxy classification for each source.
+\sout{
+TPC is a part of a publicly available software package called
+\textsc{MLZ}%\footnote{http://pythonhosted.org/MLZ/}
+(Machine Learning for Photo-$z$).
+}
+
+\sout{
+TPC uses classification trees,
+a type of prediction tree that is designed to
+provide a classification or predict a discrete category.
+Prediction trees are built by asking a sequence of questions
+that recursively split the data into branches
+until a terminal leaf is created
+that meets a stopping criterion
+(\eg a minimum leaf size).
+The optimal split dimension is decided by
+choosing the attribute that maximizes
+the \textit{Information Gain} ($I_G$), which is defined as
+}
+
+\sout{ $
+  I_G \left(D_{\rmn{node}}, X\right)
+  = I_d \left( D_{\rmn{node}} \right)
+  - \sum_{x \in \rmn{values}(X)}
+  \frac{|D_{\rmn{node}, x}|}{|D_{\rmn{node}}|}
+  I_d \left( D_{\rmn{node}, x} \right),
+$ }
+
+\sout{
+\noindent
+where $D_{\rmn{node}}$ is the training data in a given node,
+$X$ is one of the possible dimensions (\eg magnitudes or colors)
+along which the node is split, and
+$x$ are the possible values of a specific dimension $X$.
+$|D_{\rmn{node}}|$ and $|D_{\rmn{node}, x}|$ are the size of the total training data
+and the number of objects in a given subset $x$ within the current node,
+respectively.
+$I_d$ is the impurity degree index,
+and TPC can calculate $I_d$
+from any of the three standard different impurity indices:
+\textit{information entropy}, \textit{Gini impurity},
+and \textit{classification error}.
+In this work, we use the information entropy,
+which is defined similarly to the thermodynamic entropy:
+}
+
+\sout{ $
+  I_d \left( D \right)
+  = - f_g \log_{2} f_g - \left(1 - f_g\right) \log_{2} \left(1 - f_g\right),
+$ }
+
+\sout{
+\noindent
+where $f_g$ is the fraction of galaxies in the training data.
+At each node in our tree,
+we scan all dimensions to identify the split point that
+maximizes the information gain as defined by Equation~\ref{eq:information_gain},
+and select the attribute that maximizes the overall impurity index.
+}
+
+\sout{
+In a technique called random forest,
+we create bootstrap samples
+(\ie $N$ randomly selected objects with replacement)
+from the input training data
+by sampling repeatedly from the magnitudes and colors
+using their measurement errors.
+We use these bootstrap samples to construct
+multiple, uncorrelated prediction trees
+whose individual predictions are aggregated to produce
+a star-galaxy classification for each source.
+}
 
 We train two TPC models on the SDSS data set by using different sets of
 attributes.
@@ -1508,7 +1530,7 @@ the calibration curves of ConvNet and $\rmn{TPC}_{\rmn{morph}}$.
 }
 The calibration curve of ConvNet in Figure~\ref{fig:sdss_calibration}
 is not as well-calibrated as the calibration curve in
-Figure~\ref{fig:clens_calibration_conv},
+Figure~\ref{fig:clens_calibration},
 where the same ConvNet model was applied to the CFHTLenS data set.
 However, ConvNet may still be better calibrated than $\rmn{TPC}_{\rmn{morph}}$,
 even when it is applied to the SDSS data set.
@@ -1611,7 +1633,7 @@ predictive performance.
 \section*{Acknowledgements}
 
 \changed{
-The authors thank the referee for a careful reading of the manuscript
+The authors thank the referees for a careful reading of the manuscript
 and comments that improved this work.
 }
 We acknowledge support from the 
