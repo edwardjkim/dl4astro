@@ -252,9 +252,7 @@ server\footnote{http://skyserver.sdss.org/casjobs/}~\citep{li2008casjobs}.
 Using the CasJobs server, we randomly select a total of 65,000 sources, which are either stars or galaxies.
 We exclude some bad photometric observations as follows.
 We consider only objects
-\sout{
-whose $r$-band magnitude is less than 40; there are
-}
+\sout{ whose $r$-band magnitude is less than 40; there are }
 with no warning flags in the spectroscopic measurement (\texttt{zWarning = 0});
 the half-light radius in the $r$ band is less than 30 arc seconds
 as measured by the exponential and de Vaucouleurs light profiles;
@@ -288,10 +286,7 @@ In the end, we have 17,344 stars and 47,656 galaxies available
 for the training and testing processes.
 The apparent magnitudes range from $10.7 < r < 23.1$,
 and the galaxies in this sample have a mean redshift of $z \sim 0.36$.
-\sout{
-The $ugriz$ color-color space of the sample is plotted in
-Figure ?%~\ref{fig:sdss_color_color}.
-}
+\sout{ The $ugriz$ color-color space of the sample is plotted in Figure ?.}
 We randomly split the objects into training, held-out validation,
 and blind test sets of size 40,000, 10,000, and 15,000, respectively.
 We note that cross-validation is often avoided in deep learning
@@ -361,10 +356,7 @@ In the end, we have 8,545 stars and 57,843 galaxies available
 for the training and testing processes.
 The apparent magnitudes range from $13.9 < r < 25.6$,
 and the galaxies in this sample have a mean redshift of $z \sim 0.59$.
-\sout{
-The $ugriz$ color-color space of the sample is plotted in
-Figure ?%~\ref{fig:clens_color_color}.
-}
+\sout{ The $ugriz$ color-color space of the sample is plotted in Figure ?.}
 We randomly split the objects into training, held-out validation, and
 blind test sets of size 40,000, 10,000, and 13,278, respectively.
 Figures~\ref{fig:clens_mag} and \ref{fig:clens_g_r} show the distribution
@@ -398,14 +390,7 @@ and validation sets are almost identical to those of the test set.
     }
 \end{figure*}
 
-\sout{
-A neuron in the human brain receives signals from other neurons through
-synaptic connections.
-If the combination of these signals exceeds a certain threshold,
-the neuron will fire and send a signal to other neurons.
-Intelligence is believed to be the collective effect of
-approximately $10^{11}$ neurons firing.
-}
+\sout{ A neuron in the human brain receives signals from other neurons through synaptic connections.  If the combination of these signals exceeds a certain threshold, the neuron will fire and send a signal to other neurons.  Intelligence is believed to be the collective effect of approximately $10^{11}$ neurons firing.  }
 An artificial neuron in most artificial neural networks is represented
 as a mathematical function that models a biological neural structure
 \changed{
@@ -421,14 +406,9 @@ Then, the output of the neuron is
   \label{eq:neuron_output}
 \end{equation}
 where $\sigma$ is the activation function (or \textit{non-linearity}).
-\sout{
-The sigmoid function, $\sigma(x)=1/\left(1+e^{-x}\right)$,
-has frequently been used as an activation function, but it has recently fallen out of favor,
-and the hyperbolic tangent function, $\sigma(x)=\tanh(x)$, is generally used instead.
-}
+\sout{ The sigmoid function, $\sigma(x)=1/\left(1+e^{-x}\right)$, has frequently been used as an activation function, but it has recently fallen out of favor, and the hyperbolic tangent function, $\sigma(x)=\tanh(x)$, is generally used instead.  }
 The most popular non-linearity at present
-\sout{, however,
-}
+\sout{, however, }
 is the rectified linear unit
 \citep[ReLU;][]{nair2010rectified}, $\sigma(x)=\max(0, x)$.
 ReLUs generally allow much faster
@@ -451,16 +431,11 @@ Many deep learning models use feedforward neural network architectures with mult
 where each neuron in one layer is connected to the neurons of the subsequent layer.
 A schematic representation is shown in Figure~\ref{fig:neuron_b}.
 All layers except the input and output layers are conveniently called hidden layers.
-\sout{
-With multiple hidden layers, deep neural networks can model complex nonlinear
-relationships, and they have had great success in multimedia tasks where humans traditionally
-outperformed computers, such as speech recognition, language processing, and image classification.
-}
+\sout{ With multiple hidden layers, deep neural networks can model complex nonlinear relationships, and they have had great success in multimedia tasks where humans traditionally outperformed computers, such as speech recognition, language processing, and image classification.  }
 
 The goal of learning is to find a set of weights and biases such that,
 given $N$ samples, the output from the network
-$\bmath{y}=\left(y_1, y_2, \dots, y_N \right)$
-approximates the desired output
+$\bmath{y}=\left(y_1, y_2, \dots, y_N \right)$ approximates the desired output
 $\hat{\bmath{y}}=\left(\hat{y}_1, \hat{y}_2, \dots, \hat{y}_N \right)$
 as closely as possible for all input
 $\bmath{X}=\left(\bmath{x}_1,\bmath{x}_2,\dots,\bmath{x}_N\right)$.
@@ -475,7 +450,11 @@ In this work, we use \textit{cross-entropy},
 where $\hat{y}_j$ is the actual truth value (\eg 0 or 1) of the $j$-th data, and
 $y_j$ is the probability prediction made by the model.
 We compute the loss function by taking the average of all cross-entropies in the sample.
-Thus, the loss function becomes
+Thus,
+\changed{
+given $N$ samples,
+}
+the loss function becomes
 \begin{equation}
 \changed{
   L(\bmath{y}, \hat{\bmath{y}})
@@ -524,48 +503,17 @@ and full training usually requires many epochs.
 At the end of each epoch, we evaluate the loss function on the validation set,
 and the model that minimizes the validation loss is chosen as the best model.
 
-\sout{
-The gradients in Equation~\ref{eq:gradient_descent}
-can be computed using the \textit{backpropagation} procedure%~\citep{rumelhart1988learning},
-which is nothing more than an application of the chain rule for derivatives.
-The derivative of the loss function with respect to the input of a unit can be
-computed by working backwards from the gradient with respect to the output of
-the unit.
-At the output layer, the derivative of the loss function with respect to the
-output is given by
-}
+\sout{ The gradients in Equation~\ref{eq:gradient_descent} can be computed using the \textit{backpropagation} procedure, which is nothing more than an application of the chain rule for derivatives.  The derivative of the loss function with respect to the input of a unit can be computed by working backwards from the gradient with respect to the output of the unit.  At the output layer, the derivative of the loss function with respect to the output is given by }
 
-\sout{$
-  \frac{ \partial L }{ \partial y_i } = y_i - \hat{y}_i
-$}
-\sout{$
-  \frac{ \partial L }{ \partial x_i } =
-    \frac{ \partial L }{ \partial y_i }
-    \frac{ \partial y_i }{ \partial x_i }.
-$}
+\sout{$ \frac{ \partial L }{ \partial y_i } = y_i - \hat{y}_i $}
+\sout{$ \frac{ \partial L }{ \partial x_i } = \frac{ \partial L }{ \partial y_i } \frac{ \partial y_i }{ \partial x_i }.  $}
 
-\sout{
-At each hidden layer, the derivative of the loss function with respect to the
-output of each unit is a weighted sum of the derivatives with respect to the
-inputs of the subsequent layer,
-}
-\sout{$
-  \frac{ \partial L }{ \partial y_j } =
-    \sum_{i} w_{ji} \frac{ \partial L }{ \partial x_i}
-$}
-\sout{$
-  \frac{ \partial L }{ \partial x_j } =
-    \frac{ \partial L }{ \partial y_j }
-    \frac{ \partial y_j }{ \partial x_j }.
-$}
+\sout{ At each hidden layer, the derivative of the loss function with respect to the output of each unit is a weighted sum of the derivatives with respect to the inputs of the subsequent layer, }
+\sout{$ \frac{ \partial L }{ \partial y_j } = \sum_{i} w_{ji} \frac{ \partial L }{ \partial x_i} $}
+\sout{$ \frac{ \partial L }{ \partial x_j } = \frac{ \partial L }{ \partial y_j } \frac{ \partial y_j }{ \partial x_j }.  $}
 
-\sout{
-Finally, once the gradients $\partial L / \partial x_j$ have been
-computed, it is straightforward to compute the gradients for the weight,
-}
-\sout{$
-\frac{\partial L}{\partial w_{jk}} = y_k \frac{\partial L}{\partial x_j}.
-$}
+\sout{ Finally, once the gradients $\partial L / \partial x_j$ have been computed, it is straightforward to compute the gradients for the weight, }
+\sout{$ \frac{\partial L}{\partial w_{jk}} = y_k \frac{\partial L}{\partial x_j}.  $}
 
 
 \subsection{Convolutional Neural Networks}
@@ -872,78 +820,20 @@ we refer the reader to
 \cite{carrascokind2013tpz} and \cite{kim2015hybrid} for more details.
 }
 
-\sout{
-TPC is a part of a publicly available software package called
-\textsc{MLZ}%\footnote{http://pythonhosted.org/MLZ/}
-(Machine Learning for Photo-$z$).
+\sout{ TPC is a part of a publicly available software package called \textsc{MLZ}%\footnote{http://pythonhosted.org/MLZ/} (Machine Learning for Photo-$z$).
 }
 
-\sout{
-TPC uses classification trees,
-a type of prediction tree that is designed to
-provide a classification or predict a discrete category.
-Prediction trees are built by asking a sequence of questions
-that recursively split the data into branches
-until a terminal leaf is created
-that meets a stopping criterion
-(\eg a minimum leaf size).
-The optimal split dimension is decided by
-choosing the attribute that maximizes
-the \textit{Information Gain} ($I_G$), which is defined as
-}
+\sout{ TPC uses classification trees, a type of prediction tree that is designed to provide a classification or predict a discrete category.  Prediction trees are built by asking a sequence of questions that recursively split the data into branches until a terminal leaf is created that meets a stopping criterion (\eg a minimum leaf size).  The optimal split dimension is decided by choosing the attribute that maximizes the \textit{Information Gain} ($I_G$), which is defined as }
 
-\sout{ $
-  I_G \left(D_{\rmn{node}}, X\right)
-  = I_d \left( D_{\rmn{node}} \right)
-  - \sum_{x \in \rmn{values}(X)}
-  \frac{|D_{\rmn{node}, x}|}{|D_{\rmn{node}}|}
-  I_d \left( D_{\rmn{node}, x} \right),
-$ }
+\sout{ $ I_G \left(D_{\rmn{node}}, X\right) = I_d \left( D_{\rmn{node}} \right) - \sum_{x \in \rmn{values}(X)} \frac{|D_{\rmn{node}, x}|}{|D_{\rmn{node}}|} I_d \left( D_{\rmn{node}, x} \right), $ }
 
-\sout{
-\noindent
-where $D_{\rmn{node}}$ is the training data in a given node,
-$X$ is one of the possible dimensions (\eg magnitudes or colors)
-along which the node is split, and
-$x$ are the possible values of a specific dimension $X$.
-$|D_{\rmn{node}}|$ and $|D_{\rmn{node}, x}|$ are the size of the total training data
-and the number of objects in a given subset $x$ within the current node,
-respectively.
-$I_d$ is the impurity degree index,
-and TPC can calculate $I_d$
-from any of the three standard different impurity indices:
-\textit{information entropy}, \textit{Gini impurity},
-and \textit{classification error}.
-In this work, we use the information entropy,
-which is defined similarly to the thermodynamic entropy:
-}
+\sout{ \noindent where $D_{\rmn{node}}$ is the training data in a given node, $X$ is one of the possible dimensions (\eg magnitudes or colors) along which the node is split, and $x$ are the possible values of a specific dimension $X$.  $|D_{\rmn{node}}|$ and $|D_{\rmn{node}, x}|$ are the size of the total training data and the number of objects in a given subset $x$ within the current node, respectively.  $I_d$ is the impurity degree index, and TPC can calculate $I_d$ from any of the three standard different impurity indices: \textit{information entropy}, \textit{Gini impurity}, and \textit{classification error}.  In this work, we use the information entropy, which is defined similarly to the thermodynamic entropy: }
 
-\sout{ $
-  I_d \left( D \right)
-  = - f_g \log_{2} f_g - \left(1 - f_g\right) \log_{2} \left(1 - f_g\right),
-$ }
+\sout{ $ I_d \left( D \right) = - f_g \log_{2} f_g - \left(1 - f_g\right) \log_{2} \left(1 - f_g\right), $ }
 
-\sout{
-\noindent
-where $f_g$ is the fraction of galaxies in the training data.
-At each node in our tree,
-we scan all dimensions to identify the split point that
-maximizes the information gain as defined by Equation~\ref{eq:information_gain},
-and select the attribute that maximizes the overall impurity index.
-}
+\sout{ \noindent where $f_g$ is the fraction of galaxies in the training data.  At each node in our tree, we scan all dimensions to identify the split point that maximizes the information gain as defined by Equation~\ref{eq:information_gain}, and select the attribute that maximizes the overall impurity index.  }
 
-\sout{
-In a technique called random forest,
-we create bootstrap samples
-(\ie $N$ randomly selected objects with replacement)
-from the input training data
-by sampling repeatedly from the magnitudes and colors
-using their measurement errors.
-We use these bootstrap samples to construct
-multiple, uncorrelated prediction trees
-whose individual predictions are aggregated to produce
-a star-galaxy classification for each source.
-}
+\sout{ In a technique called random forest, we create bootstrap samples (\ie $N$ randomly selected objects with replacement) from the input training data by sampling repeatedly from the magnitudes and colors using their measurement errors.  We use these bootstrap samples to construct multiple, uncorrelated prediction trees whose individual predictions are aggregated to produce a star-galaxy classification for each source.  }
 
 We train two TPC models on the SDSS data set by using different sets of
 attributes.
@@ -987,11 +877,7 @@ $\rmn{TPC}_{\rmn{morph}}$ uses
 the five magnitudes and their corresponding colors,
 for a total of twelve dimensions.
 
-\sout{
-We note that TPC is able to utilize parallelization, and parallelized on 64
-cores of Xeon E5 2.7 GHz processors, it takes 23 minutes to train 500 trees,
-for a total of 25 CPU hours.
-}
+\sout{ We note that TPC is able to utilize parallelization, and parallelized on 64 cores of Xeon E5 2.7 GHz processors, it takes 23 minutes to train 500 trees, for a total of 25 CPU hours.  }
 
 \section{Results and Discussion}
   \label{sec:results_and_discussion}
