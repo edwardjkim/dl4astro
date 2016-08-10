@@ -240,6 +240,10 @@ Maas A.~L.,  Hannun A.~Y.,   Ng A.~Y.,  2013, in Proc. ICML.
 Monteith K.,  Carroll J.~L.,  Seppi K.,   Martinez T.,  2011, in Neural
   Networks (IJCNN), The 2011 International Joint Conference on. pp 2657--2663
 
+\bibitem[\protect\citeauthoryear{Murphy}{Murphy}{2012}]{murphy2012machine}
+Murphy K.~P.,  2012, Machine learning: a probabilistic perspective.
+MIT press
+
 \bibitem[\protect\citeauthoryear{Nair \& Hinton}{Nair \&
   Hinton}{2010}]{nair2010rectified}
 Nair V.,  Hinton G.~E.,  2010, in Proceedings of the 27th International
@@ -257,6 +261,11 @@ Newman J.~A.,  et~al., 2013, \ApJSupp, 208, 5
 \bibitem[\protect\citeauthoryear{Paterno}{Paterno}{2003}]{paterno2004calculating}
 Paterno M.,  2003, Calculating Efficiencies and Their Uncertainties,
   \url{http://home.fnal.gov/~paterno/images/effic.pdf}
+
+\bibitem[\protect\citeauthoryear{Rosenblatt}{Rosenblatt}{1961}]{rosenblatt1961principles}
+Rosenblatt F.,  1961, Technical report, Principles of neurodynamics.
+  perceptrons and the theory of brain mechanisms.
+DTIC Document
 
 \bibitem[\protect\citeauthoryear{Ross et~al.}{Ross
   et~al.}{2011}]{ross2011ameliorating}

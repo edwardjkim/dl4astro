@@ -408,6 +408,9 @@ Let $\bmath{x}=\left(x_1,x_2,\dots,x_n\right)$ be a vector of inputs to a given 
 $\bmath{w}=\left(w_1,w_2,\dots,w_n\right)$ be a vector of weights, and
 $b$ be the bias.
 Then, the output of the neuron is
+\changed{
+\citep{rosenblatt1961principles}
+}
 \begin{equation}
   y = \sigma \left( \bmath{w} \cdot \bmath{x} + b \right),
   \label{eq:neuron_output}
@@ -449,7 +452,10 @@ $\bmath{X}=\left(\bmath{x}_1,\bmath{x}_2,\dots,\bmath{x}_N\right)$.
 We can formulate this as the minimization of a loss function
 $L(\bmath{y},\hat{\bmath{y}})$
 over the training data.
-In this work, we use \textit{cross-entropy},
+In this work, we use \textit{cross-entropy}
+\changed{
+\citep{murphy2012machine},
+}
 \begin{equation}
   L(y_j, \hat{y}_j) = -\hat{y}_j \log_2 y_j - (1 - \hat{y}_j) \log_2(1 - y_j),
   \label{eq:cross_entropy}
@@ -552,7 +558,10 @@ $\ast$ is the convolution operator, and $\bmath{w}_m^k$ represent the filters.
 \changed{
 Typically, a
 }
-pooling layer computes the maximum of a local $2\times2$ patch in a feature map.
+pooling layer computes the maximum of a local $2\times2$ patch in a feature map
+\changed{
+\citep{krizhevsky2012imagenet}.
+}
 Since the pooling layer aggregates the activations of neighboring units from the previous layer,
 it reduces the dimensionality of the feature maps and
 makes the model invariant to small shifts and distortions.
