@@ -290,7 +290,7 @@ The apparent magnitudes range from $10.7 < r < 23.1$,
 and the galaxies in this sample have a mean redshift of $z \sim 0.36$.
 \sout{
 The $ugriz$ color-color space of the sample is plotted in
-Figure~\ref{fig:sdss_color_color}.
+Figure ?%~\ref{fig:sdss_color_color}.
 }
 We randomly split the objects into training, held-out validation,
 and blind test sets of size 40,000, 10,000, and 15,000, respectively.
@@ -363,7 +363,7 @@ The apparent magnitudes range from $13.9 < r < 25.6$,
 and the galaxies in this sample have a mean redshift of $z \sim 0.59$.
 \sout{
 The $ugriz$ color-color space of the sample is plotted in
-Figure~\ref{fig:clens_color_color}.
+Figure ?%~\ref{fig:clens_color_color}.
 }
 We randomly split the objects into training, held-out validation, and
 blind test sets of size 40,000, 10,000, and 13,278, respectively.
@@ -448,9 +448,11 @@ Many deep learning models use feedforward neural network architectures with mult
 where each neuron in one layer is connected to the neurons of the subsequent layer.
 A schematic representation is shown in Figure~\ref{fig:neuron_b}.
 All layers except the input and output layers are conveniently called hidden layers.
+\sout{
 With multiple hidden layers, deep neural networks can model complex nonlinear
 relationships, and they have had great success in multimedia tasks where humans traditionally
 outperformed computers, such as speech recognition, language processing, and image classification.
+}
 
 The goal of learning is to find a set of weights and biases such that,
 given $N$ samples, the output from the network
@@ -519,35 +521,49 @@ and full training usually requires many epochs.
 At the end of each epoch, we evaluate the loss function on the validation set,
 and the model that minimizes the validation loss is chosen as the best model.
 
-%The gradients in \ref{eq:gradient_descent} can be computed using the
-%\textit{backpropagation} procedure~\citep{rumelhart1988learning},
-%which is nothing more than an application of the chain rule for derivatives.
-%The derivative of the loss function with respect to the input of a unit can be
-%computed by working backwards from the gradient with respect to the output of
-%the unit.
-%At the output layer, the derivative of the loss function with respect to the
-%output is given by
-%\begin{align}
-%  \frac{ \partial L }{ \partial y_i } &= y_i - \hat{y}_i \\
-%  \frac{ \partial L }{ \partial x_i } &=
-%    \frac{ \partial L }{ \partial y_i }
-%    \frac{ \partial y_i }{ \partial x_i }.
-%\end{align}
-%At each hidden layer, the derivative of the loss function with respect to the
-%output of each unit is a weighted sum of the derivatives with respect to the
-%inputs of the subsequent layer,
-%\begin{align}
-%  \frac{ \partial L }{ \partial y_j } &=
-%    \sum_{i} w_{ji} \frac{ \partial L }{ \partial x_i}   \\
-%  \frac{ \partial L }{ \partial x_j } &=
-%    \frac{ \partial L }{ \partial y_j }
-%    \frac{ \partial y_j }{ \partial x_j }.
-%\end{align}
-%Finally, once the gradients $\partial L / \partial x_j$ have been
-%computed, it is straightforward to compute the gradients for the weight,
-%\begin{equation}
-%\frac{\partial L}{\partial w_{jk}} = y_k \frac{\partial L}{\partial x_j}.
-%\end{equation}
+\sout{
+The gradients in Equation~\ref{eq:gradient_descent}
+can be computed using the \textit{backpropagation} procedure%~\citep{rumelhart1988learning},
+which is nothing more than an application of the chain rule for derivatives.
+The derivative of the loss function with respect to the input of a unit can be
+computed by working backwards from the gradient with respect to the output of
+the unit.
+At the output layer, the derivative of the loss function with respect to the
+output is given by
+}
+
+\sout{$
+  \frac{ \partial L }{ \partial y_i } = y_i - \hat{y}_i
+$}
+\sout{$
+  \frac{ \partial L }{ \partial x_i } =
+    \frac{ \partial L }{ \partial y_i }
+    \frac{ \partial y_i }{ \partial x_i }.
+$}
+
+\sout{
+At each hidden layer, the derivative of the loss function with respect to the
+output of each unit is a weighted sum of the derivatives with respect to the
+inputs of the subsequent layer,
+}
+\sout{$
+  \frac{ \partial L }{ \partial y_j } =
+    \sum_{i} w_{ji} \frac{ \partial L }{ \partial x_i}
+$}
+\sout{$
+  \frac{ \partial L }{ \partial x_j } =
+    \frac{ \partial L }{ \partial y_j }
+    \frac{ \partial y_j }{ \partial x_j }.
+$}
+
+\sout{
+Finally, once the gradients $\partial L / \partial x_j$ have been
+computed, it is straightforward to compute the gradients for the weight,
+}
+\sout{$
+\frac{\partial L}{\partial w_{jk}} = y_k \frac{\partial L}{\partial x_j}.
+$}
+
 
 \subsection{Convolutional Neural Networks}
   \label{sec:convnet}
