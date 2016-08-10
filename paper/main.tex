@@ -270,8 +270,11 @@ to align each image to the reference ($r$-band) image.
 We then use \texttt{SExtractor} to find the pixel positions of
 the 65,000 objects we have selected,
 and to center each object in the cutout image.
-We also convert the flux values to inverse hyperbolic sine magnitudes
-\citep[also known as luptitudes;][]{lupton1999modified}.
+{
+Magnitudes in the SDSS photometric catalog are expressed as inverse hyperbolic
+sine magnitudes~\citep[also known as luptitudes;][]{lupton1999modified},
+and we follow the SDSS convention and convert all flux values to luptitudes.
+}
 Finally, in order to account for the effect of Galactic dust,
 extinction corrections in magnitudes are applied
 following \cite{schlegel1998maps}.
