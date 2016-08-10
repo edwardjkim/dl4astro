@@ -166,9 +166,22 @@ the reduced summary information available from astronomical catalogs.
 Constructing catalogs requires careful engineering and considerable domain expertise
 to transform the reduced, calibrated pixel values that comprise an image into suitable features,
 such as magnitudes or shape information of an object.
-In a branch of machine learning called \textit{deep learning},
+\changed{
+In a branch of machine learning called \textit{deep learning}~\citep{lecun2015deep},
 features are not designed by human experts;
 they are learned directly from data by deep neural networks.
+Deep learning methods learn multiple levels of features by
+transforming the feature at one level into a more abstract feature at a higher
+level.
+For example, when an array of pixel values is used as input to a deep learning
+method, the features in the first layer might represent locations and orientations
+of edges.
+The second layer could assemble particular arrangements of edges into more
+complex shapes, and subsequent layers would detect objects as
+combinations of low-level features.
+These multiple layers of abstraction progressively amplify aspects of the input
+that are important for classification tasks.
+}
 Deep learning has been applied successfully to galaxy morphological
 classification in Sloan Digital Sky Survey~\citep[SDSS;][]{dieleman2015rotation}
 and Cosmic Assembly Near-infrared Deep Extragalactic Legacy
