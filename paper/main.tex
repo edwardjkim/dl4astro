@@ -468,13 +468,24 @@ where we use the following rules to update the parameters in each layer $l$:
   \label{eq:gradient_descent}
 \end{align}
 where $\eta$ is a small, positive number known as the \textit{learning rate}.
+\changed{
 A common approach to speed up training is to split the training data
-into mini-batches and compute the gradients in
-Equation~\ref{eq:gradient_descent} for each mini-batch separately instead of
-the entire training data.
-This results in much faster convergence, as training examples are usually correlated
-and the gradient computed from a randomly chosen mini-batch is a good approximation
+into mini-batches.
+In mini-batch gradient descent, instead of computing the gradients in
+Equation~\ref{eq:gradient_descent} for the entire training data,
+we only compute the gradient of randomly chosen training examples at each step.
+As training examples are usually correlated,
+the gradient computed from each mini-batch is a good approximation
 of the overall gradient.
+As a result, mini-batch gradient descent results in much faster convergence.
+However, there is a trade-off: the lower the batch size is,
+the lower the convergence rate will be;
+the higher the batch size is,
+the longer it will take to compute the gradient at each step.
+Thus, a moderate batch size, combined with a decaying learning rate, is
+generally used in practice.
+}
+
 We define an \textit{epoch} as a single, complete pass through the training data,
 and full training usually requires many epochs.
 At the end of each epoch, we evaluate the loss function on the validation set,
