@@ -707,7 +707,7 @@ We introduce random Gaussian noise to each pixel values
 by using a similar method to \cite{krizhevsky2012imagenet}.}
 \end{itemize}
 \changed{
-In addition to artificially increasing the size of the dataset,
+In addition to artificially increasing the size of the data set,
 these data augmentation schemes make the resulting model more invariant to
 rotation, reflection, translation, and small noise in the pixel values.
 We also note that the data augmentation steps
@@ -742,66 +742,22 @@ uses Bayesian principles to generate an ensemble combination of different models
 Although the data augmentation step in Section~\ref{sec:data_augmentation} should
 make our ConvNet model invariant to these types of transformations,
 we find that applying BMC still results in a significant increase in performance.
+\changed{
+Although a complete description of BMC is beyond the scope of this paper,
+we provide a brief description.
+For more details, we refer the reader to \citet{Monteith2011}.
+}
 
-The posterior probability that a source is a galaxy is given by
-\begin{equation} \label{eq:posterior_bmc}
-  P \left(G | \bmath{x}, \bmath{D}, \bmath{M}, \bmath{E} \right)
-  = \sum_{e \in \bmath{E}} P \left(G | \bmath{x}, \bmath{M}, e \right)
-  P \left(e | \bmath{D} \right),
-\end{equation}
-where $\bmath{x}$ is the input, $\bmath{D}$ is the data set,
-$\bmath{M}$ is the set of models (\ie different transformations of input images),
-and $e$ is an element in the ensemble space $\bmath{E}$ of possible model combinations.
-By Bayes' Theorem, the posterior probability of $e$ given $\bmath{D}$ is given by
-\begin{equation} \label{eq:p_ensemble}
-  P \left(e | \bmath{D} \right)
-  = \frac{P \left(e \right)}{P \left(\bmath{D} \right)}
-  \prod_{d \in \bmath{D}} P \left( d | e \right)
-  \propto P \left(e\right) \prod_{d \in \bmath{D}} P \left(d | e \right).
-\end{equation}
-Here, $P\left(e \right)$ is the prior probability of $e$,
-which we assume to be uniform.
-The product of $P\left(d | e\right)$ is
-over all individual data $d$ in the training data $\bmath{D}$,
-and $P\left(\bmath{D}\right)$ is merely a normalization factor
-and not important.
-For probabilistic classifiers,
-we can directly use the probabilistic predictions
-and write Equation~\ref{eq:p_ensemble} as
-\begin{equation} \label{eq:p_ensemble_prob}
-  P \left( e | \bmath{D} \right) \propto 
-  P \left( e \right) \prod_{i=1}^{N}
-  \hat{y}_i y_i + 
-  \left(1 - \hat{y}_i\right) \left(1 - y_i\right).
-\end{equation}
+\sout{ The posterior probability that a source is a galaxy is given by }
+\sout{ $ P \left(G | \bmath{x}, \bmath{D}, \bmath{M}, \bmath{E} \right) = \sum_{e \in \bmath{E}} P \left(G | \bmath{x}, \bmath{M}, e \right) P \left(e | \bmath{D} \right), $ }
+\sout{ where $\bmath{x}$ is the input, $\bmath{D}$ is the data set, $\bmath{M}$ is the set of models (\ie different transformations of input images), and $e$ is an element in the ensemble space $\bmath{E}$ of possible model combinations.  By Bayes' Theorem, the posterior probability of $e$ given $\bmath{D}$ is given by }
+\sout{$ P \left(e | \bmath{D} \right) = \frac{P \left(e \right)}{P \left(\bmath{D} \right)} \prod_{d \in \bmath{D}} P \left( d | e \right) \propto P \left(e\right) \prod_{d \in \bmath{D}} P \left(d | e \right). $}
+\sout{Here, $P\left(e \right)$ is the prior probability of $e$, which we assume to be uniform.  The product of $P\left(d | e\right)$ is over all individual data $d$ in the training data $\bmath{D}$, and $P\left(\bmath{D}\right)$ is merely a normalization factor and not important.  For probabilistic classifiers, we can directly use the probabilistic predictions and write Equation~\ref{eq:p_ensemble} as}
+\sout{ $ P \left( e | \bmath{D} \right) \propto P \left( e \right) \prod_{i=1}^{N} \hat{y}_i y_i + \left(1 - \hat{y}_i\right) \left(1 - y_i\right), $}
 
-Although the space $\bmath{E}$ of potential model combinations
-is in principle infinite,
-we can produce a reasonable finite set
-of potential model combinations by using sampling techniques.
-In our implementation,
-the weights of each combination of the base classifiers
-is obtained by sampling from a Dirichlet distribution.
-We first set all alpha values of a Dirichlet distribution to unity.
-We then sample this distribution $q$ times
-to obtain $q$ sets of weights.
-For each combination,
-we assume a uniform prior and
-calculate $P\left(e|\bmath{D}\right)$ using
-Equation~\ref{eq:p_ensemble_prob}.
-We select the combination with the highest $P\left(e|\bmath{D}\right)$,
-and update the alpha values by
-adding the weights of the most probable combination
-to the current alpha values.
-The next $q$ sets of weights are drawn
-using the updated alpha values.
+\sout{Although the space $\bmath{E}$ of potential model combinations is in principle infinite, we can produce a reasonable finite set of potential model combinations by using sampling techniques.  In our implementation, the weights of each combination of the base classifiers is obtained by sampling from a Dirichlet distribution.  We first set all alpha values of a Dirichlet distribution to unity.  We then sample this distribution $q$ times to obtain $q$ sets of weights.  For each combination, we assume a uniform prior and calculate $P\left(e|\bmath{D}\right)$ using Equation~\ref{eq:p_ensemble_prob}.  We select the combination with the highest $P\left(e|\bmath{D}\right)$, and update the alpha values by adding the weights of the most probable combination to the current alpha values.  The next $q$ sets of weights are drawn using the updated alpha values.}
 
-We continue the sampling process until
-we reach a predefined number of combinations,
-and we finally use Equation~\ref{eq:posterior_bmc} to compute
-the posterior probability that a source is a star (or a galaxy).
-In this paper, we use a $q$ value of three,
-and we consider a total of 1,000 model combinations.
+\sout{We continue the sampling process until we reach a predefined number of combinations, and we finally use Equation~\ref{eq:posterior_bmc} to compute the posterior probability that a source is a star (or a galaxy).  In this paper, we use a $q$ value of three, and we consider a total of 1,000 model combinations.}
 
 \section{Trees for Probabilistic Classifications}
   \label{sec:tpc}
