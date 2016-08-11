@@ -649,17 +649,37 @@ also use large receptive fields of $7\times7$ and $6\times6$
 in the first convolution layer, respectively.
 However, we find that using a receptive field larger than $5\times5$ in the first
 convolutional layer leads to worse performance.
-This result is in agreement with \citet{simonyan2014very},
-which features an extremely homogeneous architecture that only performs
+This result is in agreement with
+\changed{
+the network of \citet{simonyan2014very}, which has become known as ``VGGNet".
+}
+VGGNet features an extremely homogeneous architecture that only performs
 $3\times3$ convolutions.
 Using a large receptive field instead of a stack of multiple $3\times3$ convolutions
 leads to a shallower network, and it is often preferable to increase
 the depth by using smaller receptive fields.
 However, we find that replacing the first layer with
 a stack of two $3\times3$ convolutional layers increases the validation error,
-but we still follow \citet{simonyan2014very} and add many
-$3\times3$ convolutions (with zero-padding) in the remaining layers.
+\changed{
+and thus use a $5\times5$ convolution in the first layer.
+}
 
+\changed{
+In the remaining layers, we still follow VGGNet and add many
+$3\times3$ convolutions (with zero-padding of size 1 pixel).
+Note that with the padding of 1 pixel for $3\times3$ convolutional layers,
+the spatial resolution will be preserved after convolution.
+Such preservation of spatial resolution allows us to build relatively deep
+networks, as shown in Table~\ref{table:hyperparamters}.
+The main contribution of VGGNet is in showing that the depth plays an important
+role in good performance.
+In our case, we start with four convolutional layers and progressively add more
+layers, while monitoring the validation loss;
+we stop at eight convolutoinal layers after we find that adding more layers
+leads to worse performance.
+We conjecture that a greater depth and hence larger number of parameters
+lead to overfitting in our case.
+}
 
 The choice of momentum, learning rate, and initial weights is crucial
 for achieving high predictive performance and speeding up the learning
