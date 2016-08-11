@@ -1342,13 +1342,13 @@ process.
     as applied to the SDSS data.
   }
   \centering
-  \begin{tabular}{l c c c c c c}
+  \begin{tabular}{l c c c c c c c}
     \hline
-    classifier & AUC & MSE & $p_{g}(c_g=0.96) $ & $c_{s}(p_s=0.97)$ & CAL & $ |\Delta N_g|/N_g$ \\
+    classifier & AUC & MSE & $p_{g}(c_g=0.96) $ & $c_{s}(p_s=0.97)$ & CAL & $ |\Delta N_g|/N_g$ & \changed{log loss} \\
     \hline
-    ConvNet               & 0.9952          & 0.0182          & 0.9915          & 0.9500          & \textbf{0.0243} & 0.0157          \\
-    TPC${}_{\rmn{morph}}$ & \textbf{0.9967} & \textbf{0.0099} & \textbf{0.9977} & \textbf{0.9810} & 0.0254          & \textbf{0.0044} \\
-    TPC${}_{\rmn{phot}}$  & 0.9886          & 0.0283          & 0.9819          & 0.8879          & 0.0316          & 0.0160 \\
+    ConvNet               & 0.9952          & 0.0182          & 0.9915          & 0.9500          & \textbf{0.0243} & 0.0157 & \changed{\textbf{0.0731}} \\
+    TPC${}_{\rmn{morph}}$ & \textbf{0.9967} & \textbf{0.0099} & \textbf{0.9977} & \textbf{0.9810} & 0.0254          & \textbf{0.0044} & \changed{0.0914} \\
+    TPC${}_{\rmn{phot}}$  & 0.9886          & 0.0283          & 0.9819          & 0.8879          & 0.0316          & 0.0160 & \changed{0.1372} \\
     \hline
   \end{tabular}
   \label{table:sdss_metrics}
@@ -1397,7 +1397,10 @@ $\rmn{TPC}_{\rmn{morph}}$, and $\rmn{TPC}_{\rmn{phot}}$.
 The bold entries highlight the best technique for any particular metrics.
 In contrast with the CFHTLenS data set in Section~\ref{sec:results_cfht},
 it is apparent that $\rmn{TPC}_{\rmn{morph}}$ outperforms ConvNet
-in all metrics except $\rmn{CAL}$.
+in all metrics except $\rmn{CAL}$
+\changed{
+and cross-entropy.
+}
 Both ConvNet and $\rmn{TPC}_{\rmn{morph}}$ still outperform
 $\rmn{TPC}_{\rmn{phot}}$ in all six metrics by a significant amount, as
 magnitudes and colors alone are not sufficient to separate stars from galaxies.
