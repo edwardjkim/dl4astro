@@ -805,6 +805,14 @@ to produce a star-galaxy classification.
 A complete description of TPC is beyond the scope of this paper, and
 we refer the reader to
 \cite{carrascokind2013tpz} and \cite{kim2015hybrid} for more details.
+While other random forest implementations exist, we have chosen TPC, because
+it is tailored specifically for astronomical use~\citep{carrascokind2013tpz};
+it has been tested for astronomical use cases, including
+photometric redshift estimation~\citep{sanchez2014photometric}
+and star-galaxy classification~\citep{kim2015hybrid};
+it adds an extra layer of randomness by perturbing the measured attributes by
+their uncertainties;
+and it uses parallelism to handle large data sets on distributed memory systems.
 }
 
 \sout{ TPC is a part of a publicly available software package called \textsc{MLZ}%\footnote{http://pythonhosted.org/MLZ/} (Machine Learning for Photo-$z$).
