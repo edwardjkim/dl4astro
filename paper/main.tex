@@ -901,6 +901,14 @@ on the CFHTLenS and SDSS data sets, and compare it with the performance of TPC.
   $c_s(p_s=x)$ & Star completeness at $x$ star purity \\
   $CAL$ & Calibration error with overlapping binning \\
   $\mid\Delta N_g\mid / N_g$ & Absolute error in number of galaxies\\
+\changed{
+log loss
+}
+&
+\changed{
+Cross-entropy
+}
+\\
   \hline
   \end{tabular}
   \label{table:metrics}
@@ -1059,13 +1067,29 @@ in the estimation of number of galaxies,
     The bold entries highlight the best performance values within each column.
   }
   \centering
-  \begin{tabular}{l c c c c c c}
+  \begin{tabular}{l c c c c c c c}
     \hline
-    classifier & AUC & MSE & $p_{g}(c_g=0.96)$ & $c_{s}(p_s=0.97)$ & CAL & $ |\Delta N_g|/N_g$ \\
+    classifier & AUC & MSE & $p_{g}(c_g=0.96)$ & $c_{s}(p_s=0.97)$ & CAL & $ |\Delta N_g|/N_g$ &
+\changed{
+log loss
+}
+\\
     \hline
-    ConvNet                       & \textbf{0.9948} & 0.0112          & \textbf{0.9972} & 0.8971          & \textbf{0.0197}  & \textbf{0.0029} \\
-    TPC${}_{\rmn{morph}}$         & 0.9924          & \textbf{0.0109} & 0.9963          & \textbf{0.9268} & 0.0245           & 0.0056 \\
-    TPC${}_{\rmn{phot}}$          & 0.9876          & 0.0189          & 0.9927          & 0.8044          & 0.0266           & 0.0101 \\
+    ConvNet                       & \textbf{0.9948} & 0.0112          & \textbf{0.9972} & 0.8971          & \textbf{0.0197}  & \textbf{0.0029} &
+\changed{
+\textbf{0.0441}
+}
+\\
+    TPC${}_{\rmn{morph}}$         & 0.9924          & \textbf{0.0109} & 0.9963          & \textbf{0.9268} & 0.0245           & 0.0056 &
+\changed{
+0.0809
+}
+\\
+    TPC${}_{\rmn{phot}}$          & 0.9876          & 0.0189          & 0.9927          & 0.8044          & 0.0266           & 0.0101 &
+\changed{
+0.1085
+}
+\\
     \hline
   \end{tabular}
   \label{table:clens_metrics}
@@ -1224,14 +1248,13 @@ We present in Table~\ref{table:clens_metrics} a summary of the results obtained
 by applying ConvNet, $\rmn{TPC}_{\rmn{morph}}$, and $\rmn{TPC}_{\rmn{phot}}$
 on the test set of the CFHTLenS data.
 The bold entries highlight the best technique for any particular metric.
-ConvNet outperforms $\rmn{TPC}_{\rmn{morph}}$ in four metrics (AUC, $p_g$, CAL,
-and $|\Delta N_g|/N_g$), while $\rmn{TPC}_{\rmn{morph}}$ performs better in
-two metrics (MSE and $c_g$).
+ConvNet outperforms $\rmn{TPC}_{\rmn{morph}}$ in \changed{five} metrics
+(AUC, $p_g$, CAL, $|\Delta N_g|/N_g$, \changed{and log loss}),
+while $\rmn{TPC}_{\rmn{morph}}$ performs better in two metrics (MSE and $c_g$).
 It is not surprising that $\rmn{TPC}_{\rmn{phot}}$, which is trained on only
 magnitudes and colors, performs significantly worse than both ConvNet and
 $\rmn{TPC}_{\rmn{phot}}$.
-As Figure~\ref{fig:clens_color_color} shows, there is significant overlap
-between stars and galaxies in color-color space.
+\sout{ As Figure~\ref{fig:clens_color_color} shows, there is significant overlap between stars and galaxies in color-color space.  }
 Thus, magnitudes and colors alone are not sufficient to separate stars from
 galaxies,
 and morphology is critical in separating stars from galaxies.
