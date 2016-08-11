@@ -152,6 +152,10 @@ Heymans C.,  et~al., 2012, \mnras, 427, 146
   et~al.}{2012}]{hildebrandt2012cfhtlens}
 Hildebrandt H.,  et~al., 2012, \mnras, 421, 2355
 
+\bibitem[\protect\citeauthoryear{Hinton, Osindero  \& Teh}{Hinton
+  et~al.}{2006}]{hinton2006fast}
+Hinton G.~E.,  Osindero S.,   Teh Y.-W.,  2006, Neural computation, 18, 1527
+
 \bibitem[\protect\citeauthoryear{Hinton, Srivastava, Krizhevsky, Sutskever  \&
   Salakhutdinov}{Hinton et~al.}{2012}]{hinton2012improving}
 Hinton G.~E.,  Srivastava N.,  Krizhevsky A.,  Sutskever I.,   Salakhutdinov
@@ -262,6 +266,10 @@ Rumelhart D.~E.,  Hinton G.~E.,   Williams R.~J.,  1988, Cognitive modeling, 5,
 Russakovsky O.,  et~al., 2015, International Journal of Computer Vision, 115,
   211
 
+\bibitem[\protect\citeauthoryear{Salakhutdinov \& Hinton}{Salakhutdinov \&
+  Hinton}{2009}]{salakhutdinov2009deep}
+Salakhutdinov R.,  Hinton G.~E.,  2009, in AISTATS. p.~3
+
 \bibitem[\protect\citeauthoryear{S{\'a}nchez et~al.,}{S{\'a}nchez
   et~al.}{2014}]{sanchez2014photometric}
 S{\'a}nchez C.,  et~al., 2014, Monthly Notices of the Royal Astronomical
@@ -317,6 +325,10 @@ Szegedy C.,  et~al., 2015, in Proceedings of the IEEE Conference on Computer
 \bibitem[\protect\citeauthoryear{{Theano Development Team}}{{Theano Development
   Team}}{2016}]{theano2016theano}
 {Theano Development Team} 2016, arXiv e-prints, abs/1605.02688
+
+\bibitem[\protect\citeauthoryear{Wasserman \& Schwartz}{Wasserman \&
+  Schwartz}{1988}]{wasserman1988neural}
+Wasserman P.~D.,  Schwartz T.,  1988, IEEE Expert, 3, 10
 
 \bibitem[\protect\citeauthoryear{{Weir}, {Fayyad}  \& {Djorgovski}}{{Weir}
   et~al.}{1995}]{weir1995automated}
