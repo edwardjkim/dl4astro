@@ -30,12 +30,6 @@ CRC Press
 {Ball} N.~M.,  {Brunner} R.~J.,  {Myers} A.~D.,   {Tcheng} D.,  2006, \apj,
   650, 497
 
-\bibitem[\protect\citeauthoryear{{Ball}, {Brunner}, {Myers}, {Strand},
-  {Alberts}, {Tcheng}  \& {Llor{\`a}}}{{Ball} et~al.}{2007}]{ball2007robust}
-{Ball} N.~M.,  {Brunner} R.~J.,  {Myers} A.~D.,  {Strand} N.~E.,  {Alberts}
-  S.~L.,  {Tcheng} D.,   {Llor{\`a}} X.,  2007, \mn@doi [\apj]
-  {10.1086/518362}, 663, 774
-
 \bibitem[\protect\citeauthoryear{Ball, Brunner, Myers, Strand, Alberts  \&
   Tcheng}{Ball et~al.}{2008}]{ball2008robust}
 Ball N.~M.,  Brunner R.~J.,  Myers A.~D.,  Strand N.~E.,  Alberts S.~L.,
@@ -78,14 +72,6 @@ Brier G.~W.,  1950, Monthly weather review, 78, 1
 \bibitem[\protect\citeauthoryear{{Carrasco Kind} \& {Brunner}}{{Carrasco Kind}
   \& {Brunner}}{2013}]{carrascokind2013tpz}
 {Carrasco Kind} M.,  {Brunner} R.~J.,  2013, \mnras, 432, 1483
-
-\bibitem[\protect\citeauthoryear{{Carrasco Kind} \& {Brunner}}{{Carrasco Kind}
-  \& {Brunner}}{2014a}]{carrascokind2014somz}
-{Carrasco Kind} M.,  {Brunner} R.~J.,  2014a, \mnras, 438, 3409
-
-\bibitem[\protect\citeauthoryear{{Carrasco Kind} \& {Brunner}}{{Carrasco Kind}
-  \& {Brunner}}{2014b}]{carrascokind2014exhausting}
-{Carrasco Kind} M.,  {Brunner} R.~J.,  2014b, \mnras, 442, 3380
 
 \bibitem[\protect\citeauthoryear{Caruana \& Niculescu-Mizil}{Caruana \&
   Niculescu-Mizil}{2004}]{caruana2004data}
@@ -186,13 +172,8 @@ Ivezi{\'c} {\v{Z}}.,  Connolly A.~J.,  VanderPlas J.~T.,   Gray A.,  2014,
 Princeton University Press
 
 \bibitem[\protect\citeauthoryear{Kamdar, Turk  \& Brunner}{Kamdar
-  et~al.}{2016a}]{kamdar2016machine1}
-Kamdar H.~M.,  Turk M.~J.,   Brunner R.~J.,  2016a, \mnras, 455, 642
-
-\bibitem[\protect\citeauthoryear{Kamdar, Turk  \& Brunner}{Kamdar
-  et~al.}{2016b}]{kamdar2016machine2}
-Kamdar H.~M.,  Turk M.~J.,   Brunner R.~J.,  2016b, \mn@doi [\mnras]
-  {10.1093/mnras/stv2981}, 457, 1162
+  et~al.}{2016}]{kamdar2016machine1}
+Kamdar H.~M.,  Turk M.~J.,   Brunner R.~J.,  2016, \mnras, 455, 642
 
 \bibitem[\protect\citeauthoryear{Kim, Brunner  \& Kind}{Kim
   et~al.}{2015}]{kim2015hybrid}
