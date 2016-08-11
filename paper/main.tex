@@ -1391,6 +1391,74 @@ process.
   \label{fig:sdss_calibration}
 \end{figure}
 
+\begin{figure*}
+  \centering
+  \begin{subfigure}[c]{0.24\linewidth}
+  \centering
+    \includegraphics[width=\textwidth]{figures/sdss_galaxy_original.pdf}
+    \caption{Input (5 bands$\times44\times44$)}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[c]{0.24\linewidth}
+  \centering
+    \includegraphics[width=\textwidth]{figures/sdss_galaxy_conv11.pdf}
+    \caption{Layer 1 (32 maps$\times40\times40$)}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[c]{0.24\linewidth}
+  \centering
+    \includegraphics[width=\textwidth]{figures/sdss_galaxy_conv21.pdf}
+    \caption{Layer 3 (64 maps$\times20\times20$)}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[c]{0.24\linewidth}
+  \centering
+    \includegraphics[width=\textwidth]{figures/sdss_galaxy_conv31.pdf}
+    \caption{Layer 6 (128 maps$\times10\times10$)}
+  \end{subfigure}
+  \caption{
+\changed{
+    Similar to Figure~\ref{fig:galaxy_activations} but for a galaxy in the
+    SDSS data set.
+}
+    }
+  \label{fig:sdss_galaxy_activations}
+\end{figure*}
+
+\begin{figure*}
+  \centering
+  \begin{subfigure}[c]{0.24\linewidth}
+  \centering
+    \includegraphics[width=\textwidth]{figures/sdss_star_original.pdf}
+    \caption{Input (5 bands$\times44\times44$)}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[c]{0.24\linewidth}
+  \centering
+    \includegraphics[width=\textwidth]{figures/sdss_star_conv11.pdf}
+    \caption{Layer 1 (32 maps$\times40\times40$)}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[c]{0.24\linewidth}
+  \centering
+    \includegraphics[width=\textwidth]{figures/sdss_star_conv21.pdf}
+    \caption{Layer 3 (64 maps$\times20\times20$)}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[c]{0.24\linewidth}
+  \centering
+    \includegraphics[width=\textwidth]{figures/sdss_star_conv31.pdf}
+    \caption{Layer 6 (128 maps$\times10\times10$)}
+  \end{subfigure}
+  \caption{
+\changed{
+    Similar to Figure~\ref{fig:sdss_galaxy_activations} but for a star in the
+    SDSS data set.
+}
+    }
+  \label{fig:sdss_star_activations}
+\end{figure*}
+
 We have also trained and tested our ConvNet model on the SDSS data set, and
 we present in Table~\ref{table:sdss_metrics} the same six metrics for ConvNet,
 $\rmn{TPC}_{\rmn{morph}}$, and $\rmn{TPC}_{\rmn{phot}}$.
@@ -1464,6 +1532,16 @@ Although it is not straightforward to compare the two calibration curves by
 visual inspection, Table~\ref{table:sdss_metrics} shows that the CAL metric of
 ConvNet is lower than that of $\rmn{TPC}_{\rmn{morph}}$.
 
+\changed{
+Figures~\ref{fig:sdss_galaxy_activations} and \ref{fig:sdss_star_activations}
+show the activations when images of a galaxy and a star are fed into the network. 
+Similarly to Figures~\ref{fig:galaxy_activations} and \ref{fig:star_activations}
+in Section~\ref{sec:results_cfht},
+the feature maps show hierarchical abstraction from low-level features in the
+first convolutional layer to high-level features in the subsequent layers.
+This hierarchical abstraction is what enables ConvNets to learn morphological
+features automatically from images.
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
