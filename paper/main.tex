@@ -159,7 +159,7 @@ Other successfully implemented examples of applying machine learning to
 the star-galaxy classification problem include decision 
 trees~\citep{weir1995automated,suchkov2005census,ball2006robust,sevilla2015effect}, 
 Support Vector Machines~\citep{Fadely2012}, and
-classifier combination strategies~\citep{kim2015hybrid}.
+classifier combination strategies~\citep*{kim2015hybrid}.
 
 Almost all star-galaxy classifiers published in the literature use
 the reduced summary information available from astronomical catalogs.
@@ -914,82 +914,41 @@ Cross-entropy
   \label{table:metrics}
 \end{table}
 
-Probabilistic classification models can be considered as
-functions that output a probability estimate of each source
-to be in one of the classes (\eg a star or a galaxy).
-The simplest way to use the probability output is to
-convert it into a class label by using a threshold (a probability cut).
-Although many studies often choose the threshold by setting it to a fixed value,
-such as $P_{\rmn{cut}} = 0.5$ \citep[\eg][]{henrion2011bayesian, Fadely2012},
-choosing $0.5$ as a threshold is not the best choice
-for an unbalanced data set, where galaxies outnumber stars.
-Furthermore, setting a fixed threshold ignores the operating condition 
-(\eg science requirements, stellar distribution, misclassification costs)
-where the model will be applied.
-
+\changed{
+Probabilistic classifiers, rather than only assigning discrete labels to each
+source, produce a continuous probability distribution of whether each source is
+a star or a galaxy.
+To evaluate the performance of probabilistic classifiers,
+many studies~\citep[\eg][]{henrion2011bayesian, Fadely2012} convert
+probability estimates into class labels by choosing a probability
+threshold, \eg a source is classified as a star if $P_{\rmn{class}} < 0.5$,
+and a galaxy if $P_{\rmn{class}} > 0.5$.
+However, using a fixed threshold ignores the model's operating conditions,
+such as science requirements, misclassification costs, and stellar distribution.
+Furthermore, the probability threshold of 0.5 is not necessarily optimal for
+an unbalanced data set, where galaxies outnumber stars.
+Following \citet{kim2015hybrid}, we use performance metrics that are well-suited
+for probabilistic classifiers: Area Under the Curve (AUC)
+for the Receiver Operating Characteristic (ROC) curve, completeness and purity,
+and the Mean Squared Error (MSE).
+To evaluate 
+we also use the calibration error and the absolute error in the estimation
+of number of galaxies as performance metrics.
+}
 
 \subsubsection{Receiver Operating Characteristic Curve}
 
-When we have no information about the operating condition
-when evaluating the performance of classifiers,
-there are effective tools such as
-the Receiver Operating Characteristic (ROC) curve
-\citep*{swets2000better}.
-An ROC curve is a graphical plot that illustrates the true positive rate
-versus the false positive rate of a binary classifier
-as its classification threshold is varied.
-The Area Under the Curve (AUC) summarizes the curve information
-in a single number,
-and can be used as an assessment of the overall performance.
+\changed{
+A Receiver Operating Characteristic (ROC) curve is the
+most commonly used method for evaluating the overall performance of a binary
+classifier~\citep*{swets2000better}.
+In an ROC curve, we plot the true positive rate as a function of the false
+positive rate by varying the classification threshold.
+The Area Under the Curve (AUC) quantifies the overall performance in a single
+number.
+}
 
 \subsubsection{Completeness and Purity}
-
-In astronomical applications,
-the operating condition usually translates to
-the completeness and purity requirements of the star or galaxy sample.
-We define the galaxy \textit{completeness}
-$c_g$ (also known as recall or sensitivity) as
-the fraction of the number of true galaxies classified as galaxies
-out of the total number of true galaxies,
-\begin{equation}
-c_g = \frac{N_g}{N_g + M_g},
-\end{equation}
-
-\noindent
-where $N_g$ is the number of true galaxies classified as galaxies,
-and $M_g$ is the number of true galaxies classified as stars.
-We define the galaxy \textit{purity} $p_g$ (also known as precision
-or positive predictive value)
-as the fraction of the number of true galaxies classified as galaxies
-out of the total number of objects classified as galaxies, 
-\begin{equation}
-p_g = \frac{N_g}{N_g + M_s},
-\end{equation}
-
-\noindent
-where $M_s$ is the number of true stars classified as galaxies.
-Star completeness and purity are defined in a similar manner.
-
-
-One of the advantages of a probabilistic classification is
-that the threshold can be adjusted to produce
-a more complete but less pure sample,
-or a less complete but more pure one.
-We can compare the performance of different classification techniques
-by assuming an arbitrary operating condition.
-For example, weak lensing science measurements
-of the DES require $c_g > 0.960$ and $p_g > 0.778$
-to control both the statistical and systematic errors
-on the cosmological parameters,
-and $c_s > 0.250$ and $p_s > 0.970$
-for stellar Point Spread Function (PSF) calibration
-\citep{soumagnac2013star}.
-Although these values will likely be different
-for the science cases of the CFHTLenS data,
-we adopt these values to compare the classification performance
-at a reasonable operating condition.
-Thus, we compute $p_{g}$ at $c_g=0.960$
-and $c_{s}$ at $p_s=0.970$.
 
 \subsubsection{Mean Squared Error}
 
