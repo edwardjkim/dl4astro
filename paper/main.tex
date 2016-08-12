@@ -93,7 +93,7 @@ $^4$National Center for Supercomputing Applications, Urbana, IL 61801 USA
 \date{Accepted XXX. Received YYY; in original form ZZZ}
 
 % Enter the current year, for the copyright statements etc.
-\pubyear{2015}
+\pubyear{2016}
 
 % Don't change these lines
 \begin{document}
@@ -1263,6 +1263,17 @@ the images, and the performance of ConvNet is therefore comparable to
 that of $\rmn{TPC}_{\rmn{morph}}$,
 which is trained on both morphological and photometric attributes.
 
+\changed{
+Note that $p_{g}(c_g=0.96)$ and $c_{s}(p_s=0.97)$ require adjusting
+threshold values (\ie probability cuts), while other metrics do not.
+To obtain a galaxy completeness of $c_g=0.96$, we choose the threshold values
+0.9972, 0.9963, and 0.9927 for ConvNet, TPC${}_{\rmn{morph}}$, TPC${}_{\rmn{phot}}$,
+respectively;
+for star purity $p_s=0.97$, we choose 0.6990, 0.5297, and 0.8570 for
+ConvNet, TPC${}_{\rmn{morph}}$, TPC${}_{\rmn{phot}}$, respectively.
+In Table ? and ?, we present example.
+}
+
 In Figure~\ref{fig:clens_mag}, we compare the galaxy purity
 and star completeness values for ConvNet, $\rmn{TPC}_{\rmn{morph}}$, and
 $\rmn{TPC}_{\rmn{phot}}$, as a function of  $i$-band magnitude
@@ -1620,7 +1631,7 @@ neural network architectures.
 \changed{
 Futhermore, future work could compare the performance of other deep learning
 variants, such as deep belief networks~\citep{hinton2006fast},
-deep Boltzmann machines~\citep{salakhutdinov2009deep}, and
+deep Boltzmann machines~\citep{salakhutdinov2009deep}, or
 multilayer perceptrons~\citep{wasserman1988neural}.
 }
 
