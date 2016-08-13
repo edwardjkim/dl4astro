@@ -25,15 +25,13 @@ CRC Press
   et~al.}{2015}]{alam2015eleventh}
 {Alam} S.,  et~al., 2015, \mn@doi [\apjs] {10.1088/0067-0049/219/1/12}, 219, 12
 
-\bibitem[\protect\citeauthoryear{{Ball}, {Brunner}, {Myers}  \&
-  {Tcheng}}{{Ball} et~al.}{2006}]{ball2006robust}
-{Ball} N.~M.,  {Brunner} R.~J.,  {Myers} A.~D.,   {Tcheng} D.,  2006, \apj,
-  650, 497
+\bibitem[\protect\citeauthoryear{{Ball} \& et al.}{{Ball} \&
+  et~al.}{2006}]{ball2006robust}
+{Ball} N.~M.,  et al. 2006, \apj, 650, 497
 
-\bibitem[\protect\citeauthoryear{Ball, Brunner, Myers, Strand, Alberts  \&
-  Tcheng}{Ball et~al.}{2008}]{ball2008robust}
-Ball N.~M.,  Brunner R.~J.,  Myers A.~D.,  Strand N.~E.,  Alberts S.~L.,
-  Tcheng D.,  2008, \apj, 683, 12
+\bibitem[\protect\citeauthoryear{Ball \& et al.}{Ball \&
+  et~al.}{2008}]{ball2008robust}
+Ball N.~M.,  et al. 2008, \apj, 683, 12
 
 \bibitem[\protect\citeauthoryear{Banerji et~al.,}{Banerji
   et~al.}{2010}]{banerji2010galaxy}
@@ -52,6 +50,11 @@ Bertin E.,  Arnouts S.,  1996, \aaps, 117, 393
 \bibitem[\protect\citeauthoryear{Bottou}{Bottou}{1998}]{bottou1998online}
 Bottou L.,  1998, On-line learning in neural networks, 17, 142
 
+\bibitem[\protect\citeauthoryear{Boureau, Ponce  \& LeCun}{Boureau
+  et~al.}{2010}]{boureau2010theoretical}
+Boureau Y.-L.,  Ponce J.,   LeCun Y.,  2010, in Proceedings of the 27th
+  international conference on machine learning (ICML-10). pp 111--118
+
 \bibitem[\protect\citeauthoryear{Bousquet \& Bottou}{Bousquet \&
   Bottou}{2008}]{bousquet2008tradeoffs}
 Bousquet O.,  Bottou L.,  2008, in Advances in neural information processing
@@ -60,10 +63,9 @@ Bousquet O.,  Bottou L.,  2008, in Advances in neural information processing
 \bibitem[\protect\citeauthoryear{Breiman}{Breiman}{2001}]{breiman2001random}
 Breiman L.,  2001, Machine learning, 45, 5
 
-\bibitem[\protect\citeauthoryear{Breiman, Friedman, Stone  \& Olshen}{Breiman
+\bibitem[\protect\citeauthoryear{Breiman \& et al.}{Breiman \&
   et~al.}{1984}]{breiman1984classification}
-Breiman L.,  Friedman J.,  Stone C.~J.,   Olshen R.~A.,  1984, Classification
-  and regression trees.
+Breiman L.,  et al. 1984, Classification and regression trees.
 CRC press
 
 \bibitem[\protect\citeauthoryear{Brier}{Brier}{1950}]{brier1950verification}
@@ -72,6 +74,10 @@ Brier G.~W.,  1950, Monthly weather review, 78, 1
 \bibitem[\protect\citeauthoryear{{Carrasco Kind} \& {Brunner}}{{Carrasco Kind}
   \& {Brunner}}{2013}]{carrascokind2013tpz}
 {Carrasco Kind} M.,  {Brunner} R.~J.,  2013, \mnras, 432, 1483
+
+\bibitem[\protect\citeauthoryear{{Carrasco Kind} \& {Brunner}}{{Carrasco Kind}
+  \& {Brunner}}{2014}]{carrascokind2014exhausting}
+{Carrasco Kind} M.,  {Brunner} R.~J.,  2014, \mnras, 442, 3380
 
 \bibitem[\protect\citeauthoryear{Caruana \& Niculescu-Mizil}{Caruana \&
   Niculescu-Mizil}{2004}]{caruana2004data}
@@ -139,10 +145,9 @@ Gwyn S.~D.,  2012, \aj, 143, 38
   et~al.}{2015}]{he2015deep}
 He K.,  Zhang X.,  Ren S.,   Sun J.,  2015, arXiv preprint arXiv:1512.03385
 
-\bibitem[\protect\citeauthoryear{{Henrion}, {Mortlock}, {Hand}  \&
-  {Gandy}}{{Henrion} et~al.}{2011}]{henrion2011bayesian}
-{Henrion} M.,  {Mortlock} D.~J.,  {Hand} D.~J.,   {Gandy} A.,  2011, \mnras,
-  412, 2286
+\bibitem[\protect\citeauthoryear{{Henrion} \& et al.}{{Henrion} \&
+  et~al.}{2011}]{henrion2011bayesian}
+{Henrion} M.,  et al. 2011, \mnras, 412, 2286
 
 \bibitem[\protect\citeauthoryear{Heymans et~al.}{Heymans
   et~al.}{2012}]{heymans2012cfhtlens}
@@ -168,11 +173,11 @@ Hoyle B.,  2015, arXiv preprint arXiv:1504.07255
   et~al.}{2015}]{huertas2015catalog}
 Huertas-Company M.,  et~al., 2015, ApJS, 221, 8
 
-\bibitem[\protect\citeauthoryear{Ivezi{\'c}, Connolly, VanderPlas  \&
-  Gray}{Ivezi{\'c} et~al.}{2014}]{ivezic2014statistics}
-Ivezi{\'c} {\v{Z}}.,  Connolly A.~J.,  VanderPlas J.~T.,   Gray A.,  2014,
-  Statistics, Data Mining, and Machine Learning in Astronomy: A Practical
-  Python Guide for the Analysis of Survey Data.
+\bibitem[\protect\citeauthoryear{Ivezi{\'c} \& et al.}{Ivezi{\'c} \&
+  et~al.}{2014}]{ivezic2014statistics}
+Ivezi{\'c} {\v{Z}}.,  et al. 2014, Statistics, Data Mining, and Machine
+  Learning in Astronomy: A Practical Python Guide for the Analysis of Survey
+  Data.
 Princeton University Press
 
 \bibitem[\protect\citeauthoryear{Kamdar, Turk  \& Brunner}{Kamdar
@@ -192,16 +197,14 @@ Krizhevsky A.,  Sutskever I.,   Hinton G.~E.,  2012, in Advances in neural
   et~al.}{2005}]{le2005vimos}
 Le~F{\`e}vre O.,  et~al., 2005, \aap, 439, 845
 
-\bibitem[\protect\citeauthoryear{LeCun, Bottou, Orr  \& M{\"u}ller}{LeCun
+\bibitem[\protect\citeauthoryear{LeCun \& et al.}{LeCun \&
   et~al.}{1998a}]{lecun1998efficient}
-LeCun Y.~A.,  Bottou L.,  Orr G.~B.,   M{\"u}ller K.-R.,  1998a, in , Neural
-  networks: Tricks of the trade.
+LeCun Y.~A.,  et al. 1998a, in , Neural networks: Tricks of the trade.
 Springer, pp 9--50
 
-\bibitem[\protect\citeauthoryear{LeCun, Bottou, Bengio  \& Haffner}{LeCun
+\bibitem[\protect\citeauthoryear{LeCun \& et al.}{LeCun \&
   et~al.}{1998b}]{lecun1998gradient}
-LeCun Y.,  Bottou L.,  Bengio Y.,   Haffner P.,  1998b, Proceedings of the
-  IEEE, 86, 2278
+LeCun Y.,  et al. 1998b, Proceedings of the IEEE, 86, 2278
 
 \bibitem[\protect\citeauthoryear{LeCun, Bengio  \& Hinton}{LeCun
   et~al.}{2015}]{lecun2015deep}
@@ -220,10 +223,10 @@ Li N.,  Thakar A.~R.,  2008, Computing in Science \& Engineering, 10, 18
   et~al.}{2013}]{maas2013rectifier}
 Maas A.~L.,  Hannun A.~Y.,   Ng A.~Y.,  2013, in Proc. ICML.
 
-\bibitem[\protect\citeauthoryear{Monteith, Carroll, Seppi  \&
-  Martinez}{Monteith et~al.}{2011}]{Monteith2011}
-Monteith K.,  Carroll J.~L.,  Seppi K.,   Martinez T.,  2011, in Neural
-  Networks (IJCNN), The 2011 International Joint Conference on. pp 2657--2663
+\bibitem[\protect\citeauthoryear{Monteith \& et al.}{Monteith \&
+  et~al.}{2011}]{Monteith2011}
+Monteith K.,  et al. 2011, in Neural Networks (IJCNN), The 2011 International
+  Joint Conference on. pp 2657--2663
 
 \bibitem[\protect\citeauthoryear{Murphy}{Murphy}{2012}]{murphy2012machine}
 Murphy K.~P.,  2012, Machine learning: a probabilistic perspective.
@@ -238,10 +241,9 @@ Nair V.,  Hinton G.~E.,  2010, in Proceedings of the 27th International
   et~al.}{2013}]{newman2013deep2}
 Newman J.~A.,  et~al., 2013, \ApJSupp, 208, 5
 
-\bibitem[\protect\citeauthoryear{{Odewahn}, {Stockwell}, {Pennington},
-  {Humphreys}  \& {Zumach}}{{Odewahn} et~al.}{1992}]{odewahn1992automated}
-{Odewahn} S.~C.,  {Stockwell} E.~B.,  {Pennington} R.~L.,  {Humphreys} R.~M.,
-  {Zumach} W.~A.,  1992, \aj, 103, 318
+\bibitem[\protect\citeauthoryear{{Odewahn} \& et al.}{{Odewahn} \&
+  et~al.}{1992}]{odewahn1992automated}
+{Odewahn} S.~C.,  et al. 1992, \aj, 103, 318
 
 \bibitem[\protect\citeauthoryear{Paterno}{Paterno}{2003}]{paterno2004calculating}
 Paterno M.,  2003, Calculating Efficiencies and Their Uncertainties,
@@ -308,10 +310,10 @@ Soumagnac M.~T.,  et~al., 2015, \mnras, 450, 666
   et~al.}{2005}]{suchkov2005census}
 {Suchkov} A.~A.,  {Hanisch} R.~J.,   {Margon} B.,  2005, \aj, 130, 2439
 
-\bibitem[\protect\citeauthoryear{Sutskever, Martens, Dahl  \& Hinton}{Sutskever
+\bibitem[\protect\citeauthoryear{Sutskever \& et al.}{Sutskever \&
   et~al.}{2013}]{sutskever2013importance}
-Sutskever I.,  Martens J.,  Dahl G.,   Hinton G.,  2013, in Proceedings of the
-  30th international conference on machine learning (ICML-13). pp 1139--1147
+Sutskever I.,  et al. 2013, in Proceedings of the 30th international conference
+  on machine learning (ICML-13). pp 1139--1147
 
 \bibitem[\protect\citeauthoryear{Swets, Dawes  \& Monahan}{Swets
   et~al.}{2000}]{swets2000better}
@@ -337,9 +339,9 @@ Wasserman P.~D.,  Schwartz T.,  1988, IEEE Expert, 3, 10
 \bibitem[\protect\citeauthoryear{Wolpert}{Wolpert}{1996}]{wolpert1996lack}
 Wolpert D.~H.,  1996, Neural computation, 8, 1341
 
-\bibitem[\protect\citeauthoryear{York et~al.,}{York
+\bibitem[\protect\citeauthoryear{York \& et al.}{York \&
   et~al.}{2000}]{york2000sloan}
-York D.~G.,  et~al., 2000, \aj, 120, 1579
+York D.~G.,  et al. 2000, \aj, 120, 1579
 
 \bibitem[\protect\citeauthoryear{Zadrozny \& Elkan}{Zadrozny \&
   Elkan}{2001}]{zadrozny2001obtaining}

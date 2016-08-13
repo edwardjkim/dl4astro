@@ -86,8 +86,7 @@
 $^1$Department of Physics, University of Illinois, Urbana, IL 61801 USA\\
 $^2$Department of Astronomy, University of Illinois, Urbana, IL 61801 USA\\
 $^3$Department of Statistics, University of Illinois, Champaign, IL 61820 USA\\
-$^4$National Center for Supercomputing Applications, Urbana, IL 61801 USA
-}
+$^4$National Center for Supercomputing Applications, Urbana, IL 61801 USA }
 
 % These dates will be filled out by the publisher
 \date{Accepted XXX. Received YYY; in original form ZZZ}
@@ -222,19 +221,6 @@ steps for retrieving cutout images.
 \subsection{Sloan Digital Sky Survey}
   \label{sec:sdss}
 
-%\begin{figure}
-%  \centering
-%  \includegraphics[width=\columnwidth]{figures/sdss_color_color.pdf}
-%  \caption{
-%    Hexbin plots showing the color-color space distribution of galaxies (blue, top row) and stars (green, bottom row)
-%    in the SDSS data set used in this analysis.
-%    It is easy to see that there is significant overlap between stars
-%    and galaxies in these color-color spaces. 
-%  }
-%  \label{fig:sdss_color_color}
-%\end{figure}
-
-
 The Sloan Digital Sky Survey~\citep[SDSS;][]{york2000sloan}
 phases I--III obtained photometric data in five bands,
 $u$, $g$, $r$, $i$, and $z$,
@@ -268,7 +254,7 @@ to align each image to the reference ($r$-band) image.
 We then use \texttt{SExtractor} to find the pixel positions of
 the 65,000 objects we have selected,
 and to center each object in the cutout image.
-{
+\changed{
 Magnitudes in the SDSS photometric catalog are expressed as inverse hyperbolic
 sine magnitudes~\citep[also known as luptitudes;][]{lupton1999modified},
 and we follow the SDSS convention and convert all flux values to luptitudes.
@@ -307,17 +293,6 @@ plots.
 
 
 \subsection{Canada-France-Hawaii Telescope Lensing Survey}
-
-%\begin{figure}
-%  \centering
-%  \includegraphics[width=\columnwidth]{figures/clens_color_color.pdf}
-%  \caption{
-%    Hexbin plots showing the color-color space distribution of
-%    galaxies (blue, top row) and stars (green, bottom row)
-%    in the CFHTLenS data set used in this analysis.
-%  }
-%  \label{fig:clens_color_color}
-%\end{figure}
 
 We also use photometric data from
 the Canada-France-Hawaii Telescope Lensing Survey
@@ -369,8 +344,8 @@ and validation sets are almost identical to those of the test set.
   \label{sec:deep_learning}
 
 \changed{
-In this section, we first provide a brief overview of deep neural networks,
-including convolutional neural networks (ConvNets).
+In this section, we first provide a brief overview of deep neural networks
+including convolutional neural networks.
 We then describe the precise network architecture and the details of key
 hyperparamters.
 }
@@ -438,12 +413,16 @@ that have a small, non-zero slope in the negative region,
 \end{equation}
 
 Many deep learning models use feedforward neural network architectures with multiple layers,
-where each neuron in one layer is connected to the neurons of the subsequent layer.
+where each neuron in one layer is connected to the neurons of the subsequent
+layer~\citep{lecun2015deep}.
 A schematic representation is shown in Figure~\ref{fig:neuron_b}.
 All layers except the input and output layers are conveniently called hidden layers.
 \sout{ With multiple hidden layers, deep neural networks can model complex nonlinear relationships, and they have had great success in multimedia tasks where humans traditionally outperformed computers, such as speech recognition, language processing, and image classification.  }
 
-The goal of learning is to find a set of weights and biases such that,
+\changed{
+We
+}
+find a set of weights and biases such that,
 given $N$ samples, the output from the network
 $\bmath{y}=\left(y_1, y_2, \dots, y_N \right)$ approximates the desired output
 $\hat{\bmath{y}}=\left(\hat{y}_1, \hat{y}_2, \dots, \hat{y}_N \right)$
@@ -565,7 +544,11 @@ pooling layer computes the maximum of a local $2\times2$ patch in a feature map
 }
 Since the pooling layer aggregates the activations of neighboring units from the previous layer,
 it reduces the dimensionality of the feature maps and
-makes the model invariant to small shifts and distortions.
+makes the model invariant to small shifts and distortions
+\changed{
+\citep{boureau2010theoretical}
+}
+.
 Two or more layers of convolution and pooling are stacked,
 followed by more convolutional and fully-connected layers.
 
@@ -776,7 +759,10 @@ Although the data augmentation step in Section~\ref{sec:data_augmentation} shoul
 make our ConvNet model invariant to these types of transformations,
 we find that applying BMC still results in a significant increase in performance.
 \changed{
-For a thorough discussion of BMC, we refer the reader to \citet{Monteith2011}.
+For a thorough discussion of BMC, we refer the reader to \citet{Monteith2011}
+(See also \citet{carrascokind2014exhausting} for application of BMC to
+photometric estimation, and \citet{kim2015hybrid} for combining star-galaxy
+classifiers).
 }
 
 \sout{ The posterior probability that a source is a galaxy is given by }
@@ -813,9 +799,6 @@ and star-galaxy classification~\citep{kim2015hybrid};
 it adds an extra layer of randomness by perturbing the measured attributes by
 their uncertainties;
 and it uses parallelism to handle large data sets on distributed memory systems.
-}
-
-\sout{ TPC is a part of a publicly available software package called \textsc{MLZ}%\footnote{http://pythonhosted.org/MLZ/} (Machine Learning for Photo-$z$).
 }
 
 \sout{ TPC uses classification trees, a type of prediction tree that is designed to provide a classification or predict a discrete category.  Prediction trees are built by asking a sequence of questions that recursively split the data into branches until a terminal leaf is created that meets a stopping criterion (\eg a minimum leaf size).  The optimal split dimension is decided by choosing the attribute that maximizes the \textit{Information Gain} ($I_G$), which is defined as }
@@ -927,11 +910,16 @@ However, using a fixed threshold ignores the model's operating conditions,
 such as science requirements, misclassification costs, and stellar distribution.
 Furthermore, the probability threshold of 0.5 is not necessarily optimal for
 an unbalanced data set, where galaxies outnumber stars.
+}
+
+\changed{
 Following \citet{kim2015hybrid}, we use performance metrics that are well-suited
 for probabilistic classifiers: Area Under the Curve (AUC)
 for the Receiver Operating Characteristic (ROC) curve, completeness and purity,
 and the Mean Squared Error (MSE).
-To evaluate 
+A good probabilistic classifier should also provide well-calibrated
+posterior probabilities.
+Thus, to evaluate calibration performance,
 we also use the calibration error and the absolute error in the estimation
 of number of galaxies as performance metrics.
 }
@@ -949,6 +937,30 @@ number.
 }
 
 \subsubsection{Completeness and Purity}
+
+\changed{
+Let $N_g$ be the number of true galaxies classified as galaxies,
+and $M_g$ the number of true galaxies classified as stars.
+Then the galaxy \textit{completeness} $c_g$ (also called recall or sensitivity)
+is given by
+}
+\begin{equation}
+c_g = \frac{N_g}{N_g + M_g}.
+\end{equation}
+\changed{
+Let $M_s$ be the number of true stars classified as galaxies.
+Then the galaxy \textit{purity} $p_g$ (also called precision or positive
+predictive value) is given by
+}
+\begin{equation}
+p_g = \frac{N_g}{N_g + M_s}.
+\end{equation}
+\changed{
+We define the star completeness and purity in a similar way.
+As discussed in our previous work~\citep{kim2015hybrid},
+we adopt weak lensing science requirements of the DES~\citep{soumagnac2013star},
+and compute $p_g$ at $c_g=0.960$ and $c_s$ at $p_s=0.970$.
+}
 
 \subsubsection{Mean Squared Error}
 
@@ -1024,6 +1036,15 @@ in the estimation of number of galaxies,
     as applied to the CFHTLenS data.
     The definition of the metrics is summarized in Table~\ref{table:metrics}.
     The bold entries highlight the best performance values within each column.
+\changed{
+    Note that $p_{g}(c_g=0.96)$ and $c_{s}(p_s=0.97)$ require adjusting
+    threshold values (\ie probability cuts), while other metrics do not.
+    To obtain a galaxy completeness of $c_g=0.96$, we choose the threshold values
+    0.9972, 0.9963, and 0.9927 for ConvNet, TPC${}_{\rmn{morph}}$, TPC${}_{\rmn{phot}}$,
+    respectively;
+    for star purity $p_s=0.97$, we choose 0.6990, 0.5297, and 0.8570 for
+    ConvNet, TPC${}_{\rmn{morph}}$, TPC${}_{\rmn{phot}}$, respectively.
+}
   }
   \centering
   \begin{tabular}{l c c c c c c c}
@@ -1222,17 +1243,6 @@ the images, and the performance of ConvNet is therefore comparable to
 that of $\rmn{TPC}_{\rmn{morph}}$,
 which is trained on both morphological and photometric attributes.
 
-\changed{
-Note that $p_{g}(c_g=0.96)$ and $c_{s}(p_s=0.97)$ require adjusting
-threshold values (\ie probability cuts), while other metrics do not.
-To obtain a galaxy completeness of $c_g=0.96$, we choose the threshold values
-0.9972, 0.9963, and 0.9927 for ConvNet, TPC${}_{\rmn{morph}}$, TPC${}_{\rmn{phot}}$,
-respectively;
-for star purity $p_s=0.97$, we choose 0.6990, 0.5297, and 0.8570 for
-ConvNet, TPC${}_{\rmn{morph}}$, TPC${}_{\rmn{phot}}$, respectively.
-In Table ? and ?, we present example.
-}
-
 In Figure~\ref{fig:clens_mag}, we compare the galaxy purity
 and star completeness values for ConvNet, $\rmn{TPC}_{\rmn{morph}}$, and
 $\rmn{TPC}_{\rmn{phot}}$, as a function of  $i$-band magnitude
@@ -1310,6 +1320,13 @@ process.
   \caption{
     A summary of the classification performance metrics
     as applied to the SDSS data.
+\changed{
+    To obtain a galaxy completeness of $c_g=0.96$, we choose the threshold values
+    0.7558, 0.9989, and 0.9360 for ConvNet, TPC${}_{\rmn{morph}}$, TPC${}_{\rmn{phot}}$,
+    respectively;
+    for star purity $p_s=0.97$, we choose 0.6046, 0.0547, and 0.7449 for
+    ConvNet, TPC${}_{\rmn{morph}}$, TPC${}_{\rmn{phot}}$, respectively.
+}
   }
   \centering
   \begin{tabular}{l c c c c c c c}
@@ -1608,6 +1625,23 @@ classifier combination framework to produce further improvements in
 predictive performance.
 
 \changed{
+Furthermore, our ConvNet is a supervised algorithm; and one of the criticisms
+of supervised techniques is their difficulty in extrapolating past the limits
+of available spectroscopic training data.
+Since it is difficult to assess the classification performance without a deeper
+spectroscopic sample, we have evaluated the performance on a test set
+that is drawn from the same underlying distribution as the spectroscopic sample.
+However, when our ConvNet model
+---trained on sources from a spectroscopic sample---
+is applied to a photometric sample
+---which is often fainter than our training set--- 
+the performance of ConvNet will be less reliable.
+Combining our ConvNet model with unsupervised methods (\eg a template fitting
+method) in this meta-classification framework will help improve the efficacy of
+star-galaxy classification beyond the limits of spectroscopic training data.
+}
+
+\changed{
 Finally, we are currently exploring different strategies for including objects
 that are neither stars nor galaxies (\eg quasars).
 The results of this multi-class problem will be presented in subsequent papers.
@@ -1631,9 +1665,12 @@ This work used the Extreme Science and Engineering Discovery Environment
 ACI-1053575.
 
 \changed{
-This work has made use of the Theano library (http://deeplearning.net/software/theano/),
-the Lasagne library (http://lasagne.readthedocs.io/),
-and the Nolearn library (http://pythonhosted.org/nolearn/).
+This work has made use of the Theano library
+(\href{http://deeplearning.net/software/theano/}{http://deeplearning.net/software/theano/}),
+the Lasagne library
+(\href{http://lasagne.readthedocs.io/)}{http://lasagne.readthedocs.io/}),
+and the Nolearn library
+(\href{http://pythonhosted.org/nolearn/}{http://pythonhosted.org/nolearn/}).
 }
 
 This work is based on observations obtained with MegaPrime/MegaCam, a
@@ -1669,8 +1706,7 @@ of Washington, and Yale University.
 
 \footnotesize{
 \bibliographystyle{mnras}
-\bibliography{sg_paper}
-}
+\bibliography{sg_paper} }
 
 % Don't change these lines
 \bsp	% typesetting comment
