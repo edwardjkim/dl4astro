@@ -23,7 +23,7 @@ CRC Press
 
 \bibitem[\protect\citeauthoryear{{Alam} et~al.,}{{Alam}
   et~al.}{2015}]{alam2015eleventh}
-{Alam} S.,  et~al., 2015, \mn@doi [\apjs] {10.1088/0067-0049/219/1/12}, 219, 12
+{Alam} S.,  et~al., 2015, \apjs, 219, 12
 
 \bibitem[\protect\citeauthoryear{{Ball} \& et al.}{{Ball} \&
   et~al.}{2006}]{ball2006robust}
@@ -157,14 +157,13 @@ Heymans C.,  et~al., 2012, \mnras, 427, 146
   et~al.}{2012}]{hildebrandt2012cfhtlens}
 Hildebrandt H.,  et~al., 2012, \mnras, 421, 2355
 
+\bibitem[\protect\citeauthoryear{Hinton \& et al.}{Hinton \&
+  et~al.}{2012}]{hinton2012improving}
+Hinton G.~E.,  et al. 2012, arXiv preprint arXiv:1207.0580
+
 \bibitem[\protect\citeauthoryear{Hinton, Osindero  \& Teh}{Hinton
   et~al.}{2006}]{hinton2006fast}
 Hinton G.~E.,  Osindero S.,   Teh Y.-W.,  2006, Neural computation, 18, 1527
-
-\bibitem[\protect\citeauthoryear{Hinton, Srivastava, Krizhevsky, Sutskever  \&
-  Salakhutdinov}{Hinton et~al.}{2012}]{hinton2012improving}
-Hinton G.~E.,  Srivastava N.,  Krizhevsky A.,  Sutskever I.,   Salakhutdinov
-  R.~R.,  2012, arXiv preprint arXiv:1207.0580
 
 \bibitem[\protect\citeauthoryear{Hoyle}{Hoyle}{2015}]{hoyle2015measuring}
 Hoyle B.,  2015, arXiv preprint arXiv:1504.07255
@@ -216,8 +215,7 @@ Li N.,  Thakar A.~R.,  2008, Computing in Science \& Engineering, 10, 18
 
 \bibitem[\protect\citeauthoryear{{Lupton}, {Gunn}  \& {Szalay}}{{Lupton}
   et~al.}{1999}]{lupton1999modified}
-{Lupton} R.~H.,  {Gunn} J.~E.,   {Szalay} A.~S.,  1999, \mn@doi [\aj]
-  {10.1086/301004}, 118, 1406
+{Lupton} R.~H.,  {Gunn} J.~E.,   {Szalay} A.~S.,  1999, \aj, 118, 1406
 
 \bibitem[\protect\citeauthoryear{Maas, Hannun  \& Ng}{Maas
   et~al.}{2013}]{maas2013rectifier}
@@ -245,9 +243,10 @@ Newman J.~A.,  et~al., 2013, \ApJSupp, 208, 5
   et~al.}{1992}]{odewahn1992automated}
 {Odewahn} S.~C.,  et al. 1992, \aj, 103, 318
 
-\bibitem[\protect\citeauthoryear{Paterno}{Paterno}{2003}]{paterno2004calculating}
-Paterno M.,  2003, Calculating Efficiencies and Their Uncertainties,
-  \url{http://home.fnal.gov/~paterno/images/effic.pdf}
+\bibitem[\protect\citeauthoryear{Paterno}{Paterno}{2004}]{paterno2004calculating}
+Paterno M.,  2004, Technical report, Calculating efficiencies and their
+  uncertainties.
+United States. Department of Energy
 
 \bibitem[\protect\citeauthoryear{Rosenblatt}{Rosenblatt}{1961}]{rosenblatt1961principles}
 Rosenblatt F.,  1961, Technical report, Principles of neurodynamics.
@@ -274,8 +273,7 @@ Salakhutdinov R.,  Hinton G.~E.,  2009, in AISTATS. p.~3
 
 \bibitem[\protect\citeauthoryear{S{\'a}nchez et~al.,}{S{\'a}nchez
   et~al.}{2014}]{sanchez2014photometric}
-S{\'a}nchez C.,  et~al., 2014, Monthly Notices of the Royal Astronomical
-  Society, 445, 1482
+S{\'a}nchez C.,  et~al., 2014, \mnras, 445, 1482
 
 \bibitem[\protect\citeauthoryear{Saxe, McClelland  \& Ganguli}{Saxe
   et~al.}{2013}]{saxe2013exact}
@@ -284,8 +282,7 @@ Saxe A.~M.,  McClelland J.~L.,   Ganguli S.,  2013, arXiv preprint
 
 \bibitem[\protect\citeauthoryear{{Schlegel}, {Finkbeiner}  \&
   {Davis}}{{Schlegel} et~al.}{1998}]{schlegel1998maps}
-{Schlegel} D.~J.,  {Finkbeiner} D.~P.,   {Davis} M.,  1998, \mn@doi [\apj]
-  {10.1086/305772}, 500, 525
+{Schlegel} D.~J.,  {Finkbeiner} D.~P.,   {Davis} M.,  1998, \apj, 500, 525
 
 \bibitem[\protect\citeauthoryear{Seo et~al.,}{Seo
   et~al.}{2012}]{seo2012acoustic}
