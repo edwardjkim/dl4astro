@@ -165,7 +165,6 @@ the reduced summary information available from astronomical catalogs.
 Constructing catalogs requires careful engineering and considerable domain expertise
 to transform the reduced, calibrated pixel values that comprise an image into suitable features,
 such as magnitudes or shape information of an object.
-\changed{
 In a branch of machine learning called \textit{deep learning}~\citep{lecun2015deep},
 features are not designed by human experts;
 they are learned directly from data by deep neural networks.
@@ -180,7 +179,6 @@ complex shapes, and subsequent layers would detect objects as
 combinations of low-level features.
 These multiple layers of abstraction progressively amplify aspects of the input
 that are important for classification tasks.
-}
 Deep learning has been applied successfully to galaxy morphological
 classification in Sloan Digital Sky Survey~\citep[SDSS;][]{dieleman2015rotation}
 and Cosmic Assembly Near-infrared Deep Extragalactic Legacy
@@ -211,12 +209,10 @@ we outline our conclusions in Section~\ref{sec:conclusions}.
 \section{Data}
   \label{sec:data}
 
-\changed{
 To demonstrate the performance of our ConvNet model, we use photometric and
 spectroscopic data sets with different characteristics and compositions.
 In this section, we briefly describe these data sets and the image pre-processing
 steps for retrieving cutout images.
-}
 
 \subsection{Sloan Digital Sky Survey}
   \label{sec:sdss}
@@ -238,7 +234,6 @@ server\footnote{http://skyserver.sdss.org/casjobs/}~\citep{li2008casjobs}.
 Using the CasJobs server, we randomly select a total of 65,000 sources, which are either stars or galaxies.
 We exclude some bad photometric observations as follows.
 We consider only objects
-\sout{ whose $r$-band magnitude is less than 40; there are }
 with no warning flags in the spectroscopic measurement (\texttt{zWarning = 0});
 the half-light radius in the $r$ band is less than 30 arc seconds
 as measured by the exponential and de Vaucouleurs light profiles;
@@ -254,11 +249,9 @@ to align each image to the reference ($r$-band) image.
 We then use \texttt{SExtractor} to find the pixel positions of
 the 65,000 objects we have selected,
 and to center each object in the cutout image.
-\changed{
 Magnitudes in the SDSS photometric catalog are expressed as inverse hyperbolic
 sine magnitudes~\citep[also known as luptitudes;][]{lupton1999modified},
 and we follow the SDSS convention and convert all flux values to luptitudes.
-}
 Finally, in order to account for the effect of Galactic dust,
 extinction corrections in magnitudes are applied
 following \cite{schlegel1998maps}.
@@ -272,7 +265,6 @@ In the end, we have 17,344 stars and 47,656 galaxies available
 for the training and testing processes.
 The apparent magnitudes range from $10.7 < r < 23.1$,
 and the galaxies in this sample have a mean redshift of $z \sim 0.36$.
-\sout{ The $ugriz$ color-color space of the sample is plotted in Figure ?.}
 We randomly split the objects into training, held-out validation,
 and blind test sets of size 40,000, 10,000, and 15,000, respectively.
 We note that cross-validation is often avoided in deep learning
@@ -331,7 +323,6 @@ In the end, we have 8,545 stars and 57,843 galaxies available
 for the training and testing processes.
 The apparent magnitudes range from $13.9 < r < 25.6$,
 and the galaxies in this sample have a mean redshift of $z \sim 0.59$.
-\sout{ The $ugriz$ color-color space of the sample is plotted in Figure ?.}
 We randomly split the objects into training, held-out validation, and
 blind test sets of size 40,000, 10,000, and 13,278, respectively.
 Figures~\ref{fig:clens_mag} and \ref{fig:clens_g_r} show the distribution
@@ -343,7 +334,6 @@ and validation sets are almost identical to those of the test set.
 \section{Deep Learning}
   \label{sec:deep_learning}
 
-\changed{
 Neural networks have many hyperparameters, including those that specify the
 network itself (\eg the size and non-linearity of each layer)
 and those that specify how the network is trained
@@ -352,7 +342,6 @@ Furthermore, the architecture of a neural network can have a
 significant impact on its performance.
 In this section, we provide a brief description of key hyperparameters in our
 ConvNet model, and also present the network architecture.
-}
 
 \subsection{Neural Networks}
 
@@ -376,37 +365,28 @@ ConvNet model, and also present the network architecture.
     }
 \end{figure*}
 
-\sout{ A neuron in the human brain receives signals from other neurons through synaptic connections.  If the combination of these signals exceeds a certain threshold, the neuron will fire and send a signal to other neurons.  Intelligence is believed to be the collective effect of approximately $10^{11}$ neurons firing.  }
 An artificial neuron in most artificial neural networks is represented
 as a mathematical function that models a biological neural structure
-\changed{
 \citep{aggarwal2014data}.
 A schematic representation is shown in Figure~\ref{fig:neuron_a}.
-}
 Let $\bmath{x}=\left(x_1,x_2,\dots,x_n\right)$ be a vector of inputs to a given neuron,
 $\bmath{w}=\left(w_1,w_2,\dots,w_n\right)$ be a vector of weights, and
 $b$ be the bias.
 Then, the output of the neuron is
-\changed{
 \citep{rosenblatt1961principles}
-}
 \begin{equation}
   y = \sigma \left( \bmath{w} \cdot \bmath{x} + b \right),
   \label{eq:neuron_output}
 \end{equation}
 where $\sigma$ is the activation function (or \textit{non-linearity}).
-\sout{ The sigmoid function, $\sigma(x)=1/\left(1+e^{-x}\right)$, has frequently been used as an activation function, but it has recently fallen out of favor, and the hyperbolic tangent function, $\sigma(x)=\tanh(x)$, is generally used instead.  }
 The most popular non-linearity at present
-\sout{, however, }
 is the rectified linear unit
 \citep[ReLU;][]{nair2010rectified}, $\sigma(x)=\max(0, x)$.
 ReLUs generally allow much faster
 training of deep neural networks with many layers.
 However, ReLU units can sometimes result in dead neurons whose output is always zero.
 To mitigate this problem, we use leaky ReLUs
-\changed{
 ~\citep{maas2013rectifier}
-}
 that have a small, non-zero slope in the negative region,
 \begin{equation}
   \sigma(x) =
@@ -421,11 +401,8 @@ where each neuron in one layer is connected to the neurons of the subsequent
 layer~\citep{lecun2015deep}.
 A schematic representation is shown in Figure~\ref{fig:neuron_b}.
 All layers except the input and output layers are conveniently called hidden layers.
-\sout{ With multiple hidden layers, deep neural networks can model complex nonlinear relationships, and they have had great success in multimedia tasks where humans traditionally outperformed computers, such as speech recognition, language processing, and image classification.  }
 
-\changed{
 We
-}
 find a set of weights and biases such that,
 given $N$ samples, the output from the network
 $\bmath{y}=\left(y_1, y_2, \dots, y_N \right)$ approximates the desired output
@@ -436,22 +413,18 @@ We can formulate this as the minimization of a loss function
 $L(\bmath{y},\hat{\bmath{y}})$
 over the training data.
 In this work, we use \textit{cross-entropy}
-\changed{
 \citep[also called log loss;][]{murphy2012machine} as the loss function.
 For binary classification, the cross-entropy per sample is given by
 \begin{equation}
   L(y_j, \hat{y}_j) = -\hat{y}_j \log_2 y_j - (1 - \hat{y}_j) \log_2(1 - y_j),
   \label{eq:cross_entropy}
 \end{equation}
-}
 where $\hat{y}_j$ is the actual truth value (\eg 0 or 1) of the $j$-th data, and
 $y_j$ is the probability prediction made by the model.
 We compute the loss function by taking the average of all cross-entropies in the sample.
 Thus, the loss function becomes
 \begin{equation}
-\changed{
   L(\bmath{y}, \hat{\bmath{y}})
-}
 = - \frac{1}{N} \sum_{j=1}^{N} \hat{y}_j  \log_2 y_j
     + (1 - \hat{y}_j)  \log_2 (1 - \hat y_j).
   \label{eq:cross_entropy_all}
@@ -470,7 +443,6 @@ where we use the following rules to update the parameters in each layer $l$:
   \label{eq:gradient_descent}
 \end{align}
 where $\eta$ is a small, positive number known as the \textit{learning rate}.
-\changed{
 The gradients can be computed using the backpropagation
 procedure~\citep{rumelhart1988learning}.
 A common approach to speed up training is to split the training data
@@ -488,7 +460,6 @@ the higher the batch size is, the longer it will take to compute the gradient
 at each step~\citep{bousquet2008tradeoffs}.
 Thus, a moderate batch size, combined with a decaying learning rate, is
 generally used in practice. We use a batch size of 128 in this work.
-}
 
 
 We define an \textit{epoch} as a single, complete pass through the training data,
@@ -496,17 +467,9 @@ and full training usually requires many epochs.
 At the end of each epoch, we evaluate the loss function on the validation set,
 and the model that minimizes the validation loss is chosen as the best model.
 
-\sout{ The gradients in Equation~\ref{eq:gradient_descent} can be computed using the \textit{backpropagation} procedure, which is nothing more than an application of the chain rule for derivatives.  The derivative of the loss function with respect to the input of a unit can be computed by working backwards from the gradient with respect to the output of the unit.  At the output layer, the derivative of the loss function with respect to the output is given by }
 
-\sout{$ \frac{ \partial L }{ \partial y_i } = y_i - \hat{y}_i $}
-\sout{$ \frac{ \partial L }{ \partial x_i } = \frac{ \partial L }{ \partial y_i } \frac{ \partial y_i }{ \partial x_i }.  $}
 
-\sout{ At each hidden layer, the derivative of the loss function with respect to the output of each unit is a weighted sum of the derivatives with respect to the inputs of the subsequent layer, }
-\sout{$ \frac{ \partial L }{ \partial y_j } = \sum_{i} w_{ji} \frac{ \partial L }{ \partial x_i} $}
-\sout{$ \frac{ \partial L }{ \partial x_j } = \frac{ \partial L }{ \partial y_j } \frac{ \partial y_j }{ \partial x_j }.  $}
 
-\sout{ Finally, once the gradients $\partial L / \partial x_j$ have been computed, it is straightforward to compute the gradients for the weight, }
-\sout{$ \frac{\partial L}{\partial w_{jk}} = y_k \frac{\partial L}{\partial x_j}.  $}
 
 
 \subsection{Convolutional Neural Networks}
@@ -515,17 +478,13 @@ and the model that minimizes the validation loss is chosen as the best model.
 The convolutional neural network~\citep[ConvNet;][]{fukushima1980neocognitron,lecun1998gradient}
 is a type of deep, feedforward neural network
 that has recently become
-\changed{
 a popular
-}
 approach in the computer vision community.
 In a typical ConvNet, the first few stages are composed of two types of layers: 
 convolutional layers and pooling layers.
 
-\changed{
 The input to a convolutional layer is an image, and the output channels of
 each layer are called \textit{feature maps}.
-}
 To produce output feature maps, we convolve each feature map with a set of weights
 called \textit{filters},
 and apply a non-linearity such as ReLU to the weighted sum of these convolutions.
@@ -539,19 +498,13 @@ with a sum of convolutions. Thus, the $k$-th feature map is given by
 where we sum over the set of input feature maps,
 $\ast$ is the convolution operator, and $\bmath{w}_m^k$ represent the filters.
 
-\changed{
 Typically, a
-}
 pooling layer computes the maximum of a local $2\times2$ patch in a feature map
-\changed{
 \citep{krizhevsky2012imagenet}.
-}
 Since the pooling layer aggregates the activations of neighboring units from the previous layer,
 it reduces the dimensionality of the feature maps and
 makes the model invariant to small shifts and distortions
-\changed{
 \citep{boureau2010theoretical}
-}
 .
 Two or more layers of convolution and pooling are stacked,
 followed by more convolutional and fully-connected layers.
@@ -637,9 +590,7 @@ in the first convolution layer, respectively.
 However, we find that using a receptive field larger than $5\times5$ in the first
 convolutional layer leads to worse performance.
 This result is in agreement with
-\changed{
 the network of \citet{simonyan2014very}, which has become known as ``VGGNet".
-}
 VGGNet features an extremely homogeneous architecture that only performs
 $3\times3$ convolutions.
 Using a large receptive field instead of a stack of multiple $3\times3$ convolutions
@@ -647,11 +598,8 @@ leads to a shallower network, and it is often preferable to increase
 the depth by using smaller receptive fields.
 However, we find that replacing the first layer with
 a stack of two $3\times3$ convolutional layers increases the validation error,
-\changed{
 and thus use a $5\times5$ convolution in the first layer.
-}
 
-\changed{
 In the remaining layers, we still follow VGGNet and add many
 $3\times3$ convolutions (with zero-padding of size 1 pixel).
 Note that with the padding of 1 pixel for $3\times3$ convolutional layers,
@@ -666,7 +614,6 @@ we stop at eight convolutoinal layers after we find that adding more layers
 leads to worse performance.
 We conjecture that a greater depth and hence larger number of parameters
 lead to overfitting in our case.
-}
 
 The choice of momentum, learning rate, and initial weights is crucial
 for achieving high predictive performance and speeding up the learning
@@ -726,12 +673,10 @@ vertically and/or horizontally. }
 We introduce random Gaussian noise to each pixel values
 by using a similar method to \cite{krizhevsky2012imagenet}.}
 \end{itemize}
-\changed{
 In addition to artificially increasing the size of the data set,
 these data augmentation schemes make the resulting model more invariant to
 rotation, reflection, translation, and small noise in the pixel values.
 We also note that the data augmentation steps
-}
 add almost no computational cost,
 as they are performed on the CPU while the GPU is training the ConvNets on images.
 
@@ -762,23 +707,13 @@ uses Bayesian principles to generate an ensemble combination of different models
 Although the data augmentation step in Section~\ref{sec:data_augmentation} should
 make our ConvNet model invariant to these types of transformations,
 we find that applying BMC still results in a significant increase in performance.
-\changed{
 For a thorough discussion of BMC, we refer the reader to \citet{Monteith2011}
 (See also \citet{carrascokind2014exhausting} for application of BMC to
 photometric redshift estimation,
 and \citet{kim2015hybrid} for combining star-galaxy classifiers).
-}
 
-\sout{ The posterior probability that a source is a galaxy is given by }
-\sout{ $ P \left(G | \bmath{x}, \bmath{D}, \bmath{M}, \bmath{E} \right) = \sum_{e \in \bmath{E}} P \left(G | \bmath{x}, \bmath{M}, e \right) P \left(e | \bmath{D} \right), $ }
-\sout{ where $\bmath{x}$ is the input, $\bmath{D}$ is the data set, $\bmath{M}$ is the set of models (\ie different transformations of input images), and $e$ is an element in the ensemble space $\bmath{E}$ of possible model combinations.  By Bayes' Theorem, the posterior probability of $e$ given $\bmath{D}$ is given by }
-\sout{$ P \left(e | \bmath{D} \right) = \frac{P \left(e \right)}{P \left(\bmath{D} \right)} \prod_{d \in \bmath{D}} P \left( d | e \right) \propto P \left(e\right) \prod_{d \in \bmath{D}} P \left(d | e \right). $}
-\sout{Here, $P\left(e \right)$ is the prior probability of $e$, which we assume to be uniform.  The product of $P\left(d | e\right)$ is over all individual data $d$ in the training data $\bmath{D}$, and $P\left(\bmath{D}\right)$ is merely a normalization factor and not important.  For probabilistic classifiers, we can directly use the probabilistic predictions and write Equation~\ref{eq:p_ensemble} as}
-\sout{ $ P \left( e | \bmath{D} \right) \propto P \left( e \right) \prod_{i=1}^{N} \hat{y}_i y_i + \left(1 - \hat{y}_i\right) \left(1 - y_i\right), $}
 
-\sout{Although the space $\bmath{E}$ of potential model combinations is in principle infinite, we can produce a reasonable finite set of potential model combinations by using sampling techniques.  In our implementation, the weights of each combination of the base classifiers is obtained by sampling from a Dirichlet distribution.  We first set all alpha values of a Dirichlet distribution to unity.  We then sample this distribution $q$ times to obtain $q$ sets of weights.  For each combination, we assume a uniform prior and calculate $P\left(e|\bmath{D}\right)$ using Equation~\ref{eq:p_ensemble_prob}.  We select the combination with the highest $P\left(e|\bmath{D}\right)$, and update the alpha values by adding the weights of the most probable combination to the current alpha values.  The next $q$ sets of weights are drawn using the updated alpha values.}
 
-\sout{We continue the sampling process until we reach a predefined number of combinations, and we finally use Equation~\ref{eq:posterior_bmc} to compute the posterior probability that a source is a star (or a galaxy).  In this paper, we use a $q$ value of three, and we consider a total of 1,000 model combinations.}
 
 \section{Trees for Probabilistic Classifications}
   \label{sec:tpc}
@@ -791,7 +726,6 @@ TPC is a parallel, supervised machine learning algorithm
 that uses prediction trees and random forest 
 techniques~\citep{breiman1984classification, breiman2001random}
 to produce a star-galaxy classification.
-\changed{
 A complete description of TPC is beyond the scope of this paper, and
 we refer the reader to
 \cite{carrascokind2013tpz} and \cite{kim2015hybrid} for more details.
@@ -803,19 +737,12 @@ and star-galaxy classification~\citep{kim2015hybrid};
 it adds an extra layer of randomness by perturbing the measured attributes by
 their uncertainties;
 and it uses parallelism to handle large data sets on distributed memory systems.
-}
 
-\sout{ TPC uses classification trees, a type of prediction tree that is designed to provide a classification or predict a discrete category.  Prediction trees are built by asking a sequence of questions that recursively split the data into branches until a terminal leaf is created that meets a stopping criterion (\eg a minimum leaf size).  The optimal split dimension is decided by choosing the attribute that maximizes the \textit{Information Gain} ($I_G$), which is defined as }
 
-\sout{ $ I_G \left(D_{\rmn{node}}, X\right) = I_d \left( D_{\rmn{node}} \right) - \sum_{x \in \rmn{values}(X)} \frac{|D_{\rmn{node}, x}|}{|D_{\rmn{node}}|} I_d \left( D_{\rmn{node}, x} \right), $ }
 
-\sout{ \noindent where $D_{\rmn{node}}$ is the training data in a given node, $X$ is one of the possible dimensions (\eg magnitudes or colors) along which the node is split, and $x$ are the possible values of a specific dimension $X$.  $|D_{\rmn{node}}|$ and $|D_{\rmn{node}, x}|$ are the size of the total training data and the number of objects in a given subset $x$ within the current node, respectively.  $I_d$ is the impurity degree index, and TPC can calculate $I_d$ from any of the three standard different impurity indices: \textit{information entropy}, \textit{Gini impurity}, and \textit{classification error}.  In this work, we use the information entropy, which is defined similarly to the thermodynamic entropy: }
 
-\sout{ $ I_d \left( D \right) = - f_g \log_{2} f_g - \left(1 - f_g\right) \log_{2} \left(1 - f_g\right), $ }
 
-\sout{ \noindent where $f_g$ is the fraction of galaxies in the training data.  At each node in our tree, we scan all dimensions to identify the split point that maximizes the information gain as defined by Equation~\ref{eq:information_gain}, and select the attribute that maximizes the overall impurity index.  }
 
-\sout{ In a technique called random forest, we create bootstrap samples (\ie $N$ randomly selected objects with replacement) from the input training data by sampling repeatedly from the magnitudes and colors using their measurement errors.  We use these bootstrap samples to construct multiple, uncorrelated prediction trees whose individual predictions are aggregated to produce a star-galaxy classification for each source.  }
 
 We train two TPC models on the SDSS data set by using different sets of
 attributes.
@@ -828,15 +755,10 @@ and their corresponding colors
 The second model, which we denote $\rmn{TPC}_{\rmn{morph}}$, is trained with
 the concentration parameter in each band in addition to the magnitudes and
 colors, for a total of
-\changed{
 fourteen
-}
 dimensions.
 The concentration is defined as the difference between the
-\sout{cmodel and}
-\changed{
 PSF magnitude (psfMag) and the composite model magnitude (cModelMag), \ie
-}
 $\rmn{concentration}\equiv\rmn{psfMag}-\rmn{cModelMag}$.
 The SDSS pipeline uses a parametric method based on the concentration,
 an object is classified as a galaxy if $\rmn{concentration}>0.145$.
@@ -859,7 +781,6 @@ $\rmn{TPC}_{\rmn{morph}}$ uses
 the five magnitudes and their corresponding colors,
 for a total of twelve dimensions.
 
-\sout{ We note that TPC is able to utilize parallelization, and parallelized on 64 cores of Xeon E5 2.7 GHz processors, it takes 23 minutes to train 500 trees, for a total of 25 CPU hours.  }
 
 \section{Results and Discussion}
   \label{sec:results_and_discussion}
@@ -888,20 +809,15 @@ on the CFHTLenS and SDSS data sets, and compare it with the performance of TPC.
   $c_s(p_s=x)$ & Star completeness at $x$ star purity \\
   $CAL$ & Calibration error with overlapping binning \\
   $\mid\Delta N_g\mid / N_g$ & Absolute error in number of galaxies\\
-\changed{
 log loss
-}
 &
-\changed{
 Cross-entropy
-}
 \\
   \hline
   \end{tabular}
   \label{table:metrics}
 \end{table}
 
-\changed{
 Probabilistic classifiers, rather than only assigning discrete labels to each
 source, produce a continuous probability distribution of whether each source is
 a star or a galaxy.
@@ -914,9 +830,7 @@ However, using a fixed threshold ignores the model's operating conditions,
 such as science requirements, misclassification costs, and stellar distribution.
 Furthermore, the probability threshold of 0.5 is not necessarily optimal for
 an unbalanced data set, where galaxies outnumber stars.
-}
 
-\changed{
 Following \citet{kim2015hybrid}, we use performance metrics that are well-suited
 for probabilistic classifiers: Area Under the Curve (AUC)
 for the Receiver Operating Characteristic (ROC) curve, completeness and purity,
@@ -926,11 +840,9 @@ posterior probabilities.
 Thus, to evaluate calibration performance,
 we also use the calibration error and the absolute error in the estimation
 of number of galaxies.
-}
 
 \subsubsection{Receiver Operating Characteristic Curve}
 
-\changed{
 A Receiver Operating Characteristic (ROC) curve is the
 most commonly used method for evaluating the overall performance of a binary
 classifier~\citep*{swets2000better}.
@@ -938,33 +850,26 @@ In an ROC curve, we plot the true positive rate as a function of the false
 positive rate by varying the classification threshold.
 The Area Under the Curve (AUC) quantifies the overall performance in a single
 number.
-}
 
 \subsubsection{Completeness and Purity}
 
-\changed{
 Let $N_g$ be the number of true galaxies classified as galaxies,
 and $M_g$ the number of true galaxies classified as stars.
 Then the galaxy \textit{completeness} $c_g$ (also called recall or sensitivity)
 is given by
-}
 \begin{equation}
 c_g = \frac{N_g}{N_g + M_g}.
 \end{equation}
-\changed{
 Let $M_s$ be the number of true stars classified as galaxies.
 Then the galaxy \textit{purity} $p_g$ (also called precision or positive
 predictive value) is given by
-}
 \begin{equation}
 p_g = \frac{N_g}{N_g + M_s}.
 \end{equation}
-\changed{
 We define the star completeness and purity in a similar way.
 As discussed in our previous work~\citep{kim2015hybrid},
 we adopt weak lensing science requirements of the DES~\citep{soumagnac2013star},
 and compute $p_g$ at $c_g=0.960$ and $c_s$ at $p_s=0.970$.
-}
 
 \subsubsection{Mean Squared Error}
 
@@ -1040,7 +945,6 @@ in the estimation of number of galaxies,
     as applied to the CFHTLenS data.
     The definition of the metrics is summarized in Table~\ref{table:metrics}.
     The bold entries highlight the best performance values within each column.
-\changed{
     Note that $p_{g}(c_g=0.96)$ and $c_{s}(p_s=0.97)$ require adjusting
     threshold values (\ie probability cuts), while other metrics do not.
     To obtain a galaxy completeness of $c_g=0.96$, we choose the threshold values
@@ -1048,31 +952,22 @@ in the estimation of number of galaxies,
     TPC${}_{\rmn{phot}}$, respectively;
     for star purity $p_s=0.97$, we choose 0.6990, 0.5297, and 0.8570 for
     ConvNet, TPC${}_{\rmn{morph}}$, and TPC${}_{\rmn{phot}}$, respectively.
-}
   }
   \centering
   \begin{tabular}{l c c c c c c c}
     \hline
     classifier & AUC & MSE & $p_{g}(c_g=0.96)$ & $c_{s}(p_s=0.97)$ & CAL & $ |\Delta N_g|/N_g$ &
-\changed{
 log loss
-}
 \\
     \hline
     ConvNet                       & \textbf{0.9948} & 0.0112          & \textbf{0.9972} & 0.8971          & \textbf{0.0197}  & \textbf{0.0029} &
-\changed{
 \textbf{0.0441}
-}
 \\
     TPC${}_{\rmn{morph}}$         & 0.9924          & \textbf{0.0109} & 0.9963          & \textbf{0.9268} & 0.0245           & 0.0056 &
-\changed{
 0.0809
-}
 \\
     TPC${}_{\rmn{phot}}$          & 0.9876          & 0.0189          & 0.9927          & 0.8044          & 0.0266           & 0.0101 &
-\changed{
 0.1085
-}
 \\
     \hline
   \end{tabular}
@@ -1130,12 +1025,10 @@ log loss
   \centering
   \includegraphics[width=\columnwidth]{figures/clens_calibration.pdf}
   \caption{
-\changed{
     The calibration curves for ConvNet (red) and $\rmn{TPC}_{\rmn{morph}}$ (blue)
     as applied to the CFHTLenS data set.
     $P_{\rmn{gal}}$ is the fraction of objects that are galaxies, and
     $P_{\rmn{class}}$ is the probabilistic outputs generated by the classifiers.
-}
     The dashed line displays the relationship
     $P_{\rmn{gal}} = P_{\rmn{conv}}$.
     The $1 \sigma$ error bars are computed following the method
@@ -1221,9 +1114,7 @@ we train our ConvNet model by monitoring its performance on the validation set.
 Once we have finished training the model,
 we evaluate its performance on the blind test set.
 We also use the same training and validation sets to train
-\changed{
 and tune the hyperparameters of 
-}
 $\rmn{TPC}_{\rmn{morph}}$ and $\rmn{TPC}_{\rmn{phot}}$, and
 perform classifications on the same test set to compare their performance
 with that of ConvNet.
@@ -1233,20 +1124,15 @@ by applying ConvNet, $\rmn{TPC}_{\rmn{morph}}$, and $\rmn{TPC}_{\rmn{phot}}$
 on the test set of the CFHTLenS data.
 The bold entries highlight the best technique for any particular metric.
 ConvNet outperforms $\rmn{TPC}_{\rmn{morph}}$ in
-\changed{
 five
-}
 metrics
 (AUC, $p_g$, CAL, $|\Delta N_g|/N_g$, 
-\changed{
 and log loss
-}
 ),
 while $\rmn{TPC}_{\rmn{morph}}$ performs better in two metrics (MSE and $c_g$).
 It is not surprising that $\rmn{TPC}_{\rmn{phot}}$, which is trained on only
 magnitudes and colors, performs significantly worse than both ConvNet and
 $\rmn{TPC}_{\rmn{phot}}$.
-\sout{ As Figure~\ref{fig:clens_color_color} shows, there is significant overlap between stars and galaxies in color-color space.  }
 Thus, magnitudes and colors alone are not sufficient to separate stars from
 galaxies,
 and morphology is critical in separating stars from galaxies.
@@ -1289,7 +1175,6 @@ $\rmn{TPC}_{\rmn{morph}}$ provides slightly better
 completeness and purity than ConvNet between $0.8 \la g-r \la 1.6$ while
 ConvNet outperforms $\rmn{TPC}_{\rmn{morph}}$ in the remaining regions.
 
-\changed{
 Figure~\ref{fig:clens_calibration} shows the calibration curves that compare
 $P_{\rmn{gal}}$,
 the fraction of objects that are galaxies (as determined from their spectra),
@@ -1301,7 +1186,6 @@ output as the probability that an object is a galaxy.
 In contrast, the calibration curve
 for the probabilistic output of $\rmn{TPC}_{\rmn{morph}}$
 is apparently not as well-calibrated as ConvNet.
-}
 These calibration curves visually confirm the results in
 Table~\ref{table:clens_metrics} that the calibration error
 of ConvNet is about 20\% lower than that of $\rmn{TPC}_{\rmn{morph}}$.
@@ -1332,37 +1216,27 @@ process.
   \caption{
     A summary of the classification performance metrics
     as applied to the SDSS data.
-\changed{
     To obtain a galaxy completeness of $c_g=0.96$, we choose the threshold values
     0.7558, 0.9989, and 0.9360 for ConvNet, TPC${}_{\rmn{morph}}$, and
     TPC${}_{\rmn{phot}}$, respectively;
     for star purity $p_s=0.97$, we choose 0.6046, 0.0547, and 0.7449 for
     ConvNet, TPC${}_{\rmn{morph}}$, and TPC${}_{\rmn{phot}}$, respectively.
-}
   }
   \centering
   \begin{tabular}{l c c c c c c c}
     \hline
     classifier & AUC & MSE & $p_{g}(c_g=0.96) $ & $c_{s}(p_s=0.97)$ & CAL & $ |\Delta N_g|/N_g$ &
-\changed{
 log loss
-}
 \\
     \hline
     ConvNet               & 0.9952          & 0.0182          & 0.9915          & 0.9500          & \textbf{0.0243} & 0.0157 &
-\changed{
 \textbf{0.0731}
-}
 \\
     TPC${}_{\rmn{morph}}$ & \textbf{0.9967} & \textbf{0.0099} & \textbf{0.9977} & \textbf{0.9810} & 0.0254          & \textbf{0.0044} & 
-\changed{
 0.0914
-}
 \\
     TPC${}_{\rmn{phot}}$  & 0.9886          & 0.0283          & 0.9819          & 0.8879          & 0.0316          & 0.0160 & 
-\changed{
 0.1372
-}
 \\
     \hline
   \end{tabular}
@@ -1398,10 +1272,8 @@ log loss
   \centering
   \includegraphics[width=\columnwidth]{figures/sdss_calibration.pdf}
   \caption{
-\changed{
     Calibration curves for ConvNet (red) and $\rmn{TPC}_{\rmn{morph}}$
     (blue) as applied to the SDSS data set.
-}
     }
   \label{fig:sdss_calibration}
 \end{figure}
@@ -1432,10 +1304,8 @@ log loss
     \caption{Layer 6 (128 maps$\times10\times10$)}
   \end{subfigure}
   \caption{
-\changed{
     Similar to Figure~\ref{fig:galaxy_activations} but for a galaxy in the
     SDSS data set.
-}
     }
   \label{fig:sdss_galaxy_activations}
 \end{figure*}
@@ -1466,10 +1336,8 @@ log loss
     \caption{Layer 6 (128 maps$\times10\times10$)}
   \end{subfigure}
   \caption{
-\changed{
     Similar to Figure~\ref{fig:sdss_galaxy_activations} but for a star in the
     SDSS data set.
-}
     }
   \label{fig:sdss_star_activations}
 \end{figure*}
@@ -1481,9 +1349,7 @@ The bold entries highlight the best technique for any particular metrics.
 In contrast with the CFHTLenS data set in Section~\ref{sec:results_cfht},
 it is apparent that $\rmn{TPC}_{\rmn{morph}}$ outperforms ConvNet
 in all metrics except $\rmn{CAL}$
-\changed{
 and cross-entropy.
-}
 Both ConvNet and $\rmn{TPC}_{\rmn{morph}}$ still outperform
 $\rmn{TPC}_{\rmn{phot}}$ in all six metrics by a significant amount, as
 magnitudes and colors alone are not sufficient to separate stars from galaxies.
@@ -1533,10 +1399,8 @@ where the stellar fraction is relatively low.
 On the other hand, both $\rmn{TPC}_{\rmn{morph}}$ and $\rmn{TPC}_{\rmn{phot}}$ outperform
 ConvNet in the region $g-r \la 0.8$ where the stellar fraction is higher.
 
-\changed{
 Figure~\ref{fig:sdss_calibration} shows
 the calibration curves of ConvNet and $\rmn{TPC}_{\rmn{morph}}$.
-}
 The calibration curve of ConvNet in Figure~\ref{fig:sdss_calibration}
 is not as well-calibrated as the calibration curve in
 Figure~\ref{fig:clens_calibration},
@@ -1547,7 +1411,6 @@ Although it is not straightforward to compare the two calibration curves by
 visual inspection, Table~\ref{table:sdss_metrics} shows that the CAL metric of
 ConvNet is lower than that of $\rmn{TPC}_{\rmn{morph}}$.
 
-\changed{
 Figures~\ref{fig:sdss_galaxy_activations} and \ref{fig:sdss_star_activations}
 show the activations when images of a galaxy and a star are fed into the network. 
 Similarly to Figures~\ref{fig:galaxy_activations} and \ref{fig:star_activations}
@@ -1556,7 +1419,6 @@ the feature maps show hierarchical abstraction from low-level features in the
 first convolutional layer to high-level features in the subsequent layers.
 This hierarchical abstraction is what enables ConvNets to learn morphological
 features automatically from images.
-}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1632,12 +1494,10 @@ For example, the winning solution of \cite{dieleman2015rotation}
 for the Galaxy Zoo challenge was based on a ConvNet model,
 and it required averaging many sets of predictions from models with different
 neural network architectures.
-\changed{
 Futhermore, future work could compare the performance of other deep learning
 variants, such as deep belief networks~\citep{hinton2006fast},
 deep Boltzmann machines~\citep{salakhutdinov2009deep}, or
 multilayer perceptrons~\citep{wasserman1988neural}.
-}
 
 It is also likely that the performance will be improved
 not only by training multiple network architectures,
@@ -1652,7 +1512,6 @@ ConvNets could be included as a different machine learning paradigm in this
 classifier combination framework to produce further improvements in
 predictive performance.
 
-\changed{
 Our ConvNet model is a supervised algorithm, and one of the criticisms
 of supervised techniques is their difficulty in extrapolating past the limits
 of available spectroscopic training data.
@@ -1668,13 +1527,10 @@ Combining our ConvNet model with unsupervised methods (\eg a template fitting
 method) in the aforementioned meta-classification framework will
 help improve the efficacy of star-galaxy classification
 beyond the limits of spectroscopic training data.
-}
 
-\changed{
 Finally, we are currently exploring different strategies for including objects
 that are neither stars nor galaxies (\eg quasars).
 The results of this multi-class problem will be presented in subsequent papers.
-}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1689,14 +1545,12 @@ This work used the Extreme Science and Engineering Discovery Environment
 (XSEDE), which is supported by National Science Foundation grant number
 ACI-1053575.
 
-\changed{
 This work has made use of the Theano library
 (http://deeplearning.net/software/theano/),
 the Lasagne library
 (http://lasagne.readthedocs.io/),
 and the Nolearn library
 (http://pythonhosted.org/nolearn/).
-}
 
 This work is based on observations obtained with MegaPrime/MegaCam, a
 joint project of CFHT and CEA/DAPNIA, at the Canada-France-Hawaii
