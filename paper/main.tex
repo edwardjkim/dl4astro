@@ -231,7 +231,12 @@ contained within the Data Release 12~\citep[DR12;][]{alam2015eleventh},
 which is publicly available through the online CasJobs
 server\footnote{http://skyserver.sdss.org/casjobs/}~\citep{li2008casjobs}.
 
-Using the CasJobs server, we randomly select a total of 65,000 sources, which are either stars or galaxies.
+Using the CasJobs server, we randomly select a total of 65,000 sources,
+which are either stars or galaxies.
+\changed{
+We exclude quasars, as they clearly are neither stars nor galaxies and many of
+them have one or more saturated pixels in the images.
+}
 We exclude some bad photometric observations as follows.
 We consider only objects
 with no warning flags in the spectroscopic measurement (\texttt{zWarning = 0});
@@ -610,7 +615,11 @@ The main contribution of VGGNet is in showing that the depth plays an important
 role in good performance.
 In our case, we start with four convolutional layers and progressively add more
 layers, while monitoring the validation loss;
-we stop at eight convolutoinal layers after we find that adding more layers
+we stop at eight 
+\changed{
+convolutional
+}
+layers after we find that adding more layers
 leads to worse performance.
 We conjecture that a greater depth and hence larger number of parameters
 lead to overfitting in our case.
@@ -734,8 +743,10 @@ it is tailored specifically for astronomical use~\citep{carrascokind2013tpz};
 it has been tested for astronomical use cases, including
 photometric redshift estimation~\citep{sanchez2014photometric}
 and star-galaxy classification~\citep{kim2015hybrid};
+\sout{
 it adds an extra layer of randomness by perturbing the measured attributes by
 their uncertainties;
+}
 and it uses parallelism to handle large data sets on distributed memory systems.
 
 
@@ -1070,7 +1081,11 @@ log loss
     image is fed into the network.
     (c) Activations on the third convolutional layer.
     (d) Activations on the sixth convolutional layer.
-    Each image in (a), (b), and (c) is a feature map corresponding to the
+    Each image in 
+\changed{
+(b), (c), and (d)
+}
+is a feature map corresponding to the
     output for one of the learned features.
     }
   \label{fig:galaxy_activations}
