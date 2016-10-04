@@ -232,27 +232,28 @@ which is publicly available through the online CasJobs
 server\footnote{http://skyserver.sdss.org/casjobs/}~\citep{li2008casjobs}.
 
 Using the CasJobs server, we randomly select a total of 65,000 sources,
-which are either stars or galaxies.\footnote{
+which are either stars or galaxies.
 \changed{
-We exclude objects that clearly are neither stars nor galaxies.
+In this work, we exclude objects that clearly are neither stars nor galaxies.
 Most of the excluded objects are QSOs or quasars.
 Quasars appear as point sources, rather than resolved sources similar to
 galaxies,
 and many of them have one or more saturated pixels in the images.
-They are also different from galaxies because of their intrinsic variability on
-a wide range of time scales, which may be due to variation in the accretion rate
-or instabilities of the accretion disk around the black hole
-\citep{popovic2012photocentric}.
 However, unlike any known stars, their spectra show strong and broad emission
 lines.
+Quasars are also different from galaxies because of their intrinsic variability
+on a wide range of time scales, which may be due to variation in the accretion
+rate or instabilities of the accretion disk around the black hole
+\citep{popovic2012photocentric}.
 Thus, many studies exclude quasars in the binary star-galaxy classification
-scheme
-\citep[\eg][]{vasconcellos2011decision,Fadely2012}.
+scheme~\citep[\eg][]{vasconcellos2011decision,Fadely2012}.
 Expanding the historical star-galaxy classification problem to include
-other classes may have advantanges~\citep{ball2006robust}, and we defer
-the results of this multi-class problem to a future paper.}
+additional classes, \eg \textit{nsng} (neither star nor galaxy),
+may have advantanges~\citep{ball2006robust}, and we plan to present
+the results of this multi-class problem in a future paper.
 }
-We exclude some bad photometric observations as follows.
+
+We also exclude some bad photometric observations as follows.
 We consider only objects
 with no warning flags in the spectroscopic measurement (\texttt{zWarning = 0});
 the half-light radius in the $r$ band is less than 30 arc seconds

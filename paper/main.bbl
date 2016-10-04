@@ -248,12 +248,9 @@ Paterno M.,  2004, Technical report, Calculating efficiencies and their
   uncertainties.
 United States. Department of Energy
 
-\bibitem[\protect\citeauthoryear{Popovi{\'c}, Jovanovi{\'c}, Stalevski, Anton,
-  Andrei, Kova{\v{c}}evi{\'c}  \& Baes}{Popovi{\'c}
+\bibitem[\protect\citeauthoryear{Popovi{\'c} \& et al.}{Popovi{\'c} \&
   et~al.}{2012}]{popovic2012photocentric}
-Popovi{\'c} L.,  Jovanovi{\'c} P.,  Stalevski M.,  Anton S.,  Andrei A.~H.,
-  Kova{\v{c}}evi{\'c} J.,   Baes M.,  2012, Astronomy \& Astrophysics, 538,
-  A107
+Popovi{\'c} L.,  et al. 2012, \aap, 538, A107
 
 \bibitem[\protect\citeauthoryear{Rosenblatt}{Rosenblatt}{1961}]{rosenblatt1961principles}
 Rosenblatt F.,  1961, Technical report, Principles of neurodynamics.
@@ -332,12 +329,9 @@ Szegedy C.,  et~al., 2015, in Proceedings of the IEEE Conference on Computer
   Team}}{2016}]{theano2016theano}
 {Theano Development Team} 2016, arXiv e-prints, abs/1605.02688
 
-\bibitem[\protect\citeauthoryear{{Vasconcellos}, {de Carvalho}, {Gal},
-  {LaBarbera}, {Capelato}, {Frago Campos Velho}, {Trevisan}  \&
-  {Ruiz}}{{Vasconcellos} et~al.}{2011}]{vasconcellos2011decision}
-{Vasconcellos} E.~C.,  {de Carvalho} R.~R.,  {Gal} R.~R.,  {LaBarbera} F.~L.,
-  {Capelato} H.~V.,  {Frago Campos Velho} H.,  {Trevisan} M.,   {Ruiz}
-  R.~S.~R.,  2011, \aj, 141, 189
+\bibitem[\protect\citeauthoryear{{Vasconcellos} \& et al.}{{Vasconcellos} \&
+  et~al.}{2011}]{vasconcellos2011decision}
+{Vasconcellos} E.~C.,  et al. 2011, \aj, 141, 189
 
 \bibitem[\protect\citeauthoryear{Wasserman \& Schwartz}{Wasserman \&
   Schwartz}{1988}]{wasserman1988neural}
