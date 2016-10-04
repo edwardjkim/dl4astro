@@ -156,7 +156,7 @@ and they have become a core part of the astronomical image processing software
 \texttt{SExtractor}~\citep{bertin1996sextractor}.
 Other successfully implemented examples of applying machine learning to
 the star-galaxy classification problem include decision 
-trees~\citep{weir1995automated,suchkov2005census,ball2006robust,sevilla2015effect}, 
+trees~\citep{weir1995automated,suchkov2005census,ball2006robust,vasconcellos2011decision,sevilla2015effect}, 
 Support Vector Machines~\citep{Fadely2012}, and
 classifier combination strategies~\citep*{kim2015hybrid}.
 
@@ -232,10 +232,25 @@ which is publicly available through the online CasJobs
 server\footnote{http://skyserver.sdss.org/casjobs/}~\citep{li2008casjobs}.
 
 Using the CasJobs server, we randomly select a total of 65,000 sources,
-which are either stars or galaxies.
+which are either stars or galaxies.\footnote{
 \changed{
-We exclude quasars, as they clearly are neither stars nor galaxies and many of
-them have one or more saturated pixels in the images.
+We exclude objects that clearly are neither stars nor galaxies.
+Most of the excluded objects are QSOs or quasars.
+Quasars appear as point sources, rather than resolved sources similar to
+galaxies,
+and many of them have one or more saturated pixels in the images.
+They are also different from galaxies because of their intrinsic variability on
+a wide range of time scales, which may be due to variation in the accretion rate
+or instabilities of the accretion disk around the black hole
+\citep{popovic2012photocentric}.
+However, unlike any known stars, their spectra show strong and broad emission
+lines.
+Thus, many studies exclude quasars in the binary star-galaxy classification
+scheme
+\citep[\eg][]{vasconcellos2011decision,Fadely2012}.
+Expanding the historical star-galaxy classification problem to include
+other classes may have advantanges~\citep{ball2006robust}, and we defer
+the results of this multi-class problem to a future paper.}
 }
 We exclude some bad photometric observations as follows.
 We consider only objects
